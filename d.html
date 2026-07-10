@@ -83,51 +83,48 @@
           </div>
         </div>
         <div class="shot-panel reveal d1">
-          <div class="ui-mock" role="img" aria-label="Gallop Codegen screen: spec-linked diff packages for an ERP modernization — code generation across four files, execution bundle with spec link verified, rollback included, and the PR package queued for inspection">
-            <aside class="ui-side">
-              <div class="ui-project">
-                <span class="ui-eyebrow">Gallop Intelligence</span>
-                <span class="ui-project-name">ERP modernization</span>
+          <div class="ui-mock" role="img" aria-label="Gallop audit chat: asked to identify the custom programs relevant for goods movement, the agent completes five tool calls and reports that the S/4 system uses a centralized function group ZFG_PREDACCOUNTING, with a table of custom goods movement function modules, their purpose, movement type, and key BAPIs">
+            <div class="ui-prompt">Help me identify the custom programs relevant for goods movement and create a dependency diagram</div>
+            <div class="ui-turn">
+              <div class="ui-turn-head">
+                <span class="ui-avatar"><img src="assets/horse-mark.svg" alt="" /></span>
+                <span class="ui-tools"><span class="ui-eyebrow">5 tool calls completed</span><span class="ui-viewall">View all</span></span>
               </div>
-              <ul class="ui-stages">
-                <li class="is-done"><i class="ui-dot"></i>Discovery</li>
-                <li class="is-done"><i class="ui-dot"></i>Specification</li>
-                <li class="is-active"><i class="ui-dot"></i>Codegen</li>
-                <li><i class="ui-dot"></i>Security</li>
-                <li><i class="ui-dot"></i>Evolution</li>
-              </ul>
-            </aside>
-            <div class="ui-main">
-              <header class="ui-head">
-                <p class="ui-title">Generate the diff.</p>
-                <p class="ui-sub">Spec-linked diffs only.</p>
-              </header>
-              <div class="ui-cols">
-                <section class="ui-card">
-                  <div class="ui-card-head"><span class="ui-eyebrow">Diff packages</span><i class="ui-dot is-live"></i></div>
-                  <p class="ui-card-title">Code generation</p>
-                  <ul class="ui-files">
-                    <li><code>invoicing.rs</code><span class="ui-counts"><b>+428</b><s>−116</s></span></li>
-                    <li><code>router.rs</code><span class="ui-counts"><b>+212</b><s>−41</s></span></li>
-                    <li><code>events.proto</code><span class="ui-counts"><b>+88</b><s>−12</s></span></li>
-                    <li><code>sap-sync.ts</code><span class="ui-counts"><b>+61</b><s>−144</s></span></li>
-                  </ul>
-                </section>
-                <section class="ui-card">
-                  <div class="ui-card-head"><span class="ui-eyebrow">Packet</span><i class="ui-dot is-live"></i></div>
-                  <p class="ui-card-title">Execution bundle</p>
-                  <ul class="ui-checks">
-                    <li><span>Spec link</span><b class="is-ok">Verified</b></li>
-                    <li><span>Rollback</span><b>Included</b></li>
-                    <li><span>PR package</span><b class="is-queued">Queued</b></li>
-                  </ul>
-                  <div class="ui-tags"><span>Guardrails</span><span>Rollback</span><span>Parity</span></div>
-                </section>
+              <p class="ui-answer">S/4 system uses a centralized function group <code>ZFG_PREDACCOUNTING</code> for custom goods movements, with high activity (~4.1k calls in 3 months).</p>
+              <p class="ui-card-title">Custom Goods Movement Function Modules</p>
+              <div class="ui-table-wrap">
+                <table class="ui-table">
+                  <thead>
+                    <tr><th>Function module</th><th>Purpose</th><th>Movement type</th><th>Key BAPIs</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code class="ui-fn">ZCREATEGR_DATAGEN1_PA</code></td>
+                      <td>Goods receipt for purchase order</td>
+                      <td>101 (GR for PO)</td>
+                      <td><code>BAPI_GOODSMVT_CREATE</code></td>
+                    </tr>
+                    <tr>
+                      <td><code class="ui-fn">ZCONFIRM_PRODORDER_PA</code></td>
+                      <td>Production order confirmation with goods movement</td>
+                      <td>Varies</td>
+                      <td><code>BAPI_PRODORDCONF_CREATE_TT</code></td>
+                    </tr>
+                    <tr>
+                      <td><code class="ui-fn">ZDELIVERY_PGI_DATAGEN_PA</code></td>
+                      <td>Create delivery and post goods issue</td>
+                      <td>Goods issue</td>
+                      <td><code>BAPI_OUTB_DELIVERY_SAVEREPLICA</code><code>WS_DELIVERY_UPDATE</code></td>
+                    </tr>
+                    <tr>
+                      <td><code class="ui-fn">ZPERFORM_PGI_OF_DELIVERYDOC_PA</code></td>
+                      <td>Post goods issue on existing delivery</td>
+                      <td>Goods issue</td>
+                      <td><code>WS_DELIVERY_UPDATE</code></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <footer class="ui-foot">
-                <span class="ui-status"><i class="ui-dot is-live"></i>Code packets queued</span>
-                <span class="ui-btn">Inspect diff</span>
-              </footer>
             </div>
           </div>
         </div>
