@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Gallop Methodology — Gallop</title>
+<meta name="description" content="The Gallop Way — six principles for AI-accelerated software transformation, learned shipping large-scale migrations at Google Cloud, Google Ads, and Android." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Gentium+Basic:wght@400&family=Gentium+Book+Plus:wght@400&family=Funnel+Sans:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="gallop-tokens.css" />
+<link rel="stylesheet" href="d.css" />
+</head>
+<body>
+
+<!-- site-nav:start · generated from partials/ — edit there, then run `node build.js` -->
+<div class="navwrap">
+  <header class="nav">
+    <a class="nav-brand" href="d.html#top" aria-label="Gallop home">
+      <img src="assets/horse-mark.svg" alt="" />
+      <span class="wm">Gallop</span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" id="navToggle"><span></span><span></span><span></span></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="d-methodology.html">Methodology</a>
+      <a href="d-blog.html">Case studies</a>
+      <a href="d-about.html">About</a>
+      <a href="d-careers.html">Careers</a>
+      <a href="d-contact.html" class="nav-cta">Book a demo</a>
+    </nav>
+  </header>
+</div>
+<!-- site-nav:end -->
+
+<main id="top">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="page-hero">
+    <div class="hero-horse horse-motif" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <h1 class="reveal in">The Gallop Way</h1>
+      <p class="sub reveal in d1">Six principles for AI-accelerated software transformation.</p>
+    </div>
+  </section>
+
+  <!-- ===================== INTRO ===================== -->
+  <section class="sec has-codewall" id="intro">
+    <div class="codewall" data-codewall style="right:-160px;top:40px;"></div>
+    <div class="wrap">
+      <div class="prose reveal in d1">
+        <p>Enterprise transformations fail at predictable rates for predictable reasons. Teams spend months on manual analysis, years on execution, and cross their fingers at deployment. The tools promise automation but deliver dashboards. The consultants deliver reports, not results.</p>
+        <p>We've shipped large-scale migrations at Google Cloud, Google Ads, and Android. We know what breaks and why. <b>These six principles are what we learned the hard way.</b></p>
+        <p>Now we're pairing that experience with AI agents that can actually execute. Not best practices — the minimum requirements for transformations that ship.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRINCIPLES INDEX ===================== -->
+  <section class="shift" id="principles">
+    <div class="wrap shift-inner">
+      <h2 class="sec-kicker reveal">The six principles</h2>
+      <div class="shift-rows reveal d1">
+        <div class="shift-row"><span class="rn">01</span><p><b>The ROI calculation has changed.</b> Most teams haven't noticed.</p></div>
+        <div class="shift-row"><span class="rn">02</span><p><b>Migrations fail by protecting everything equally.</b></p></div>
+        <div class="shift-row"><span class="rn">03</span><p><b>Ship to an agent-ready stack.</b> Verify with defense in depth.</p></div>
+        <div class="shift-row"><span class="rn">04</span><p><b>The bottleneck is never the code.</b> It's the coordination.</p></div>
+        <div class="shift-row"><span class="rn">05</span><p><b>Transformation is the opportunity to simplify.</b></p></div>
+        <div class="shift-row"><span class="rn">06</span><p><b>Months to hours.</b> By knowing what to skip.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRINCIPLE 01 ===================== -->
+  <section class="sec" id="p1">
+    <div class="wrap">
+      <span class="prin-idx reveal">Principle 01</span>
+      <h2 class="sec-kicker reveal">The ROI calculation has changed. Most teams haven't noticed.</h2>
+      <div class="prose reveal d1" style="margin-top:1.6rem;">
+        <p>Software transformations earned their bad reputation. Multi-year timelines. Budget overruns. New systems that ended up no better than what they replaced. The rational response was to avoid them unless absolutely necessary.</p>
+        <p>AI changes this. What took 18 months now takes 3. What required armies of consultants now requires a small team with the right tooling. But there's another variable most teams ignore: the cost of staying put.</p>
+        <p><b>Your legacy system has vulnerabilities. You just haven't found them yet.</b> Complexity and missed configurations lead to security incidents. Default admin credentials left unchanged. Deprecated dependencies with known CVEs. Auth bypasses buried in legacy flows. Most repos have the equivalent of default WiFi passwords — obvious vulnerabilities hiding in plain sight because no one has looked at the code in years.</p>
+        <p>The real ROI question isn't "can we afford to transform?" It's two questions: do you need to innovate in this space? And what's the actual risk profile of your existing code?</p>
+        <p>If you're in a static market with a stable, well-audited system, transformation probably isn't urgent. But if you need to move fast, integrate AI capabilities, or you haven't done a serious security audit in years? The cost of inaction is higher than you think.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRINCIPLE 02 ===================== -->
+  <section class="shift" id="p2">
+    <div class="wrap shift-inner">
+      <span class="prin-idx reveal">Principle 02</span>
+      <h2 class="sec-kicker reveal">Migrations fail by protecting everything equally.</h2>
+      <div class="prose reveal d1" style="margin-top:1.6rem;">
+        <p>The instinct in any migration is to preserve everything. Every edge case. Every quirk. Every undocumented behavior some team might depend on. This instinct is wrong.</p>
+        <p>No transformation is perfect. Anyone promising zero regressions hasn't done this at scale — or they're lying. The question isn't "will we miss something?" You will. The question is: <b>what absolutely cannot break?</b></p>
+        <p>Security. Data integrity. Compliance. Core business logic. These are your invariants. Define them explicitly. Protect them with automated verification. Everything else? Catch it early. Fix it fast.</p>
+      </div>
+      <div class="statline reveal d2" style="margin-top:2.4rem;">
+        <p>Non-negotiables don't negotiate.</p>
+        <p>When everything is critical, nothing is protected.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRINCIPLE 03 ===================== -->
+  <section class="sec" id="p3">
+    <div class="wrap">
+      <span class="prin-idx reveal">Principle 03</span>
+      <h2 class="sec-kicker reveal">Ship to an agent-ready stack. Verify with defense in depth.</h2>
+      <div class="prose reveal d1" style="margin-top:1.6rem;">
+        <p>Where you land matters. Most migrations target "modern": cleaner code, better frameworks, cloud-native. That's table stakes. <b>The real target is an architecture that AI agents can work with.</b></p>
+        <p>An agent-ready codebase has clear module boundaries. Consistent patterns. Well-typed interfaces. Comprehensive test coverage. Not because these are "best practices" — because they're what allows AI coding assistants to understand context, make safe changes, and validate their own work. The same properties that make code maintainable by humans make it navigable by agents.</p>
+        <p>But shipping AI-generated code — or any code — requires verification layers. The debate about whether to trust AI misses the point. Code quality has never been about who wrote it. It's about what catches errors before production.</p>
+      </div>
+      <div class="stage-row reveal d1" aria-label="Verification stack">
+        <span class="schema-chip">Clear requirements</span>
+        <span class="schema-arrow">→</span>
+        <span class="schema-chip">Solid architecture</span>
+        <span class="schema-arrow">→</span>
+        <span class="schema-chip">Elegant code</span>
+        <span class="schema-arrow">→</span>
+        <span class="schema-chip">Unit tests</span>
+        <span class="schema-arrow">→</span>
+        <span class="schema-chip">Integration tests</span>
+        <span class="schema-arrow">→</span>
+        <span class="schema-chip">E2E tests</span>
+        <span class="schema-arrow">→</span>
+        <span class="schema-chip">Staging</span>
+        <span class="schema-arrow">→</span>
+        <span class="schema-chip">Staged rollout</span>
+        <span class="schema-arrow">→</span>
+        <span class="schema-chip">Metrics + alerts</span>
+        <span class="schema-arrow">→</span>
+        <span class="schema-chip">Auto rollback</span>
+        <span class="schema-arrow">→</span>
+        <span class="schema-chip" style="background:var(--color-ochre);">Production safe</span>
+      </div>
+      <div class="prose reveal d2" style="margin-top:1.8rem;">
+        <p>This is how Google, Stripe, and Netflix ship thousands of changes daily. <b>The guardrails are the product.</b> They're what make an agent-ready architecture safe to operate.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRINCIPLE 04 ===================== -->
+  <section class="shift" id="p4">
+    <div class="wrap shift-inner">
+      <span class="prin-idx reveal">Principle 04</span>
+      <h2 class="sec-kicker reveal">The bottleneck is never the code. It's the coordination.</h2>
+      <div class="prose reveal d1" style="margin-top:1.6rem;">
+        <p>The technical work isn't the bottleneck anymore. Pattern matching, boilerplate translation, dependency mapping: AI handles this now. The constraint has moved.</p>
+        <p>What stalls migrations now: decisions waiting for reviewers. Context scattered across twelve tools. Stakeholders misaligned on priorities. Engineers blocked while approvals sit in someone's inbox. <b>The code is ready; the humans aren't.</b></p>
+        <p>Most migration tools optimize for the wrong thing. More automation, faster code generation. The actual bottleneck is human coordination: getting the right information to the right person at the right time so they can make a decision and move on.</p>
+        <p><b>Surface what requires decision. Hide everything else.</b> Every minute an engineer spends hunting through dashboards for the one thing that matters is a minute the migration stalls.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRINCIPLE 05 ===================== -->
+  <section class="sec" id="p5">
+    <div class="wrap">
+      <span class="prin-idx reveal">Principle 05</span>
+      <h2 class="sec-kicker reveal">Transformation is the opportunity to simplify.</h2>
+      <div class="prose reveal d1" style="margin-top:1.6rem;">
+        <p><b>The best migration is the code you don't write.</b> The instinct in any migration is to translate everything. Take the old code, convert it to the new stack, ship it. This misses the point entirely.</p>
+        <p>Transformation is the rare opportunity to question requirements that haven't been questioned in years. That billing edge case from 2014? Maybe it serves three customers. That complex workflow? Maybe a managed service handles it now. That custom infrastructure? Maybe it's table stakes in modern cloud.</p>
+        <p>Every line of code you don't write is a line you don't maintain, don't debug, don't secure, and don't explain to the next engineer. Use managed services. Let someone else carry that complexity.</p>
+      </div>
+      <div class="statline reveal d2" style="margin-top:2.4rem;">
+        <p>Migrate less. Delete more.</p>
+        <p>A system that does what you need, with the least code possible.</p>
+      </div>
+
+      <!-- Reference implementations -->
+      <div class="ledger-block">
+        <h3 class="reveal">Reference implementations</h3>
+        <p class="ledger-sub reveal d1">Reference implementations demonstrating the methodology — source system, migrated system, and the simplification strategy behind each reduction.</p>
+        <div class="ledger reveal d1">
+          <div class="ledger-scroll">
+            <table class="ledger-tbl">
+              <thead>
+                <tr><th>#</th><th>Domain</th><th>Source</th><th>Migrated</th><th>Reduction</th><th>Simplification strategy</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>01</td>
+                  <td class="rebuilt">Telecom network orchestration</td>
+                  <td>ONAP SO · 358K LOC · Java/Groovy/BPMN</td>
+                  <td>Modern orchestrator · 10K LOC · Python</td>
+                  <td><span class="veritag">~97% LOC</span></td>
+                  <td>Standardized on OpenStack; direct APIs replaced multi-vendor adapter layers</td>
+                </tr>
+                <tr>
+                  <td>02</td>
+                  <td class="rebuilt">Subscription billing</td>
+                  <td>Kill Bill · 308K LOC · Java/XML</td>
+                  <td>Modern billing · 22K LOC · Python</td>
+                  <td><span class="veritag">~93% LOC</span></td>
+                  <td>Stripe-focused approach replaced plugin architecture</td>
+                </tr>
+                <tr>
+                  <td>03</td>
+                  <td class="rebuilt">Mainframe insurance app</td>
+                  <td>CICS GenApp · 14K LOC · COBOL/JCL/BMS</td>
+                  <td>Modern insurance · 4K LOC · Python</td>
+                  <td><span class="veritag">~72% LOC</span></td>
+                  <td>REST API + PostgreSQL replaced 3270/VSAM/Db2; cloud-native deployment</td>
+                </tr>
+                <tr>
+                  <td>04</td>
+                  <td class="rebuilt">Mainframe banking app</td>
+                  <td>BankDemo · 56K LOC · COBOL/BMS/PL/I</td>
+                  <td>Modern banking · 12K LOC · Python/TypeScript</td>
+                  <td><span class="veritag">~78% LOC</span></td>
+                  <td>Full-stack web app replaced 3270/VSAM/CICS; cloud-native deployment</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ledger-foot">
+            <span>Reference implementations, open legacy codebases</span>
+            <span><b>72–97%</b> less code to maintain, debug &amp; secure</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRINCIPLE 06 ===================== -->
+  <section class="shift" id="p6">
+    <div class="wrap shift-inner">
+      <span class="prin-idx reveal">Principle 06</span>
+      <h2 class="sec-kicker reveal">Months to hours. By knowing what to skip.</h2>
+      <div class="prose reveal d1" style="margin-top:1.6rem;">
+        <p>Every migration moves through the same phases: discovery, execution, deployment. Traditionally, each phase takes weeks or months. Not because the work is hard, but because nobody knows what's safe to skip.</p>
+        <p>"Review every line of code" sounds rigorous. It's actually a failure of prioritization. When you don't know what matters, everything looks important. When you know exactly which patterns are risky and which are mechanical, <b>you review the 5% that matters and validate the rest automatically.</b></p>
+        <p>Speed doesn't come from doing the same things faster. It comes from skipping the work that was never necessary. AI handles the mechanical translation. Humans focus on decisions that require judgment. The phases compress because you stop wasting time on the wrong things.</p>
+      </div>
+
+      <div class="gates gates--3 reveal d1" style="margin-top:2.8rem;">
+        <article class="gate">
+          <span class="gate-idx">Phase 1 / Discovery &amp; planning</span>
+          <ul class="ph-list">
+            <li>System specification <b>90%</b></li>
+            <li>Risk analysis <b>99%</b></li>
+            <li>AI readiness <b>99%</b></li>
+            <li>Target architecture <b>90%</b></li>
+            <li>Target data model <b>90%</b></li>
+            <li>Transformation plan <b>90%</b></li>
+          </ul>
+        </article>
+        <article class="gate">
+          <span class="gate-idx">Phase 2 / Execution &amp; validation</span>
+          <ul class="ph-list">
+            <li>Code generation <b>95%</b></li>
+            <li>Code review <b>95%</b></li>
+            <li>Incremental validation <b>80%</b></li>
+            <li>Task iterations <b>90%</b></li>
+            <li>System integration <b>50%</b></li>
+          </ul>
+          <p class="ph-note">Each module delivered incrementally, not big-bang</p>
+        </article>
+        <article class="gate">
+          <span class="gate-idx">Phase 3 / Deployment &amp; transition</span>
+          <ul class="ph-list">
+            <li>Staged rollout <b>80%</b></li>
+            <li>Data modernization <b>80%</b></li>
+            <li>Cutover <b>80%</b></li>
+            <li>Monitoring setup <b>90%</b></li>
+            <li>Hypercare <b>80%</b></li>
+          </ul>
+        </article>
+      </div>
+      <p class="ph-note reveal d2"><b>%</b> = share of the work AI accelerates</p>
+
+      <div class="prose reveal d2" style="margin-top:2rem;">
+        <p><b>Speed comes from expertise, not shortcuts.</b> Knowing which 5% of code needs human review — and which 95% can be validated automatically — is what compresses timelines without compromising quality.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CLOSING + FOOTER ===================== -->
+  <section class="close-field" id="cta">
+    <div class="wrap close-inner">
+      <div class="close-horse horse-motif" aria-hidden="true"></div>
+      <div class="close-block">
+        <h2 class="reveal">Ready to apply these principles?</h2>
+        <p class="close-body reveal d1">Let us walk you through how Gallop applies this methodology to your specific systems — on your own environment, with no access to production required.</p>
+        <div class="close-actions reveal d2">
+          <a href="d-contact.html" class="btn btn-ink">Book a demo</a>
+          <a href="d.html#what" class="btn btn-line">See the platform</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- site-footer:start · generated from partials/ — edit there, then run `node build.js` -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="mark-row">
+          <img src="assets/horse-mark.svg" alt="" />
+          <span class="wm">Gallop</span>
+        </div>
+        <p class="footer-tag">Modernizing the world's most critical systems with speed and precision.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <a href="d.html#what">Discovery</a>
+          <a href="d.html#protocol">Modernization</a>
+          <a href="d.html#validation">Validation</a>
+          <a href="d.html#records">Cloud Migration</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="d-about.html">About</a>
+          <a href="d-careers.html">Careers</a>
+          <a href="d-blog.html">News</a>
+          <a href="d-contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Gallop Inc. All rights reserved.</span>
+      <span><a href="d-privacy.html">Privacy</a> &nbsp;&nbsp; <a href="d-terms.html">Terms</a></span>
+    </div>
+  </div>
+  <div class="stripes" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</footer>
+<!-- site-footer:end -->
+  </section>
+
+</main>
+
+<script src="d.js"></script>
+</body>
+</html>

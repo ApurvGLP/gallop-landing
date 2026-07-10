@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "gallop-options",
+      "runtimeExecutable": "env",
+      "runtimeArgs": ["PORT=4671", "node", "server.js"],
+      "port": 4671
+    }
+  ]
+}

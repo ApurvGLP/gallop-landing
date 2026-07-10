@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>How a Global Home Appliances Leader Rebuilt a Mission-Critical Field App in 4 Weeks — Gallop Case Studies</title>
+<meta name="description" content="An outdated Android field application lacked necessary agility and scalability. The team completed a comprehensive rebuild using Flutter with limited resources." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Gentium+Basic:wght@400&family=Gentium+Book+Plus:wght@400&family=Funnel+Sans:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="gallop-tokens.css" />
+<link rel="stylesheet" href="d.css" />
+</head>
+<body>
+
+<!-- site-nav:start · generated from partials/ — edit there, then run `node build.js` -->
+<div class="navwrap">
+  <header class="nav">
+    <a class="nav-brand" href="d.html#top" aria-label="Gallop home">
+      <img src="assets/horse-mark.svg" alt="" />
+      <span class="wm">Gallop</span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" id="navToggle"><span></span><span></span><span></span></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="d-methodology.html">Methodology</a>
+      <a href="d-blog.html">Case studies</a>
+      <a href="d-about.html">About</a>
+      <a href="d-careers.html">Careers</a>
+      <a href="d-contact.html" class="nav-cta">Book a demo</a>
+    </nav>
+  </header>
+</div>
+<!-- site-nav:end -->
+
+<main id="top">
+
+  <!-- ===================== ARTICLE HERO ===================== -->
+  <section class="page-hero article-hero">
+    <div class="wrap hero-inner">
+      <div class="post-meta reveal in" style="color:var(--ink-70);"><span>Case study</span><span>·</span><span>March 18, 2026</span><span>·</span><span>4 min read</span></div>
+      <h1 class="reveal in">How a Global Home Appliances Leader Rebuilt a Mission-Critical Field App in 4 Weeks with Gallop</h1>
+    </div>
+  </section>
+
+  <!-- ===================== ARTICLE ===================== -->
+  <section class="sec">
+    <div class="wrap">
+      <a class="article-back" href="d-blog.html">← Case studies</a>
+      <article class="article">
+
+        <dl class="glance reveal in">
+          <div class="glance-row"><dt>Company</dt><dd>Global home appliances leader</dd></div>
+          <div class="glance-row"><dt>Scale</dt><dd>10,000+ field engineers and business stakeholders</dd></div>
+          <div class="glance-row"><dt>Project</dt><dd>Mission-critical Android field application modernization</dd></div>
+          <div class="glance-row"><dt>The shift</dt><dd>Java &amp; XML Android monolith → Flutter, Dart, MVVM, Riverpod, GoRouter, and Drift</dd></div>
+          <div class="glance-row"><dt>The impact</dt><dd>611,374 lines reduced to 208,859 lines, with zero critical crashes across core workflows</dd></div>
+        </dl>
+
+        <h2>Executive summary</h2>
+        <p>For a global home appliances leader, a mission-critical field application had become a daily drag on field operations. More than 10,000 engineers and stakeholders depended on the app, but the Android-only codebase was fragile, difficult to extend, and burdened by nearly a decade of technical debt.</p>
+        <p>Using Gallop's AI-driven Modernization Platform, the application was rebuilt in Flutter in <b>4 weeks by a single Forward Deployed Engineer</b>. The engagement reduced the codebase by 65%, eliminated critical crash paths, introduced a modern automated test foundation, and gave the product team a platform they could evolve beyond Android.</p>
+
+        <h2>The challenge: a field app holding back operations</h2>
+        <p>The legacy application still supported essential daily workflows, but its architecture had become a liability. Years of patches across Java, XML layouts, and aging Android patterns made even small changes risky.</p>
+        <p>The team faced five core problems:</p>
+        <ul>
+          <li><b>Platform lock-in:</b> The app ran only on Android, creating a hard ceiling for future iOS, web, and desktop expansion.</li>
+          <li><b>Crash-prone workflows:</b> Dashboard drill-downs, assignments, notifications, and form submissions failed in production-critical paths.</li>
+          <li><b>Fragmented user experience:</b> More than 300 activities and fragments, 345+ XML layouts, and dialog-heavy flows made common tasks feel slow and inconsistent.</li>
+          <li><b>Hidden business intelligence:</b> The backend exposed valuable operational data that the legacy client never surfaced clearly to users.</li>
+          <li><b>Minimal test coverage:</b> Releases depended heavily on manual QA, slowing delivery and increasing regression risk.</li>
+        </ul>
+
+        <h2>The approach: a controlled Flutter modernization</h2>
+        <p>Rather than patching the Android monolith or starting a conventional multi-quarter rewrite, the client used Gallop to execute a focused modernization across four workstreams:</p>
+        <ol>
+          <li><b>AI-assisted discovery:</b> Gallop analyzed the Java/XML codebase, mapped routes, screens, dependencies, and failure-prone workflows, and established the baseline for what had to be preserved.</li>
+          <li><b>Architecture planning:</b> The target application was designed around Flutter, Dart, MVVM, Riverpod, GoRouter, and Drift, giving the team a modular foundation with clean separation between presentation, state, navigation, and storage.</li>
+          <li><b>AI-assisted execution:</b> Gallop accelerated the migration of screens, workflows, and business logic while the Forward Deployed Engineer focused on review, architecture, and production-readiness.</li>
+          <li><b>Reliability validation:</b> Critical user journeys were rebuilt with automated tests, widget tests, golden coverage, and integration suites to ensure the new app could move faster without reintroducing legacy risk.</li>
+        </ol>
+
+        <h2>Business impact: smaller, safer, and ready to scale</h2>
+        <p>The modernization changed the application from a fragile Android asset into a durable cross-platform foundation:</p>
+        <ul>
+          <li><b>65% smaller codebase:</b> The application moved from 611,374 lines to 208,859 lines, eliminating years of redundant Java and XML overhead.</li>
+          <li><b>Zero critical crashes:</b> Historical crash paths across dashboard, assignment, notification, and form workflows were eliminated.</li>
+          <li><b>Cross-platform readiness:</b> The new Flutter codebase supports Android and iOS from one foundation, with a path toward future web and desktop expansion.</li>
+          <li><b>Modern test coverage:</b> The rebuilt app includes 240+ automated test files and 10+ integration suites, reducing dependence on slow manual QA cycles.</li>
+          <li><b>Faster product velocity:</b> Modular MVVM architecture, centralized widgets, and clean state management allow the team to ship changes without touching the entire system.</li>
+        </ul>
+
+        <h2>What changed in the product</h2>
+        <p>The migration was not a one-to-one port. The team used the modernization to remove structural friction from daily workflows:</p>
+        <ul>
+          <li>Dialog-heavy drill-downs became fluid, tabbed interfaces.</li>
+          <li>Dashboard filters now persist through the active session.</li>
+          <li>Form submissions gained loading guards and ViewModel debouncing to prevent duplicate writes.</li>
+          <li>Offline states are handled gracefully instead of failing without context.</li>
+          <li>Shared widgets replaced hundreds of fragmented XML definitions.</li>
+        </ul>
+
+        <h2>Outcome</h2>
+        <p>In 4 weeks, Gallop helped the client turn a brittle field app into a cleaner, tested, cross-platform product foundation. The result was not just fewer crashes or fewer lines of code. It gave the engineering team a system they could understand, validate, and extend with confidence.</p>
+        <p><b>The Gallop Modernization Platform did not just migrate an app. It gave a product team back its ability to move.</b></p>
+
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <section class="close-field">
+    <!-- site-footer:start · generated from partials/ — edit there, then run `node build.js` -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="mark-row">
+          <img src="assets/horse-mark.svg" alt="" />
+          <span class="wm">Gallop</span>
+        </div>
+        <p class="footer-tag">Modernizing the world's most critical systems with speed and precision.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <a href="d.html#what">Discovery</a>
+          <a href="d.html#protocol">Modernization</a>
+          <a href="d.html#validation">Validation</a>
+          <a href="d.html#records">Cloud Migration</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="d-about.html">About</a>
+          <a href="d-careers.html">Careers</a>
+          <a href="d-blog.html">News</a>
+          <a href="d-contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Gallop Inc. All rights reserved.</span>
+      <span><a href="d-privacy.html">Privacy</a> &nbsp;&nbsp; <a href="d-terms.html">Terms</a></span>
+    </div>
+  </div>
+  <div class="stripes" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</footer>
+<!-- site-footer:end -->
+  </section>
+
+</main>
+
+<script src="d.js"></script>
+</body>
+</html>

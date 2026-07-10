@@ -1,0 +1,187 @@
+/* ============================================================
+   Gallop design tokens — drop-in CSS layer.
+   Source of truth: tokens.json (pulled from the [EXT] Gallop
+   Figma file · node 211-2 typography, node 211-283 colors).
+
+   Import from any project:
+     @import "../design-tokens/gallop/tokens.css";
+   or copy the file in and link it before the project stylesheet.
+
+   Fonts (load in your page/layout — not loaded here so importing
+   this file never triggers network requests):
+     - Gentium Basic 400 + Gentium Book Plus 400 → --gallop-font-serif
+       (Google Fonts still serves the deprecated Gentium Basic;
+        request both families in one link — Book Plus is its named
+        successor and only downloads if Basic stops resolving.)
+     - Funnel Sans   300/400/500    → --gallop-font-body
+     - Geist Mono    400/500        → --gallop-font-mono
+
+   The designer's DESIGN-SYSTEM.md refers to these same values as
+   --brand-* / --neutral-* / --ochre-* etc.; here every name carries
+   the --gallop- prefix so the file is safe to drop into any project
+   (--brand-text-primary ≡ --gallop-text-primary, --ochre-600 ≡
+   --gallop-ochre-600, and so on).
+   ============================================================ */
+
+:root,
+.gallop,
+.gallop-skin {
+  /* ----- Brand roles ----- */
+  --gallop-background:     #F9F9F2;  /* Brand/Background */
+  --gallop-surface:        #F2F2EB;  /* Brand/Surface */
+  --gallop-text-primary:   #362F2C;  /* Brand/Text Primary — "ink" */
+  --gallop-text-secondary: #7A7471;  /* Brand/Text Secondary */
+  --gallop-accent-ochre:   #F4E27B;  /* Brand/Accent Ochre (= ochre 500 slot) */
+  --gallop-accent-blue:    #BCDEF7;  /* Brand/Accent Blue  (= blue 500 slot) */
+  --gallop-accent-green:   #97DFA7;  /* Brand/Accent Green */
+  --gallop-white:          #FFFFFF;
+  --gallop-black:          #000000;
+
+  /* ----- Neutral ramp (brand roles occupy the 50 + 500 slots) ----- */
+  --gallop-neutral-50:  #F9F9F2;  /* = background */
+  --gallop-neutral-100: #E3E2DC;
+  --gallop-neutral-200: #B8B6B0;
+  --gallop-neutral-300: #8D8984;
+  --gallop-neutral-400: #615C58;
+  --gallop-neutral-500: #362F2C;  /* = text-primary */
+  --gallop-neutral-600: #302926;
+  --gallop-neutral-700: #29231F;
+  --gallop-neutral-800: #231D19;
+  --gallop-neutral-900: #1D1713;
+  --gallop-neutral-950: #1A140F;
+
+  /* ----- Ochre ramp ----- */
+  --gallop-ochre-50:  #FCFAEB;
+  --gallop-ochre-100: #FCF7DE;
+  --gallop-ochre-200: #FAF2C5;
+  --gallop-ochre-300: #F8EDAD;
+  --gallop-ochre-400: #F6E794;
+  --gallop-ochre-500: #F4E27B;  /* = accent-ochre */
+  --gallop-ochre-600: #D2C164;  /* stripe motif on ochre */
+  --gallop-ochre-700: #AFA04D;
+  --gallop-ochre-800: #8D7E37;
+  --gallop-ochre-900: #6A5D20;
+  --gallop-ochre-950: #594D14;
+
+  /* ----- Blue ramp ----- */
+  --gallop-blue-50:  #F5F9FC;
+  --gallop-blue-100: #EEF6FC;
+  --gallop-blue-200: #E2F0FA;
+  --gallop-blue-300: #D5EAF9;
+  --gallop-blue-400: #C9E4F8;
+  --gallop-blue-500: #BCDEF7;  /* = accent-blue */
+  --gallop-blue-600: #98B9D8;  /* feature blocks */
+  --gallop-blue-700: #7494B9;  /* stripe motif on blue */
+  --gallop-blue-800: #506F9A;
+  --gallop-blue-900: #2C4B7B;
+  --gallop-blue-950: #1A386B;
+
+  /* ----- Green ramp ----- */
+  --gallop-green-50:  #F2FBF0;
+  --gallop-green-100: #EAF8E7;
+  --gallop-green-200: #D9F2D6;
+  --gallop-green-300: #C8EDC5;
+  --gallop-green-400: #B7E7B4;
+  --gallop-green-500: #A6E1A3;
+  --gallop-green-600: #85BF85;
+  --gallop-green-700: #659D66;
+  --gallop-green-800: #457B47;
+  --gallop-green-900: #255829;
+  --gallop-green-950: #14471A;
+
+  /* ----- Spacing (Figma scale: 12/32/40/48 + known uses) ----- */
+  --gallop-space-12: 12px;         /* button pad-y */
+  --gallop-space-32: 32px;         /* button pad-x */
+  --gallop-space-40: 40px;         /* page side margins */
+  --gallop-space-48: 48px;         /* section-heading rhythm */
+  --gallop-space-section: 180px;   /* between major sections */
+  --gallop-space-card-gap: 20px;
+  --gallop-space-card-pad: 25px;
+  --gallop-canvas-max: 1440px;
+  --gallop-content-max: 1360px;
+
+  /* ----- Radius (square-cornered brand; nav bar is the exception) ----- */
+  --gallop-rounded-none: 0;
+  --gallop-rounded-nav: 3.75px;
+
+  /* ----- Font stacks ----- */
+  --gallop-font-serif: "Gentium Basic", "Gentium Book Plus", Georgia, serif;
+  --gallop-font-body:  "Funnel Sans", ui-sans-serif, system-ui, sans-serif;
+  --gallop-font-mono:  "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* ----- Type ramp (Figma text styles) ----- */
+  --gallop-text-heading-xl: 3rem;      /* 48 */
+  --gallop-text-heading-lg: 2.625rem;  /* 42 */
+  --gallop-text-heading-md: 2.25rem;   /* 36 */
+  --gallop-text-heading-sm: 2rem;      /* 32 */
+  --gallop-text-heading-xs: 1.75rem;   /* 28 */
+  --gallop-text-body-xl:    1.25rem;   /* 20 */
+  --gallop-text-body-lg:    1.125rem;  /* 18 */
+  --gallop-text-body-md:    1rem;      /* 16 */
+  --gallop-text-label-md:   1rem;      /* 16 */
+  --gallop-text-label-sm:   .8125rem;  /* 13 */
+
+  --gallop-leading-heading-xl: 1.02;
+  --gallop-leading-heading-lg: 1.08;
+  --gallop-leading-heading-md: 1.1;
+  --gallop-leading-heading-sm: 1.12;
+  --gallop-leading-heading-xs: 1.12;
+  --gallop-leading-body:       1.24;
+  --gallop-leading-label:      1.2;
+  --gallop-leading-label-tight: 1.1;   /* label-sm/medium */
+
+  --gallop-tracking:         -0.02em;  /* everything except heading-xl */
+  --gallop-tracking-display: -0.03em;  /* heading-xl */
+}
+
+/* ----- Type pattern classes (mirror the typeStyles in tokens.json).
+   Heading sizes are fluid — clamp() carries them down to small
+   viewports, so no breakpoint overrides are needed. ----- */
+.gallop-heading-xl,
+.gallop-heading-lg,
+.gallop-heading-md,
+.gallop-heading-sm,
+.gallop-heading-xs {
+  font-family: var(--gallop-font-serif);
+  font-weight: 400;
+  letter-spacing: var(--gallop-tracking);
+}
+.gallop-heading-xl { font-size: clamp(2.1rem, 3.6vw, var(--gallop-text-heading-xl)); line-height: var(--gallop-leading-heading-xl); letter-spacing: var(--gallop-tracking-display); }
+.gallop-heading-lg { font-size: clamp(1.9rem, 3.2vw, var(--gallop-text-heading-lg)); line-height: var(--gallop-leading-heading-lg); }
+.gallop-heading-md { font-size: clamp(1.6rem, 2.6vw, var(--gallop-text-heading-md)); line-height: var(--gallop-leading-heading-md); }
+.gallop-heading-sm { font-size: clamp(1.45rem, 2.3vw, var(--gallop-text-heading-sm)); line-height: var(--gallop-leading-heading-sm); }
+.gallop-heading-xs { font-size: clamp(1.3rem, 2vw, var(--gallop-text-heading-xs)); line-height: var(--gallop-leading-heading-xs); }
+
+.gallop-body-xl,
+.gallop-body-lg,
+.gallop-body-md {
+  font-family: var(--gallop-font-body);
+  font-weight: 400;
+  line-height: var(--gallop-leading-body);
+  letter-spacing: var(--gallop-tracking);
+}
+.gallop-body-xl { font-size: var(--gallop-text-body-xl); }
+.gallop-body-lg { font-size: var(--gallop-text-body-lg); }
+.gallop-body-md { font-size: var(--gallop-text-body-md); }
+
+.gallop-label-md,
+.gallop-label-sm {
+  font-family: var(--gallop-font-mono);
+  font-weight: 500;
+  line-height: var(--gallop-leading-label);
+  letter-spacing: var(--gallop-tracking);
+  text-transform: uppercase;
+}
+.gallop-label-md { font-size: var(--gallop-text-label-md); }
+.gallop-label-sm { font-size: var(--gallop-text-label-sm); }
+
+/* Opt-in base: wrap a region in .gallop-skin to get the paper +
+   ink + body type defaults without touching the rest of the page. */
+.gallop-skin {
+  background: var(--gallop-background);
+  color: var(--gallop-text-primary);
+  font-family: var(--gallop-font-body);
+  font-size: var(--gallop-text-body-md);
+  line-height: var(--gallop-leading-body);
+  letter-spacing: var(--gallop-tracking);
+}
