@@ -674,6 +674,11 @@ img,svg,video{display:block;max-width:100%;}
 .disc-media{flex:1;min-height:clamp(400px,44vw,620px);}
 .disc-media img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
   width:auto;height:auto;max-width:84%;max-height:80%;}
+/* The tex-web-*.jpg exports carry a 1px dark row at their bottom edge. Extend
+   the texture layer past the panel's bottom (anchored top) so that baked-in
+   line is clipped by .texfield's overflow:hidden instead of reading as a
+   stroke under the comparison graphic. */
+.disc-media.texfield::before{inset:0 0 -4px 0;background-position:center top;}
 .tf-disc{--tex-img:url("assets/tex-web-yellow.jpg");}
 .tf-mod{--tex-img:url("assets/tex-web-green.jpg");}
 
