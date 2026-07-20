@@ -951,3 +951,33 @@ img,svg,video{display:block;max-width:100%;}
 @media (max-width:1100px){
   .about-row.is-principle .about-copy{max-width:none;}
 }
+
+/* =========================================================================
+   [WEB] CONTACT — split hero: heading on the left inside a fixed-height ochre
+   band, the intake form in the right column top-aligned with the heading. The
+   form is taller than the band, so its lower half spills past the ochre edge
+   onto the paper below and reads as sitting half on each. The ochre is a
+   fixed-height gradient band (keeps the yellow block height); the form stays
+   in normal flow, so the section grows with it and the footer follows cleanly.
+   ========================================================================= */
+.contact-hero{position:relative;
+  margin-top:calc(-1 * (66px + 14px));padding-top:calc(66px + 14px);
+  --band-h:500px;
+  background:linear-gradient(var(--color-ochre) 0 var(--band-h), transparent var(--band-h));}
+.contact-hero-inner{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(2rem,5vw,4.5rem);align-items:start;
+  padding-block:clamp(4rem,8vw,6.5rem) clamp(4rem,8vw,7rem);}
+.contact-hero-copy{max-width:34ch;}
+.contact-hero-copy h1{font-size:var(--type-h-lg);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-heading-lg);}
+.contact-hero-copy .sub{margin-top:1.4rem;font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.3;color:var(--color-ink);}
+.contact-hero-form{width:100%;max-width:560px;margin:0;justify-self:end;}
+
+@media (max-width:900px){
+  /* stack: ochre sits behind the heading only (full-bleed), form on paper below */
+  .contact-hero{background:none;}
+  .contact-hero-inner{grid-template-columns:1fr;gap:0;padding-top:0;}
+  .contact-hero-copy{max-width:none;background:var(--color-ochre);
+    width:100vw;margin-left:calc(50% - 50vw);
+    padding:clamp(3rem,7vw,4.5rem) var(--space-page-x) clamp(2.5rem,6vw,3.5rem);}
+  .contact-hero-form{justify-self:stretch;max-width:none;margin-top:clamp(2rem,6vw,3rem);}
+}
