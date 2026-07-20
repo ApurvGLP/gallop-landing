@@ -2,7 +2,7 @@
    GALLOP — Option D · restyled to the WIP Figma direction (node 293-3).
    Warm editorial system: cream paper, ochre accent bands, Gentium serif
    headings, Funnel Sans body, Geist Mono uppercase labels, flat tinted
-   cards, dark parity panel, striped-horse + stripe-stack motifs.
+   cards, dark parity panel, stripe-stack motif.
    Shared by d.html and every d-*.html subpage.
    ========================================================================= */
 
@@ -102,13 +102,6 @@ img,svg,video{display:block;max-width:100%;}
 .has-codewall{position:relative;overflow:hidden;}
 .has-codewall>.wrap{position:relative;z-index:1;}
 
-/* Pixel-horse motif — the memory asset, rendered solid from the local mark */
-.horse-motif{
-  background:var(--color-ink);
-  -webkit-mask:url("assets/horse-mark.svg") no-repeat center / contain;
-  mask:url("assets/horse-mark.svg") no-repeat center / contain;
-}
-
 /* Stripe stack — increasing-thickness bars (page close motif) */
 .stripes{display:flex;flex-direction:column;}
 .stripes span{display:block;background:var(--color-ink);width:100%;}
@@ -164,7 +157,6 @@ img,svg,video{display:block;max-width:100%;}
 .nav-toggle{display:none;}
 
 /* =====================  HERO helpers shared with subpage page-hero  ===================== */
-.hero-horse{position:absolute;right:2%;bottom:-4%;width:min(560px,42vw);aspect-ratio:232/210;opacity:.9;pointer-events:none;}
 .hero-inner{position:relative;z-index:1;}
 
 
@@ -270,10 +262,6 @@ img,svg,video{display:block;max-width:100%;}
   background-repeat:no-repeat, no-repeat;
   background-position:center, center bottom;
   overflow:hidden;margin-top:var(--space-section-sm);}
-/* Horses live inside .close-inner and anchor to its bottom edge, so they
-   can never bleed down into the footer regardless of viewport size. */
-.close-horse{position:absolute;left:clamp(0rem,3vw,4rem);bottom:0;width:min(430px,34vw);aspect-ratio:232/210;opacity:.85;pointer-events:none;}
-.close-horse-img{position:absolute;left:0;bottom:0;width:min(744px,46vw);height:auto;pointer-events:none;}
 .close-link{font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);border-bottom:1px solid var(--hairline-strong);padding-bottom:.2rem;transition:border-color var(--dur-fast) var(--ease);}
 .close-link:hover{border-color:var(--color-ink);}
 .close-inner{position:relative;z-index:1;padding-block:clamp(4.5rem,9vw,8rem) clamp(3rem,6vw,5rem);display:flex;justify-content:flex-end;}
@@ -304,7 +292,6 @@ img,svg,video{display:block;max-width:100%;}
 .page-hero .hero-inner{padding-block:clamp(4rem,8vw,6.5rem) clamp(3rem,6vw,4.5rem);}
 .page-hero h1{font-size:var(--type-h-lg);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-heading-lg);max-width:24ch;}
 .page-hero .sub{margin-top:1.4rem;font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.3;max-width:56ch;}
-.page-hero .hero-horse{width:min(520px,44vw);right:-3%;bottom:-10%;opacity:.55;}
 
 .prose{max-width:62ch;}
 .prose p{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.35;color:var(--ink-70);}
@@ -438,10 +425,7 @@ img,svg,video{display:block;max-width:100%;}
     url("assets/texture-green-gold-stretch.jpg");
     background-size:cover, cover, cover;}
   .gates{grid-template-columns:repeat(2,1fr);}
-  .hero-horse{opacity:.35;}
   .stats{grid-template-columns:1fr;gap:2.8rem;}
-  .close-horse{opacity:.3;left:-8vw;}
-  .close-horse-img{opacity:.35;left:-12vw;width:56vw;}
   .close-inner{justify-content:flex-start;}
   .close-block{align-items:flex-start;text-align:left;}
   .close-actions{justify-content:flex-start;}
@@ -462,7 +446,6 @@ img,svg,video{display:block;max-width:100%;}
   .nav-toggle.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
   .navwrap{position:relative;}
   .hero,.page-hero{margin-top:calc(-1 * (58px + 8px));padding-top:calc(58px + 8px);}
-  .hero-horse{width:78vw;right:-14%;bottom:-2%;opacity:.25;}
   .hero-dashes{display:none;}
   .agent-row{flex-wrap:wrap;gap:.5rem;}
   .agent-send{margin-left:0;}
@@ -470,8 +453,6 @@ img,svg,video{display:block;max-width:100%;}
   .panel{padding:1.1rem;}
   .panel-row{gap:.8rem;flex-wrap:wrap;}
   .faq-item summary{padding-block:1.5rem;}
-  .close-horse{left:-16vw;width:56vw;opacity:.25;}
-  .close-horse-img{left:-24vw;width:74vw;opacity:.3;}
   .footer-top{flex-direction:column;}
   .footer-bottom{flex-direction:column;align-items:flex-start;}
   .post-grid{grid-template-columns:1fr;}
