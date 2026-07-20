@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>How a Banking Analytics Firm Modernized Its Investment Platform in 16 Weeks — Gallop Case Studies</title>
+<meta name="description" content="A business-critical VB.NET and SQL Server investment analytics platform rebuilt on a modern cloud architecture in 16 weeks, owned end to end by the client's own team." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lustria&family=Funnel+Sans:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="gallop-tokens.css" />
+<link rel="stylesheet" href="d.css" />
+</head>
+<body>
+
+<!-- site-nav:start · generated from partials/ — edit there, then run `node build.js` -->
+<div class="navwrap">
+  <header class="nav">
+    <div class="nav-left">
+      <a class="nav-brand" href="d.html#top" aria-label="Gallop home">
+        <img class="lockup" src="assets/gallop-lockup.svg" alt="Gallop" />
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="d-methodology.html">Methodology</a>
+        <a href="d-about.html">About</a>
+        <a href="d-blog.html">Case studies</a>
+        <a href="d-careers.html">Careers</a>
+      </nav>
+    </div>
+    <a href="d-contact.html" class="nav-cta">Request a demo</a>
+    <button class="nav-toggle" aria-label="Menu" id="navToggle"><span></span><span></span><span></span></button>
+  </header>
+</div>
+<!-- site-nav:end -->
+
+<main id="top">
+
+  <!-- ===================== ARTICLE HERO ===================== -->
+  <section class="page-hero article-hero">
+    <div class="wrap hero-inner">
+      <div class="post-meta reveal in" style="color:var(--ink-70);"><span>Case study</span><span>·</span><span>June 24, 2026</span><span>·</span><span>4 min read</span></div>
+      <h1 class="reveal in">How a Banking Analytics Firm Modernized Its Investment Platform in 16 Weeks and Kept Full Ownership</h1>
+    </div>
+  </section>
+
+  <!-- ===================== ARTICLE ===================== -->
+  <section class="sec">
+    <div class="wrap">
+      <a class="article-back" href="d-blog.html">← Case studies</a>
+      <article class="article">
+
+        <dl class="glance reveal in">
+          <div class="glance-row"><dt>Company</dt><dd>A leading asset/liability-management advisory and analytics firm serving the banking sector</dd></div>
+          <div class="glance-row"><dt>Scale</dt><dd>Hundreds of banking institutions served</dd></div>
+          <div class="glance-row"><dt>Project</dt><dd>Extracting and modernizing an in-house investment analytics application from a larger data-warehouse platform</dd></div>
+          <div class="glance-row"><dt>The shift</dt><dd>VB.NET &amp; SQL Server (on-prem desktop) → Python, cloud-native architecture</dd></div>
+          <div class="glance-row"><dt>The impact</dt><dd>Rebuilt in 16 weeks with a single Gallop Forward Deployed Engineer, owned end to end by the client's team</dd></div>
+        </dl>
+
+        <h2>Executive summary</h2>
+        <p>For a leading advisory and analytics firm serving hundreds of banking institutions, one business-critical application had become difficult and expensive to evolve: an investment analytics system embedded in a much larger in-house data-warehouse platform. Built as a desktop VB.NET and SQL Server application, it powered specialized financial calculations for the firm's clients, but it resisted change. Routine business updates required full code releases. Data from external services was discarded rather than retained. Aging third-party integrations needed to move to modern APIs. The firm wanted a modern, cloud-based, well-instrumented replacement, on a timeline a conventional multi-year rewrite could not meet.</p>
+        <p>With Gallop's AI-driven Modernization Platform, the firm's engineering and product leadership took a different path. A single Gallop Forward Deployed Engineer (FDE) supported the engagement while the internal team kept full control of the transformation. They used the platform to reconstruct the legacy system's logic, blueprint the target architecture, co-author the new implementation with Gallop agents, and validate it against the original behavior. <b>The result is a modernization the team owns end to end, rather than one handed to an outside vendor.</b></p>
+
+        <h2>The challenge: a legacy desktop application resistant to change</h2>
+        <p>The firm's investment workflow depended on an entrenched, inflexible legacy application. The engineering organization faced four core roadblocks:</p>
+        <ul>
+          <li><b>Entangled legacy logic:</b> An aging desktop .NET and SQL Server application, dense with specialized financial calculations spread across multiple codelines, made even small changes slow to reason about and risky to ship.</li>
+          <li><b>Every change meant a code release:</b> Adjusting business behavior, such as introducing a new analytical scenario, required editing code and pushing a full desktop release. Routine updates turned into engineering projects.</li>
+          <li><b>Discarded data and limited traceability:</b> Raw responses from external analytics services were processed and thrown away rather than stored, leaving gaps in traceability and auditability for a data-sensitive financial operation.</li>
+          <li><b>Aging integrations on a compressed timeline:</b> Legacy connections to third-party analytics and market-data providers needed to move to modern REST APIs, and the firm wanted the whole modernization delivered on a schedule traditional methods could not support.</li>
+        </ul>
+
+        <h2>The approach: engineer-led, AI-driven transformation</h2>
+        <p>Rather than outsourcing the problem or launching a multi-year internal rewrite, the firm drove the modernization internally on the Gallop platform, across four de-risked phases:</p>
+        <ol>
+          <li><b>Discovery:</b> Gallop ingested years of undocumented .NET code and deeply entangled SQL dependencies. Within days, the platform mapped user journeys and generated a verified code-to-logic map, a trustable, deterministic baseline for everything that followed.</li>
+          <li><b>Planning:</b> The firm used Gallop's Planning Module to auto-generate technical specifications for the target cloud environment. Internal architects reviewed, steered, and approved every blueprint, from architecture and security to testing strategy, keeping total architectural control.</li>
+          <li><b>AI-assisted execution:</b> The internal team co-authored the new system with Gallop's native AI agents. The platform executed high-speed refactoring and test generation on the most convoluted logic, including investment cashflow projections, scenario-based valuations, and statutory rules, while the firm's engineers focused on strategic design and oversight.</li>
+          <li><b>Reliability Mesh:</b> The team validated the new system with Gallop's automated Reliability Mesh, which confirms the new system behaves like the old one across every Critical User Journey (CUJ). A cost-safe test environment mirrored expensive third-party APIs without incurring their per-call charges, enabling continuous validation and a low-risk release for the firm's institutional clients.</li>
+        </ol>
+
+        <h2>Business impact: speed, safety, and ownership</h2>
+        <p>By putting Gallop's platform in the hands of its own engineers, the firm reshaped how it approaches modernization:</p>
+        <ul>
+          <li><b>Full internal ownership:</b> The team owns the reconstructed specifications, the locked architectural decisions, and the resulting codebase, with no dependence on an outside vendor to understand or change its own system.</li>
+          <li><b>Early functionality, delivered and validated:</b> Core investment-processing capabilities were built with AI acceleration and moved into acceptance testing, giving the team working software to validate rather than a distant promise.</li>
+          <li><b>A cost-safe way to test and iterate:</b> A mock environment mirroring external analytics and market-data services lets the team test continuously without triggering per-call charges, removing a real barrier to thorough validation.</li>
+          <li><b>Foundations for lower cost and faster change:</b> Moving off an on-prem desktop stack to a modern cloud architecture, with raw data now retained and business scenarios adjustable without code releases, sets up lower ongoing cost and a shorter path from business need to shipped change.</li>
+        </ul>
+
+        <blockquote class="testimonial">
+          <p>“We didn't hand our system to a vendor and hope for the best. Our engineers and product managers make every architectural decision. Gallop's platform just compressed work we'd scoped in years into weeks.”</p>
+          <cite>CTO, Banking Analytics Firm</cite>
+        </blockquote>
+
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <section class="close-field">
+    <!-- site-footer:start · generated from partials/ — edit there, then run `node build.js` -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="mark-row">
+          <img class="lockup" src="assets/gallop-lockup.svg" alt="Gallop" />
+        </div>
+        <p class="footer-tag">Modernizing the world's most critical systems with speed and precision.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <a href="d.html#what">Discovery</a>
+          <a href="d.html#protocol">Modernization</a>
+          <a href="d.html#validation">Validation</a>
+          <a href="d.html#records">Cloud Migration</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="d-about.html">About</a>
+          <a href="d-careers.html">Careers</a>
+          <a href="d-blog.html">News</a>
+          <a href="d-contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Gallop Inc. All rights reserved.</span>
+      <span><a href="d-privacy.html">Privacy</a> &nbsp;&nbsp; <a href="d-terms.html">Terms</a></span>
+    </div>
+  </div>
+</footer>
+<!-- site-footer:end -->
+  </section>
+
+</main>
+
+<script src="d.js"></script>
+</body>
+</html>
