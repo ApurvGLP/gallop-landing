@@ -31,10 +31,15 @@
   --font-body:  var(--gallop-font-body);
   --font-mono:  var(--gallop-font-mono);
 
-  --type-h-xl: clamp(2.1rem, 3.6vw, var(--gallop-text-heading-xl));  /* heading-xl 48 */
-  --type-h-lg: clamp(1.9rem, 3.2vw, var(--gallop-text-heading-lg));  /* heading-lg 42 */
-  --type-h-md: clamp(1.6rem, 2.6vw, var(--gallop-text-heading-md));  /* heading-md 36 */
-  --type-h-xs: clamp(1.3rem, 2vw, var(--gallop-text-heading-xs));    /* heading-xs 28 */
+  /* Lustria renders visibly larger than the former Gentium serif, so every
+     Lustria-rendered heading/display size is scaled down ~10% through this one
+     knob. Funnel Sans headings (.hx, .prin-title, .prin-heading, .stat-num) use
+     their own sizes and are unaffected. */
+  --lustria-scale: 0.9;
+  --type-h-xl: clamp(calc(2.1rem * var(--lustria-scale)), calc(3.6vw * var(--lustria-scale)), calc(var(--gallop-text-heading-xl) * var(--lustria-scale)));  /* heading-xl 48 */
+  --type-h-lg: clamp(calc(1.9rem * var(--lustria-scale)), calc(3.2vw * var(--lustria-scale)), calc(var(--gallop-text-heading-lg) * var(--lustria-scale)));  /* heading-lg 42 */
+  --type-h-md: clamp(calc(1.6rem * var(--lustria-scale)), calc(2.6vw * var(--lustria-scale)), calc(var(--gallop-text-heading-md) * var(--lustria-scale)));  /* heading-md 36 */
+  --type-h-xs: clamp(calc(1.3rem * var(--lustria-scale)), calc(2vw * var(--lustria-scale)), calc(var(--gallop-text-heading-xs) * var(--lustria-scale)));    /* heading-xs 28 */
   --type-body-xl: var(--gallop-text-body-xl);   /* 20 */
   --type-body-lg: var(--gallop-text-body-lg);   /* 18 */
   --type-body-md: var(--gallop-text-body-md);   /* 16 */
@@ -571,7 +576,7 @@ img,svg,video{display:block;max-width:100%;}
   margin-top:calc(-1 * (66px + 14px));padding-top:calc(66px + 14px);}
 .xhero-inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(2rem,4vw,4rem);align-items:end;padding-top:clamp(4.5rem,9vw,8rem);}
 .xhero-copy{padding-bottom:clamp(2.6rem,5.5vw,5.3rem);}
-.xhero-copy h1{font-family:var(--font-display);font-weight:400;font-size:clamp(1.9rem,2.8vw,2.5rem);line-height:1.02;letter-spacing:-.03em;max-width:16ch;}
+.xhero-copy h1{font-family:var(--font-display);font-weight:400;font-size:clamp(calc(1.9rem * var(--lustria-scale)),calc(2.8vw * var(--lustria-scale)),calc(2.5rem * var(--lustria-scale)));line-height:1.04;letter-spacing:-.03em;max-width:42rem;}
 .xhero-sub{margin-top:20px;font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;line-height:1.2;color:var(--color-ink);}
 .xhero-sub b{font-weight:500;}
 .xhero-ph{background:var(--color-surface);border-radius:3px;aspect-ratio:623/363;display:flex;align-items:center;justify-content:center;}
@@ -847,7 +852,7 @@ img,svg,video{display:block;max-width:100%;}
 .about-hero-inner .hglyph{width:clamp(150px,15.8vw,227px);color:var(--color-ochre);
   margin-bottom:calc(clamp(150px,15.8vw,227px) * -.36);} /* headline overlaps the faded rows, as in Figma */
 .about-hero-inner h1{position:relative;font-family:var(--font-display);font-weight:400;
-  font-size:clamp(1.8rem,2.65vw,2.375rem);line-height:1.08;letter-spacing:var(--gallop-tracking);max-width:633px;}
+  font-size:clamp(calc(1.8rem * var(--lustria-scale)),calc(2.65vw * var(--lustria-scale)),calc(2.375rem * var(--lustria-scale)));line-height:1.08;letter-spacing:var(--gallop-tracking);max-width:633px;}
 .about-hero-inner .sub{position:relative;margin-top:20px;font-family:var(--font-mono);
   font-size:var(--type-label-sm);font-weight:400;letter-spacing:var(--gallop-tracking);
   text-transform:uppercase;line-height:1.2;max-width:614px;}
@@ -883,7 +888,7 @@ img,svg,video{display:block;max-width:100%;}
 .about-stat{min-height:clamp(180px,16.6vw,240px);padding:40px clamp(2rem,6.25vw,90px);
   display:flex;flex-direction:column;justify-content:center;gap:16px;background:var(--color-surface);}
 .about-stat.is-ochre{background:var(--color-ochre);}
-.about-stat .fig{font-family:var(--font-display);font-size:clamp(2.1rem,3.3vw,3rem);
+.about-stat .fig{font-family:var(--font-display);font-size:clamp(calc(2.1rem * var(--lustria-scale)),calc(3.3vw * var(--lustria-scale)),calc(3rem * var(--lustria-scale)));
   line-height:var(--gallop-leading-heading-xl);letter-spacing:var(--gallop-tracking-display);}
 .about-stat .cap{font-family:var(--font-mono);font-weight:500;font-size:var(--type-label-md);
   letter-spacing:var(--gallop-tracking);text-transform:uppercase;line-height:var(--gallop-leading-label);
@@ -896,7 +901,7 @@ img,svg,video{display:block;max-width:100%;}
   padding-inline:clamp(1.15rem,5.5vw,80px);display:flex;flex-direction:column;gap:32px;align-items:flex-start;}
 .about-band .hglyph{width:28px;color:var(--color-ink);}
 .about-band .statement{font-family:var(--font-display);font-weight:400;
-  font-size:clamp(1.7rem,3.3vw,3rem);line-height:var(--gallop-leading-heading-xl);
+  font-size:clamp(calc(1.7rem * var(--lustria-scale)),calc(3.3vw * var(--lustria-scale)),calc(3rem * var(--lustria-scale)));line-height:var(--gallop-leading-heading-xl);
   letter-spacing:var(--gallop-tracking-display);max-width:24ch;}
 /* the statement band butts straight into the textured footer field */
 .about-band+.close-field{margin-top:0;}
