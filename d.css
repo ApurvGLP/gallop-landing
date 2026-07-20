@@ -819,3 +819,107 @@ img,svg,video{display:block;max-width:100%;}
   .team-logos{gap:1.6rem;}
   .team-logos img{height:calc(var(--lh,44px)*.7);}
 }
+
+/* =========================================================================
+   [WEB] ABOUT — recoded to the Figma [WEB] Gallop about page (node 4025-1896).
+   Hero: plain paper field, the 9-bar logo glyph blown up in ochre with rows
+   fading downward, overlapped by a centred Lustria headline + mono standfirst.
+   Body: mono-kicker rows, principle cards, stat tiles, ochre statement band.
+   ========================================================================= */
+
+/* --- the 9-bar logo glyph, reusable at any size via width + aspect-ratio.
+   Geometry in % of the Figma glyph box (226.98 × 296.31, node 4067:3879);
+   colour rides on currentColor so modifiers just set `color`. --- */
+.hglyph{position:relative;display:block;aspect-ratio:227/297;}
+.hglyph span{position:absolute;background:currentColor;height:10.29%;}
+.hglyph span:nth-child(1){left:47.70%;top:0;width:47.04%;}
+.hglyph span:nth-child(2){left:17.70%;top:14.95%;width:82.06%;}
+.hglyph span:nth-child(3){left:4.15%;top:29.90%;width:95.60%;}
+.hglyph span:nth-child(4){left:0;top:44.85%;width:39.57%;}
+.hglyph span:nth-child(5){left:67.21%;top:44.85%;width:32.54%;}
+.hglyph span:nth-child(6){left:0;top:59.81%;width:51.97%;}
+.hglyph span:nth-child(7){left:83.21%;top:59.81%;width:16.55%;}
+.hglyph span:nth-child(8){left:0;top:74.76%;width:65.55%;}
+.hglyph span:nth-child(9){left:0;top:89.71%;width:80.47%;}
+/* hero variant: rows dissolve toward the headline (opacities from Figma) */
+.hglyph--fade span:nth-child(3){opacity:.7;}
+.hglyph--fade span:nth-child(4){opacity:.6;}
+.hglyph--fade span:nth-child(5){opacity:.5;}
+.hglyph--fade span:nth-child(6),
+.hglyph--fade span:nth-child(7){opacity:.4;}
+.hglyph--fade span:nth-child(8){opacity:.3;}
+.hglyph--fade span:nth-child(9){opacity:.2;}
+
+/* --- hero ----------------------------------------------------------------- */
+.about-hero-inner{display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding-block:clamp(2rem,4vw,3.4rem) clamp(3.4rem,7vw,6rem);}
+.about-hero-inner .hglyph{width:clamp(150px,15.8vw,227px);color:var(--color-ochre);
+  margin-bottom:calc(clamp(150px,15.8vw,227px) * -.36);} /* headline overlaps the faded rows, as in Figma */
+.about-hero-inner h1{position:relative;font-family:var(--font-display);font-weight:400;
+  font-size:clamp(1.8rem,2.65vw,2.375rem);line-height:1.08;letter-spacing:var(--gallop-tracking);max-width:633px;}
+.about-hero-inner .sub{position:relative;margin-top:20px;font-family:var(--font-mono);
+  font-size:var(--type-label-sm);font-weight:400;letter-spacing:var(--gallop-tracking);
+  text-transform:uppercase;line-height:1.2;max-width:614px;}
+
+/* --- mono-kicker prose rows (problem / grown) ------------------------------ */
+.about-row{display:flex;gap:19px;align-items:flex-start;}
+.about-kicker{flex:0 0 clamp(200px,23vw,325px);font-family:var(--font-mono);font-weight:500;
+  font-size:var(--type-label-md);letter-spacing:var(--gallop-tracking);text-transform:uppercase;
+  line-height:var(--gallop-leading-label);}
+.about-copy{flex:1 1 0;min-width:0;font-weight:300;font-size:var(--type-body-lg);
+  letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-body);color:var(--color-ink);}
+.about-copy p+p{margin-top:1.35em;}
+.about-copy b{font-weight:400;}
+.about-rule{border:none;border-top:1px solid var(--hairline);margin:clamp(4rem,7.6vw,6.9rem) 0 0;}
+
+/* --- operating principles --------------------------------------------------- */
+.prin-heading{margin-top:16px;font-family:var(--font-body);font-weight:400;
+  font-size:clamp(1.4rem,2vw,var(--gallop-text-heading-xs));line-height:var(--gallop-leading-heading-xs);
+  letter-spacing:var(--gallop-tracking);max-width:633px;}
+.prin-grid{margin-top:clamp(3rem,5.5vw,5rem);display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+.prin-card{padding-block:32px;display:flex;flex-direction:column;gap:32px;}
+.prin-icon{width:48px;height:48px;flex:none;background:var(--color-surface);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;}
+.prin-icon img{width:20px;height:20px;}
+.prin-card h3{font-family:var(--font-body);font-weight:400;
+  font-size:clamp(1.3rem,1.95vw,var(--gallop-text-heading-xs));line-height:var(--gallop-leading-heading-xs);
+  letter-spacing:var(--gallop-tracking);}
+.prin-card h3+p{margin-top:12px;font-weight:300;font-size:var(--type-body-lg);
+  letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-body);color:var(--gallop-text-secondary);}
+
+/* --- stat tiles -------------------------------------------------------------- */
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.about-stat{min-height:clamp(180px,16.6vw,240px);padding:40px clamp(2rem,6.25vw,90px);
+  display:flex;flex-direction:column;justify-content:center;gap:16px;background:var(--color-surface);}
+.about-stat.is-ochre{background:var(--color-ochre);}
+.about-stat .fig{font-family:var(--font-display);font-size:clamp(2.1rem,3.3vw,3rem);
+  line-height:var(--gallop-leading-heading-xl);letter-spacing:var(--gallop-tracking-display);}
+.about-stat .cap{font-family:var(--font-mono);font-weight:500;font-size:var(--type-label-md);
+  letter-spacing:var(--gallop-tracking);text-transform:uppercase;line-height:var(--gallop-leading-label);
+  color:var(--gallop-text-secondary);}
+.about-stat.is-ochre .cap{color:var(--color-ink);opacity:.8;}
+
+/* --- ochre statement band ------------------------------------------------------ */
+.about-band{background:var(--color-ochre);}
+.about-band .wrap{padding-block:clamp(6rem,11vw,10rem);
+  padding-inline:clamp(1.15rem,5.5vw,80px);display:flex;flex-direction:column;gap:32px;align-items:flex-start;}
+.about-band .hglyph{width:28px;color:var(--color-ink);}
+.about-band .statement{font-family:var(--font-display);font-weight:400;
+  font-size:clamp(1.7rem,3.3vw,3rem);line-height:var(--gallop-leading-heading-xl);
+  letter-spacing:var(--gallop-tracking-display);max-width:24ch;}
+/* the statement band butts straight into the textured footer field */
+.about-band+.close-field{margin-top:0;}
+
+@media (max-width:1100px){
+  .about-row{flex-wrap:wrap;}
+  .about-kicker{flex-basis:100%;}
+  .prin-grid{grid-template-columns:repeat(2,1fr);}
+  .about-stats{grid-template-columns:1fr;}
+  .about-stat{min-height:150px;}
+}
+@media (max-width:760px){
+  .about-row{gap:1.4rem;}
+  .about-copy{flex-basis:100%;}
+  .prin-grid{grid-template-columns:1fr;}
+  .prin-card{padding-block:20px;}
+}
