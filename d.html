@@ -55,9 +55,68 @@
         <img src="assets/logo-aws.png" alt="Amazon Web Services" style="--lh:29px" />
         <img src="assets/logo-pepkor.png" alt="Pepkor" style="--lh:17px" />
         <img src="assets/logo-azure.png" alt="Microsoft Azure" style="--lh:24px" />
-        <img class="blend" src="assets/logo-eoh.png" alt="EOH" style="--lh:39px" />
+        <img src="assets/logo-eoh-clear.png" alt="EOH" style="--lh:34px" />
         <img src="assets/logo-hpe.png" alt="Hewlett Packard Enterprise" style="--lh:19px" />
         <img src="assets/logo-lovable.png" alt="Lovable" style="--lh:21px" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PLATFORM MAP — the real work ===================== -->
+  <section class="sec" id="what">
+    <div class="codewall" data-codewall style="left:-210px;top:120px;"></div>
+    <div class="wrap">
+      <div class="mb-head reveal">
+        <h2 class="hx">The real work happens before the first line of code.</h2>
+        <p class="mb-body">Every modernization starts the same way, someone has to figure out what the current system actually does. Most tools treat that as a quick first pass, then move on to writing code. Gallop treats it as the job. It maps every repository, every dependency, every business rule, and keeps that map current as the rebuild happens. Code only gets written against a system Gallop has already confirmed it understands.</p>
+      </div>
+      <!-- Discover / Modernization switcher: two labelled tabs swap the
+           full-bleed map panel and its mechanism list below it. The
+           Modernization tab pulses (glow-swipe) until the switcher is used. -->
+      <div class="disc-switch reveal d1" role="tablist" aria-label="Gallop Discover and Modernization">
+        <button type="button" class="disc-tab is-active" id="disc-tab-discover"
+                role="tab" aria-selected="true" aria-controls="disc-panel-discover" data-disc="discover">
+          <span class="disc-name">Gallop Discover</span>
+          <span class="disc-sub">Standalone</span>
+        </button>
+        <button type="button" class="disc-tab disc-tab--nudge" id="disc-tab-modernize"
+                role="tab" aria-selected="false" aria-controls="disc-panel-modernize" data-disc="modernize">
+          <span class="disc-name">Gallop Modernization</span>
+          <span class="disc-sub">When you're ready</span>
+        </button>
+      </div>
+
+      <div class="disc-stage reveal d1">
+        <div class="disc-panel is-active" id="disc-panel-discover" role="tabpanel"
+             aria-labelledby="disc-tab-discover" aria-hidden="false" data-disc="discover">
+          <div class="disc-side">
+            <p class="disc-headline">AI-driven comprehension of the system nobody fully understands.</p>
+            <ul class="disc-list">
+              <li>Business and functional logic, extracted and readable</li>
+              <li>Dependency graphs: what touches what, what's safe to change</li>
+              <li>Risks and vulnerabilities, surfaced and prioritized</li>
+              <li>Architecture options with cost attached, delivered as a decision pack</li>
+            </ul>
+          </div>
+          <div class="disc-media texfield tf-disc">
+            <img src="assets/mock-dependency-map.png" alt="Gallop Discover: dependency map of the system, services grouped by domain with typed edges and node health" />
+          </div>
+        </div>
+        <div class="disc-panel" id="disc-panel-modernize" role="tabpanel"
+             aria-labelledby="disc-tab-modernize" aria-hidden="true" data-disc="modernize">
+          <div class="disc-side">
+            <p class="disc-headline">An AI-native rebuild, steered by your own small team.</p>
+            <ul class="disc-list">
+              <li>Custom-built for your business logic and rules</li>
+              <li>Evidence-based validation against real behavior</li>
+              <li>GCP, AWS, or Azure, matched to the architecture that fits you</li>
+              <li>Your software, your IP. Never billed for it again</li>
+            </ul>
+          </div>
+          <div class="disc-media texfield tf-mod">
+            <img src="assets/mock-dependency-map.png" alt="Gallop Modernization: the rebuilt system mapped and verified before cutover" />
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -127,55 +186,6 @@
             </div>
           </div>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== PLATFORM MAP — the real work ===================== -->
-  <section class="sec" id="what">
-    <div class="codewall" data-codewall style="left:-210px;top:120px;"></div>
-    <div class="wrap">
-      <div class="mb-head reveal">
-        <h2 class="hx">The real work happens before the first line of code.</h2>
-        <p class="mb-body">Every modernization starts the same way, someone has to figure out what the current system actually does. Most tools treat that as a quick first pass, then move on to writing code. Gallop treats it as the job. It maps every repository, every dependency, every business rule, and keeps that map current as the rebuild happens. Code only gets written against a system Gallop has already confirmed it understands.</p>
-      </div>
-      <div class="disc-grid reveal d1">
-        <div class="disc-col">
-          <div class="disc-head">
-            <p class="disc-name">Gallop Discover</p>
-            <p class="disc-sub">Standalone</p>
-          </div>
-          <div class="disc-media texfield tf-disc">
-            <img src="assets/mock-dependency-map.png" alt="Gallop Discover: dependency map of the system, services grouped by domain with typed edges and node health" />
-          </div>
-          <div class="disc-txt">
-            <p class="disc-headline">AI-driven comprehension of the system nobody fully understands.</p>
-            <ul class="disc-list">
-              <li>Business and functional logic, extracted and readable</li>
-              <li>Dependency graphs: what touches what, what's safe to change</li>
-              <li>Risks and vulnerabilities, surfaced and prioritized</li>
-              <li>Architecture options with cost attached, delivered as a decision pack</li>
-            </ul>
-          </div>
-        </div>
-        <div class="disc-col">
-          <div class="disc-head">
-            <p class="disc-name">Gallop Modernization</p>
-            <p class="disc-sub">When you're ready</p>
-          </div>
-          <div class="disc-media texfield tf-mod">
-            <img src="assets/mock-dependency-map.png" alt="Gallop Modernization: the rebuilt system mapped and verified before cutover" />
-          </div>
-          <div class="disc-txt">
-            <p class="disc-headline">An AI-native rebuild, steered by your own small team.</p>
-            <ul class="disc-list">
-              <li>Custom-built for your business logic and rules</li>
-              <li>Evidence-based validation against real behavior</li>
-              <li>GCP, AWS, or Azure, matched to the architecture that fits you</li>
-              <li>Your software, your IP. Never billed for it again</li>
-            </ul>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -290,6 +300,39 @@
             <div class="panel-foot"><span>3/3 capabilities verified</span><span>awaiting human approval</span></div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ENTERPRISE / TRUST (client-supplied) ===================== -->
+  <section class="sec" id="enterprise">
+    <div class="wrap">
+      <h2 class="hx reveal">Enterprise-grade by default</h2>
+      <p class="ent-sub reveal">Your code. Your network. Your rules.</p>
+      <div class="ent-grid reveal d1">
+        <div class="ent-card">
+          <h3 class="ent-card-title">Deploy anywhere</h3>
+          <p class="ent-card-desc">SaaS, your cloud, on-prem, or fully air-gapped.</p>
+        </div>
+        <div class="ent-card">
+          <h3 class="ent-card-title">Your data stays yours</h3>
+          <p class="ent-card-desc">Code and business logic never leave your control.</p>
+        </div>
+        <div class="ent-card">
+          <h3 class="ent-card-title">Full audit trail</h3>
+          <p class="ent-card-desc">Every decision and change is logged and traceable, down to each extraction.</p>
+        </div>
+        <div class="ent-card">
+          <h3 class="ent-card-title">Works with your pipeline</h3>
+          <p class="ent-card-desc">Fits your CI/CD and review gates, and holds to your architecture standards.</p>
+        </div>
+      </div>
+      <div class="ent-tags reveal d1">
+        <span class="ent-tag">SOC 2 &middot; Type II</span>
+        <span class="ent-tag">GDPR</span>
+        <span class="ent-tag">SSO / RBAC</span>
+        <span class="ent-tag">Audit logging</span>
+        <span class="ent-tag">GCP Partner</span>
       </div>
     </div>
   </section>

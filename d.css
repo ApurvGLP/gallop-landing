@@ -143,7 +143,6 @@ img,svg,video{display:block;max-width:100%;}
 .nav{
   background:var(--color-bg);
   border-radius:4px;
-  box-shadow:0 1px 0 var(--hairline);
   display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
   padding:.9rem 1.4rem;
   max-width:1360px;margin-inline:auto;
@@ -593,9 +592,9 @@ img,svg,video{display:block;max-width:100%;}
 .xhero-ph span{font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);color:var(--color-ink);}
 
 /* --- LOGO BAND ------------------------------------------------------------ */
-.logoband{padding-top:clamp(4rem,8.5vw,8.2rem);text-align:center;}
+.logoband{padding-top:clamp(4rem,8.5vw,8.2rem);padding-bottom:clamp(3rem,6vw,6rem);text-align:center;}
 .logoband-lead{font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);}
-.logoband-row{margin-top:clamp(2rem,3.5vw,2.95rem);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1.5rem clamp(2rem,4.7vw,4.25rem);opacity:.8;}
+.logoband-row{margin-top:clamp(2.5rem,4.5vw,3.75rem);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2rem clamp(2.5rem,5.2vw,4.75rem);opacity:.8;}
 .logoband-row img{height:var(--lh,24px);width:auto;}
 .logoband-row img.blend{mix-blend-mode:multiply;}
 
@@ -633,26 +632,91 @@ img,svg,video{display:block;max-width:100%;}
 .mb-head{display:flex;justify-content:space-between;gap:3rem;align-items:flex-start;}
 .mb-head .hx{max-width:28ch;flex:none;}
 .mb-body{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;max-width:670px;}
-/* Two-column split: Gallop Discover + Gallop Modernization, each a labelled
-   texture panel (map screenshot) over a headline + mechanism bullet list. */
-/* Horizontal scroll: card 1 sits fully in view, card 2 bleeds off the right
-   edge to imply "scroll for more" (matches the Figma). */
-.disc-grid{margin-top:clamp(3rem,5.9vw,5rem);display:flex;gap:24px;align-items:flex-start;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
-  width:100vw;margin-left:calc(50% - 50vw);
-  padding-left:calc(var(--gutter) + 40px);padding-right:40px;}
-.disc-grid::-webkit-scrollbar{display:none;}
-.disc-col{flex:0 0 min(896px,74vw);display:flex;flex-direction:column;gap:22px;}
-.disc-head{display:flex;flex-direction:column;font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.24;}
-.disc-name{color:var(--color-ink);}
-.disc-sub{color:var(--gallop-text-secondary);}
-.disc-media{height:clamp(300px,34vw,500px);}
-.disc-media img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:82%;height:auto;}
-.tf-disc{--tex-img:url("assets/tex-disc.jpg");}
-.tf-mod{--tex-img:url("assets/tex-mod.jpg");}
-.disc-txt{display:flex;flex-direction:column;gap:20px;}
-.disc-headline{font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--color-ink);max-width:34ch;}
-.disc-list{margin:0;padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem;list-style:disc;}
-.disc-list li{font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--gallop-text-secondary);padding-left:.3rem;}
+/* Discover / Modernization switcher: two labelled tabs swap a single
+   full-bleed map panel + mechanism list. Discover is active by default;
+   the Modernization tab runs a glow-swipe nudge until the switcher is used. */
+/* two equal tabs filling the full content width, sitting directly above the
+   full-bleed map. Active = page background, inactive = surface; a hairline
+   keeps the active tab legible against the matching page colour. */
+.disc-switch{margin-top:clamp(3rem,5.5vw,4.75rem);display:grid;grid-template-columns:1fr 1fr;gap:0;
+  width:100vw;margin-left:calc(50% - 50vw);}
+.disc-tab{position:relative;overflow:hidden;isolation:isolate;
+  display:flex;justify-content:center;align-items:baseline;gap:.6ch;
+  padding:16px 32px;border:1px solid rgba(54,47,44,.06);border-bottom:none;cursor:pointer;text-align:center;
+  font-family:var(--font-body);letter-spacing:var(--gallop-tracking);line-height:1.2;
+  background:var(--color-surface);
+  transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease);}
+.disc-tab .disc-name{font-size:var(--type-body-lg);font-weight:500;color:var(--color-ink);}
+.disc-tab .disc-sub{font-size:var(--type-body-md);color:var(--gallop-text-secondary);}
+/* inactive tab: faded label to reinforce it isn't the current one */
+.disc-tab:not(.is-active) .disc-name,
+.disc-tab:not(.is-active) .disc-sub{opacity:.5;}
+.disc-tab:not(.is-active):hover{border-color:var(--hairline);}
+.disc-tab:not(.is-active):hover .disc-name,
+.disc-tab:not(.is-active):hover .disc-sub{opacity:.72;}
+/* active tab: no side/bottom stroke, but a defined top line */
+.disc-tab.is-active{background:var(--color-bg);border-color:transparent;border-top-color:var(--hairline);}
+.disc-tab:focus-visible{outline:2px solid var(--color-ink);outline-offset:2px;}
+
+/* glow-swipe: a soft sheen sweeps left→right across the Modernization tab on a
+   loop to invite the click. JS drops the class on first use; disabled for
+   reduced-motion and screenshot QA (.noanim). */
+.disc-tab--nudge::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(105deg,transparent 32%,rgba(244,226,123,.65) 50%,transparent 68%);
+  transform:translateX(-120%);
+  animation:disc-sweep 3.4s ease-in-out infinite;}
+@keyframes disc-sweep{
+  0%,20%{transform:translateX(-120%);}
+  48%,100%{transform:translateX(120%);}
+}
+
+/* full-bleed row: a Surface content panel (~26%) on the left, the textured
+   map (reduced width) on the right. Both panels sit in one grid cell so they
+   cross-fade with no layout jump. */
+.disc-stage{margin-top:0;display:grid;width:100vw;margin-left:calc(50% - 50vw);}
+.disc-panel{grid-area:1/1;display:flex;align-items:stretch;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity var(--dur) var(--ease),visibility 0s linear var(--dur);}
+.disc-panel.is-active{opacity:1;visibility:visible;pointer-events:auto;
+  transition:opacity var(--dur) var(--ease);}
+
+/* left: Surface panel with its own inner margins — title pinned top-left,
+   list pinned bottom-left (space-between). */
+.disc-side{flex:0 0 clamp(260px,26vw,460px);background:var(--color-surface);
+  display:flex;flex-direction:column;justify-content:space-between;gap:clamp(28px,4vw,48px);
+  padding:clamp(32px,3.2vw,56px);}
+.disc-headline{font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--color-ink);}
+
+/* right: the textured map band, mock (16:9) centred on it. max-width/height
+   keep the whole mock visible with ~10% breathing room on every side, at any
+   size. Square corners (brand rule). */
+.disc-media{flex:1;min-height:clamp(400px,44vw,620px);}
+.disc-media img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:auto;height:auto;max-width:84%;max-height:80%;}
+.tf-disc{--tex-img:url("assets/tex-web-yellow.jpg");}
+.tf-mod{--tex-img:url("assets/tex-web-green.jpg");}
+
+/* points separated by hairline rules — same stroke as the features list */
+.disc-list{margin:0;padding:0;list-style:none;}
+.disc-list li{padding:clamp(.7rem,1.4vw,1.1rem) 0;border-top:1px solid var(--hairline);font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--gallop-text-secondary);}
+.disc-list li:first-child{border-top:none;padding-top:0;}
+
+/* --- ENTERPRISE / TRUST (client-supplied) ---------------------------------- */
+#enterprise .hx{max-width:24ch;}
+.ent-sub{margin-top:12px;font-family:var(--font-body);font-weight:300;font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--gallop-text-secondary);}
+.ent-grid{margin-top:clamp(2.6rem,4.5vw,3.8rem);display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gallop-space-card-gap);}
+.ent-card{background:var(--color-surface);padding:25px;display:flex;flex-direction:column;gap:14px;}
+.ent-card-title{font-family:var(--font-body);font-weight:400;font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.2;color:var(--color-ink);}
+.ent-card-desc{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--gallop-text-secondary);}
+.ent-tags{margin-top:clamp(1.6rem,2.6vw,2.2rem);display:flex;flex-wrap:wrap;gap:12px;}
+.ent-tag{font-family:var(--font-mono);font-weight:500;font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--ink-70);background:var(--color-surface);padding:.6rem 1rem;white-space:nowrap;}
+
+@media (prefers-reduced-motion:reduce){
+  .disc-tab--nudge::after{animation:none;}
+  .disc-panel{transition:none;}
+}
+.noanim .disc-tab--nudge::after{animation:none;}
+.noanim .disc-panel{transition:none;}
 
 /* --- TRACK RECORD ----------------------------------------------------------- */
 .track-label{font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);}
@@ -693,12 +757,13 @@ img,svg,video{display:block;max-width:100%;}
 .stat-body{margin-top:clamp(1.4rem,2.4vw,2rem);font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--ink-50);max-width:34ch;}
 
 /* --- PARITY — texture band ------------------------------------------------------ */
-.parity-band{min-height:clamp(420px,35vw,501px);display:flex;align-items:center;}
+.parity-band{min-height:clamp(420px,35vw,501px);display:flex;align-items:center;
+  width:100vw;margin-left:calc(50% - 50vw);}
 /* FAQ surface band butts straight into the textured footer field (no gap). */
 #faq{padding-bottom:clamp(3.5rem,6.6vw,6rem);}
 #faq + .close-field{margin-top:0;}
 .tf-parity{--tex-img:url("assets/tex-parity.jpg");--tex-grad:linear-gradient(74.1deg,var(--color-ochre) 1.8%,rgba(244,226,123,0) 53.67%);}
-.pb-inner{width:100%;display:flex;justify-content:space-between;gap:3rem;align-items:center;padding:clamp(2rem,4vw,3.2rem) clamp(1.4rem,3.2vw,2.75rem);}
+.pb-inner{width:100%;display:flex;justify-content:space-between;gap:3rem;align-items:center;padding:clamp(2rem,4vw,3.2rem) calc(var(--gutter) + var(--space-page-x));}
 .pb-copy{max-width:500px;display:flex;flex-direction:column;gap:32px;}
 .pb-copy .hx{max-width:26ch;}
 .pb-copy p{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;}
@@ -738,12 +803,18 @@ img,svg,video{display:block;max-width:100%;}
   .pb-inner{flex-direction:column;align-items:flex-start;}
   .pb-inner .panel{flex:none;width:100%;max-width:560px;}
   .faq-grid{grid-template-columns:1fr;gap:2.2rem;}
+  .ent-grid{grid-template-columns:repeat(2,1fr);}
 }
 @media (max-width:760px){
   .proto-card{flex-basis:86vw;}
   .proto-txt{gap:1.4rem;}
-  .disc-col{flex-basis:86vw;}
-  .proto-track,.disc-grid{padding-left:var(--space-page-x);padding-right:var(--space-page-x);}
+  .proto-track{padding-left:var(--space-page-x);padding-right:var(--space-page-x);}
+  .disc-switch{grid-template-columns:1fr;}
+  .disc-tab{flex-direction:column;align-items:center;gap:2px;}
+  .disc-panel{flex-direction:column;}
+  .disc-side{flex-basis:auto;}
+  .disc-media{min-height:clamp(300px,60vw,460px);}
+  .ent-grid{grid-template-columns:1fr;}
   .team-photos{flex-wrap:wrap;}
   .team-logos{gap:1.6rem;}
   .team-logos img{height:calc(var(--lh,44px)*.7);}

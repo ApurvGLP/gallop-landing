@@ -94,6 +94,41 @@
     });
   }
 
+  /* --- Discover / Modernization switcher: the two tabs swap the full-bleed
+     map panel and its list. The Modernization tab pulses (glow-swipe) until
+     the switcher is first used, then the nudge stops for good. --- */
+  var discSwitch = document.querySelector('.disc-switch');
+  if(discSwitch){
+    var discTabs = Array.prototype.slice.call(discSwitch.querySelectorAll('.disc-tab'));
+    var discPanels = Array.prototype.slice.call(document.querySelectorAll('.disc-panel'));
+    var nudge = discSwitch.querySelector('.disc-tab--nudge');
+    var stopNudge = function(){ if(nudge){ nudge.classList.remove('disc-tab--nudge'); nudge = null; } };
+    var selectDisc = function(key){
+      discTabs.forEach(function(t){
+        var on = t.dataset.disc === key;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      discPanels.forEach(function(p){
+        var on = p.dataset.disc === key;
+        p.classList.toggle('is-active', on);
+        p.setAttribute('aria-hidden', on ? 'false' : 'true');
+      });
+    };
+    discTabs.forEach(function(t){
+      t.addEventListener('click', function(){ stopNudge(); selectDisc(t.dataset.disc); });
+    });
+    /* keyboard: arrow keys move between tabs (standard tablist behaviour) */
+    discSwitch.addEventListener('keydown', function(e){
+      if(e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      var i = discTabs.indexOf(document.activeElement);
+      if(i < 0) return;
+      e.preventDefault();
+      var n = e.key === 'ArrowRight' ? (i + 1) % discTabs.length : (i - 1 + discTabs.length) % discTabs.length;
+      discTabs[n].focus(); stopNudge(); selectDisc(discTabs[n].dataset.disc);
+    });
+  }
+
   /* --- demo form (preview build — not wired to a backend yet) --- */
   var form = document.getElementById('demoForm');
   if(form){
