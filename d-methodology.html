@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The Gallop Methodology — Gallop</title>
-<meta name="description" content="The Gallop Way — six principles for AI-accelerated software transformation, learned shipping large-scale migrations at Google Cloud, Google Ads, and Android." />
+<meta name="description" content="The Gallop Way: six principles for AI-accelerated software transformation, learned shipping large-scale migrations at Google Cloud, Google Ads, and Android." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Lustria&family=Funnel+Sans:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -16,17 +16,19 @@
 <!-- site-nav:start · generated from partials/ — edit there, then run `node build.js` -->
 <div class="navwrap">
   <header class="nav">
-    <a class="nav-brand" href="d.html#top" aria-label="Gallop home">
-      <img class="lockup" src="assets/gallop-lockup.svg" alt="Gallop" />
-    </a>
+    <div class="nav-left">
+      <a class="nav-brand" href="d.html#top" aria-label="Gallop home">
+        <img class="lockup" src="assets/gallop-lockup.svg" alt="Gallop" />
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="d-methodology.html">Methodology</a>
+        <a href="d-about.html">About</a>
+        <a href="d-blog.html">Case studies</a>
+        <a href="d-careers.html">Careers</a>
+      </nav>
+    </div>
+    <a href="d-contact.html" class="nav-cta">Request a demo</a>
     <button class="nav-toggle" aria-label="Menu" id="navToggle"><span></span><span></span><span></span></button>
-    <nav class="nav-links" id="navLinks">
-      <a href="d-methodology.html">Methodology</a>
-      <a href="d-blog.html">Case studies</a>
-      <a href="d-about.html">About</a>
-      <a href="d-careers.html">Careers</a>
-      <a href="d-contact.html" class="nav-cta">Book a demo</a>
-    </nav>
   </header>
 </div>
 <!-- site-nav:end -->
@@ -54,7 +56,7 @@
           <p>We've shipped large-scale migrations at Google Cloud, Google Ads, and Android. We know what breaks and why. <b>These six principles are what we learned the hard way.</b></p>
         </div>
         <div class="about-copy reveal d2">
-          <p>Now we're pairing that experience with AI agents that can actually execute. Not best practices — the minimum requirements for transformations that ship.</p>
+          <p>Now we're pairing that experience with AI agents that can actually execute. We hold that work to the minimum requirements for transformations that ship, not just best practices.</p>
         </div>
       </div>
       <hr class="about-rule" />
@@ -70,7 +72,7 @@
           <h2 class="prin-title">The ROI calculation has changed. Most teams haven't noticed.</h2>
           <p>Software transformations earned their bad reputation. Multi-year timelines. Budget overruns. New systems that ended up no better than what they replaced. The rational response was to avoid them unless absolutely necessary.</p>
           <p>AI changes this. What took 18 months now takes 3. What required armies of consultants now requires a small team with the right tooling. But there's another variable most teams ignore: the cost of staying put.</p>
-          <p><b>Your legacy system has vulnerabilities. You just haven't found them yet.</b> Complexity and missed configurations lead to security incidents. Default admin credentials left unchanged. Deprecated dependencies with known CVEs. Auth bypasses buried in legacy flows. Most repos have the equivalent of default WiFi passwords — obvious vulnerabilities hiding in plain sight because no one has looked at the code in years.</p>
+          <p><b>Your legacy system has vulnerabilities. You just haven't found them yet.</b> Complexity and missed configurations lead to security incidents. Default admin credentials left unchanged. Deprecated dependencies with known CVEs. Auth bypasses buried in legacy flows. Most repos have the equivalent of default WiFi passwords: obvious vulnerabilities hiding in plain sight because no one has looked at the code in years.</p>
           <p>The real ROI question isn't "can we afford to transform?" It's two questions: do you need to innovate in this space? And what's the actual risk profile of your existing code?</p>
           <p>If you're in a static market with a stable, well-audited system, transformation probably isn't urgent. But if you need to move fast, integrate AI capabilities, or you haven't done a serious security audit in years? The cost of inaction is higher than you think.</p>
         </div>
@@ -87,7 +89,7 @@
         <div class="about-copy reveal d1">
           <h2 class="prin-title">Migrations fail by protecting everything equally.</h2>
           <p>The instinct in any migration is to preserve everything. Every edge case. Every quirk. Every undocumented behavior some team might depend on. This instinct is wrong.</p>
-          <p>No transformation is perfect. Anyone promising zero regressions hasn't done this at scale — or they're lying. The question isn't "will we miss something?" You will. The question is: <b>what absolutely cannot break?</b></p>
+          <p>No transformation is perfect. Anyone promising zero regressions hasn't done this at scale, or they're lying. The question isn't "will we miss something?" You will. The question is: <b>what absolutely cannot break?</b></p>
           <p>Security. Data integrity. Compliance. Core business logic. These are your invariants. Define them explicitly. Protect them with automated verification. Everything else? Catch it early. Fix it fast.</p>
         </div>
       </div>
@@ -112,13 +114,13 @@
         <div class="about-copy reveal d1">
           <h2 class="prin-title">Ship to an agent-ready stack. Verify with defense in depth.</h2>
           <p>Where you land matters. Most migrations target "modern": cleaner code, better frameworks, cloud-native. That's table stakes. <b>The real target is an architecture that AI agents can work with.</b></p>
-          <p>An agent-ready codebase has clear module boundaries. Consistent patterns. Well-typed interfaces. Comprehensive test coverage. Not because these are "best practices" — because they're what allows AI coding assistants to understand context, make safe changes, and validate their own work. The same properties that make code maintainable by humans make it navigable by agents.</p>
-          <p>But shipping AI-generated code — or any code — requires verification layers. The debate about whether to trust AI misses the point. Code quality has never been about who wrote it. It's about what catches errors before production.</p>
+          <p>An agent-ready codebase has clear module boundaries. Consistent patterns. Well-typed interfaces. Comprehensive test coverage. These properties are what allow AI coding assistants to understand context, make safe changes, and validate their own work. That is the reason they matter here, well beyond any "best practices" label. The same properties that make code maintainable by humans make it navigable by agents.</p>
+          <p>But shipping AI-generated code, or any code, requires verification layers. The debate about whether to trust AI misses the point. Code quality has never been about who wrote it. It comes down to what catches errors before production.</p>
         </div>
       </div>
 
       <div class="meth-figure">
-        <div class="ddepth reveal d1" aria-label="Defense in depth — layered verification">
+        <div class="ddepth reveal d1" aria-label="Defense in depth: layered verification">
           <div class="ddepth-layer">
             <span class="lyr-tag">Layer 01<b>Foundation</b></span>
             <div class="ddepth-steps">
@@ -200,7 +202,7 @@
       <!-- Reference implementations -->
       <div class="meth-figure ledger-block">
         <h3 class="reveal">Reference implementations</h3>
-        <p class="ledger-sub reveal d1">Reference implementations demonstrating the methodology — source system, migrated system, and the simplification strategy behind each reduction.</p>
+        <p class="ledger-sub reveal d1">Reference implementations demonstrating the methodology: source system, migrated system, and the simplification strategy behind each reduction.</p>
         <div class="ledger reveal d1">
           <div class="ledger-scroll">
             <table class="ledger-tbl">
@@ -307,7 +309,7 @@
         <p class="ph-note reveal d2"><b>%</b> = share of the work AI accelerates</p>
 
         <div class="about-copy reveal d2" style="margin-top:2rem;max-width:66ch;">
-          <p><b>Speed comes from expertise, not shortcuts.</b> Knowing which 5% of code needs human review — and which 95% can be validated automatically — is what compresses timelines without compromising quality.</p>
+          <p><b>Speed comes from expertise, not shortcuts.</b> Knowing which 5% of code needs human review, and which 95% can be validated automatically, is what compresses timelines without compromising quality.</p>
         </div>
       </div>
     </div>
@@ -318,7 +320,7 @@
     <div class="wrap close-inner">
       <div class="close-block">
         <h2 class="reveal">Ready to apply these principles?</h2>
-        <p class="close-body reveal d1">Let us walk you through how Gallop applies this methodology to your specific systems — on your own environment, with no access to production required.</p>
+        <p class="close-body reveal d1">Let us walk you through how Gallop applies this methodology to your specific systems, on your own environment, with no access to production required.</p>
         <div class="close-actions reveal d2">
           <a href="d-contact.html" class="btn btn-ink">Book a demo</a>
           <a href="d.html#what" class="btn btn-line">See the platform</a>

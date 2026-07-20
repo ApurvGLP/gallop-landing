@@ -140,9 +140,12 @@ img,svg,video{display:block;max-width:100%;}
   padding:.9rem 1.4rem;
   max-width:1360px;margin-inline:auto;
 }
+/* left cluster: logo + nav links sit together, with the CTA pushed to the
+   far right (Figma [WEB] nav, node 4033:3355) */
+.nav-left{display:flex;align-items:center;gap:clamp(1.8rem,4vw,3.5rem);}
 .nav-brand{display:flex;align-items:center;gap:.5rem;}
 .nav-brand img{height:20px;width:auto;}
-.nav-links{display:flex;gap:1.9rem;align-items:center;}
+.nav-links{display:flex;gap:clamp(1.4rem,2.1vw,1.9rem);align-items:center;}
 .nav-links a{
   font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;
   color:var(--color-ink);opacity:.85;padding:.25rem 0;position:relative;
@@ -151,9 +154,12 @@ img,svg,video{display:block;max-width:100%;}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:0;background:var(--color-ink);transition:width var(--dur) var(--ease-emph);}
 .nav-links a:hover{opacity:1;}
 .nav-links a:hover::after{width:100%;}
-.nav-links .nav-cta{opacity:1;background:var(--color-ochre);padding:.55rem .95rem;border-radius:2px;}
-.nav-links .nav-cta::after{display:none;}
-.nav-links .nav-cta:hover{background:var(--color-ochre-2);}
+/* CTA — kept as the yellow button, pushed to the right edge of the bar */
+.nav-cta{margin-left:auto;
+  font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;
+  color:var(--color-ink);opacity:1;background:var(--color-ochre);padding:.55rem .95rem;border-radius:2px;
+  transition:background var(--dur-fast) var(--ease);}
+.nav-cta:hover{background:var(--color-ochre-2);}
 .nav-toggle{display:none;}
 
 /* =====================  HERO helpers shared with subpage page-hero  ===================== */
@@ -438,7 +444,6 @@ img,svg,video{display:block;max-width:100%;}
   .nav-links.open a{padding:.85rem 0;border-bottom:1px solid var(--hairline);font-size:.85rem;}
   .nav-links.open a:last-child{border-bottom:none;}
   .nav-links.open a::after{display:none;}
-  .nav-links.open .nav-cta{margin-top:.8rem;text-align:center;border-radius:2px;}
   .nav-toggle{display:inline-flex;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:.4rem;}
   .nav-toggle span{width:22px;height:2px;background:var(--color-ink);display:block;transition:transform var(--dur) var(--ease),opacity var(--dur) var(--ease);}
   .nav-toggle.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
