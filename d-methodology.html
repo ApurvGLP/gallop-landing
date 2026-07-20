@@ -7,7 +7,7 @@
 <meta name="description" content="The Gallop Way — six principles for AI-accelerated software transformation, learned shipping large-scale migrations at Google Cloud, Google Ads, and Android." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Gentium+Basic:wght@400&family=Gentium+Book+Plus:wght@400&family=Funnel+Sans:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Lustria&family=Funnel+Sans:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="gallop-tokens.css" />
 <link rel="stylesheet" href="d.css" />
 </head>
@@ -17,8 +17,7 @@
 <div class="navwrap">
   <header class="nav">
     <a class="nav-brand" href="d.html#top" aria-label="Gallop home">
-      <img src="assets/horse-mark.svg" alt="" />
-      <span class="wm">Gallop</span>
+      <img class="lockup" src="assets/gallop-lockup.svg" alt="Gallop" />
     </a>
     <button class="nav-toggle" aria-label="Menu" id="navToggle"><span></span><span></span><span></span></button>
     <nav class="nav-links" id="navLinks">
@@ -112,29 +111,47 @@
         <p>An agent-ready codebase has clear module boundaries. Consistent patterns. Well-typed interfaces. Comprehensive test coverage. Not because these are "best practices" — because they're what allows AI coding assistants to understand context, make safe changes, and validate their own work. The same properties that make code maintainable by humans make it navigable by agents.</p>
         <p>But shipping AI-generated code — or any code — requires verification layers. The debate about whether to trust AI misses the point. Code quality has never been about who wrote it. It's about what catches errors before production.</p>
       </div>
-      <div class="stage-row reveal d1" aria-label="Verification stack">
-        <span class="schema-chip">Clear requirements</span>
-        <span class="schema-arrow">→</span>
-        <span class="schema-chip">Solid architecture</span>
-        <span class="schema-arrow">→</span>
-        <span class="schema-chip">Elegant code</span>
-        <span class="schema-arrow">→</span>
-        <span class="schema-chip">Unit tests</span>
-        <span class="schema-arrow">→</span>
-        <span class="schema-chip">Integration tests</span>
-        <span class="schema-arrow">→</span>
-        <span class="schema-chip">E2E tests</span>
-        <span class="schema-arrow">→</span>
-        <span class="schema-chip">Staging</span>
-        <span class="schema-arrow">→</span>
-        <span class="schema-chip">Staged rollout</span>
-        <span class="schema-arrow">→</span>
-        <span class="schema-chip">Metrics + alerts</span>
-        <span class="schema-arrow">→</span>
-        <span class="schema-chip">Auto rollback</span>
-        <span class="schema-arrow">→</span>
-        <span class="schema-chip" style="background:var(--color-ochre);">Production safe</span>
+      <div class="ddepth reveal d1" aria-label="Defense in depth — layered verification">
+        <div class="ddepth-layer">
+          <span class="lyr-tag">Layer 01<b>Foundation</b></span>
+          <div class="ddepth-steps">
+            <span class="ddepth-step">Clear requirements</span>
+            <span class="ddepth-sep">→</span>
+            <span class="ddepth-step">Solid architecture</span>
+            <span class="ddepth-sep">→</span>
+            <span class="ddepth-step">Elegant code</span>
+          </div>
+        </div>
+        <div class="ddepth-layer is-verify">
+          <span class="lyr-tag">Layer 02<b>Automated tests</b></span>
+          <div class="ddepth-steps">
+            <span class="ddepth-step">Unit tests</span>
+            <span class="ddepth-sep">→</span>
+            <span class="ddepth-step">Integration tests</span>
+            <span class="ddepth-sep">→</span>
+            <span class="ddepth-step">E2E tests</span>
+          </div>
+        </div>
+        <div class="ddepth-layer">
+          <span class="lyr-tag">Layer 03<b>Release</b></span>
+          <div class="ddepth-steps">
+            <span class="ddepth-step">Staging</span>
+            <span class="ddepth-sep">→</span>
+            <span class="ddepth-step">Staged rollout</span>
+            <span class="ddepth-sep">→</span>
+            <span class="ddepth-step">Metrics + alerts</span>
+          </div>
+        </div>
+        <div class="ddepth-layer">
+          <span class="lyr-tag">Layer 04<b>Safety net</b></span>
+          <div class="ddepth-steps">
+            <span class="ddepth-step">Auto rollback</span>
+            <span class="ddepth-sep">→</span>
+            <span class="ddepth-step is-safe">Production safe</span>
+          </div>
+        </div>
       </div>
+      <p class="ddepth-cap reveal d1">Each layer catches what the one before it missed</p>
       <div class="prose reveal d2" style="margin-top:1.8rem;">
         <p>This is how Google, Stripe, and Netflix ship thousands of changes daily. <b>The guardrails are the product.</b> They're what make an agent-ready architecture safe to operate.</p>
       </div>
@@ -186,7 +203,7 @@
                   <td class="rebuilt">Telecom network orchestration</td>
                   <td>ONAP SO · 358K LOC · Java/Groovy/BPMN</td>
                   <td>Modern orchestrator · 10K LOC · Python</td>
-                  <td><span class="veritag">~97% LOC</span></td>
+                  <td><div class="loc-cell"><span class="veritag">~97% LOC</span><span class="loc-shrink" title="358K → 10K LOC"><i style="--keep:3%"></i></span></div></td>
                   <td>Standardized on OpenStack; direct APIs replaced multi-vendor adapter layers</td>
                 </tr>
                 <tr>
@@ -194,7 +211,7 @@
                   <td class="rebuilt">Subscription billing</td>
                   <td>Kill Bill · 308K LOC · Java/XML</td>
                   <td>Modern billing · 22K LOC · Python</td>
-                  <td><span class="veritag">~93% LOC</span></td>
+                  <td><div class="loc-cell"><span class="veritag">~93% LOC</span><span class="loc-shrink" title="308K → 22K LOC"><i style="--keep:7%"></i></span></div></td>
                   <td>Stripe-focused approach replaced plugin architecture</td>
                 </tr>
                 <tr>
@@ -202,7 +219,7 @@
                   <td class="rebuilt">Mainframe insurance app</td>
                   <td>CICS GenApp · 14K LOC · COBOL/JCL/BMS</td>
                   <td>Modern insurance · 4K LOC · Python</td>
-                  <td><span class="veritag">~72% LOC</span></td>
+                  <td><div class="loc-cell"><span class="veritag">~72% LOC</span><span class="loc-shrink" title="14K → 4K LOC"><i style="--keep:28%"></i></span></div></td>
                   <td>REST API + PostgreSQL replaced 3270/VSAM/Db2; cloud-native deployment</td>
                 </tr>
                 <tr>
@@ -210,7 +227,7 @@
                   <td class="rebuilt">Mainframe banking app</td>
                   <td>BankDemo · 56K LOC · COBOL/BMS/PL/I</td>
                   <td>Modern banking · 12K LOC · Python/TypeScript</td>
-                  <td><span class="veritag">~78% LOC</span></td>
+                  <td><div class="loc-cell"><span class="veritag">~78% LOC</span><span class="loc-shrink" title="56K → 12K LOC"><i style="--keep:22%"></i></span></div></td>
                   <td>Full-stack web app replaced 3270/VSAM/CICS; cloud-native deployment</td>
                 </tr>
               </tbody>
@@ -239,35 +256,29 @@
       <div class="gates gates--3 reveal d1" style="margin-top:2.8rem;">
         <article class="gate">
           <span class="gate-idx">Phase 1 / Discovery &amp; planning</span>
-          <ul class="ph-list">
-            <li>System specification <b>90%</b></li>
-            <li>Risk analysis <b>99%</b></li>
-            <li>AI readiness <b>99%</b></li>
-            <li>Target architecture <b>90%</b></li>
-            <li>Target data model <b>90%</b></li>
-            <li>Transformation plan <b>90%</b></li>
-          </ul>
+          <div class="ph-item"><div class="ph-top"><span>System specification</span><b>90%</b></div><div class="ph-bar"><span class="ph-fill" style="--pct:90%"></span></div></div>
+          <div class="ph-item"><div class="ph-top"><span>Risk analysis</span><b>99%</b></div><div class="ph-bar"><span class="ph-fill" style="--pct:99%"></span></div></div>
+          <div class="ph-item"><div class="ph-top"><span>AI readiness</span><b>99%</b></div><div class="ph-bar"><span class="ph-fill" style="--pct:99%"></span></div></div>
+          <div class="ph-item"><div class="ph-top"><span>Target architecture</span><b>90%</b></div><div class="ph-bar"><span class="ph-fill" style="--pct:90%"></span></div></div>
+          <div class="ph-item"><div class="ph-top"><span>Target data model</span><b>90%</b></div><div class="ph-bar"><span class="ph-fill" style="--pct:90%"></span></div></div>
+          <div class="ph-item"><div class="ph-top"><span>Transformation plan</span><b>90%</b></div><div class="ph-bar"><span class="ph-fill" style="--pct:90%"></span></div></div>
         </article>
         <article class="gate">
           <span class="gate-idx">Phase 2 / Execution &amp; validation</span>
-          <ul class="ph-list">
-            <li>Code generation <b>95%</b></li>
-            <li>Code review <b>95%</b></li>
-            <li>Incremental validation <b>80%</b></li>
-            <li>Task iterations <b>90%</b></li>
-            <li>System integration <b>50%</b></li>
-          </ul>
+          <div class="ph-item"><div class="ph-top"><span>Code generation</span><b>95%</b></div><div class="ph-bar"><span class="ph-fill" style="--pct:95%"></span></div></div>
+          <div class="ph-item"><div class="ph-top"><span>Code review</span><b>95%</b></div><div class="ph-bar"><span class="ph-fill" style="--pct:95%"></span></div></div>
+          <div class="ph-item"><div class="ph-top"><span>Incremental validation</span><b>80%</b></div><div class="ph-bar"><span class="ph-fill" style="--pct:80%"></span></div></div>
+          <div class="ph-item"><div class="ph-top"><span>Task iterations</span><b>90%</b></div><div class="ph-bar"><span class="ph-fill" style="--pct:90%"></span></div></div>
+          <div class="ph-item"><div class="ph-top"><span>System integration</span><b>50%</b></div><div class="ph-bar"><span class="ph-fill" style="--pct:50%"></span></div></div>
           <p class="ph-note">Each module delivered incrementally, not big-bang</p>
         </article>
         <article class="gate">
           <span class="gate-idx">Phase 3 / Deployment &amp; transition</span>
-          <ul class="ph-list">
-            <li>Staged rollout <b>80%</b></li>
-            <li>Data modernization <b>80%</b></li>
-            <li>Cutover <b>80%</b></li>
-            <li>Monitoring setup <b>90%</b></li>
-            <li>Hypercare <b>80%</b></li>
-          </ul>
+          <div class="ph-item"><div class="ph-top"><span>Staged rollout</span><b>80%</b></div><div class="ph-bar"><span class="ph-fill" style="--pct:80%"></span></div></div>
+          <div class="ph-item"><div class="ph-top"><span>Data modernization</span><b>80%</b></div><div class="ph-bar"><span class="ph-fill" style="--pct:80%"></span></div></div>
+          <div class="ph-item"><div class="ph-top"><span>Cutover</span><b>80%</b></div><div class="ph-bar"><span class="ph-fill" style="--pct:80%"></span></div></div>
+          <div class="ph-item"><div class="ph-top"><span>Monitoring setup</span><b>90%</b></div><div class="ph-bar"><span class="ph-fill" style="--pct:90%"></span></div></div>
+          <div class="ph-item"><div class="ph-top"><span>Hypercare</span><b>80%</b></div><div class="ph-bar"><span class="ph-fill" style="--pct:80%"></span></div></div>
         </article>
       </div>
       <p class="ph-note reveal d2"><b>%</b> = share of the work AI accelerates</p>
@@ -281,7 +292,6 @@
   <!-- ===================== CLOSING + FOOTER ===================== -->
   <section class="close-field" id="cta">
     <div class="wrap close-inner">
-      <div class="close-horse horse-motif" aria-hidden="true"></div>
       <div class="close-block">
         <h2 class="reveal">Ready to apply these principles?</h2>
         <p class="close-body reveal d1">Let us walk you through how Gallop applies this methodology to your specific systems — on your own environment, with no access to production required.</p>
@@ -298,8 +308,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <div class="mark-row">
-          <img src="assets/horse-mark.svg" alt="" />
-          <span class="wm">Gallop</span>
+          <img class="lockup" src="assets/gallop-lockup.svg" alt="Gallop" />
         </div>
         <p class="footer-tag">Modernizing the world's most critical systems with speed and precision.</p>
       </div>
@@ -325,7 +334,6 @@
       <span><a href="d-privacy.html">Privacy</a> &nbsp;&nbsp; <a href="d-terms.html">Terms</a></span>
     </div>
   </div>
-  <div class="stripes" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
 </footer>
 <!-- site-footer:end -->
   </section>

@@ -7,7 +7,7 @@
 <meta name="description" content="Gallop reads your entire codebase, maps every business capability it holds, and rebuilds it on modern foundations — with zero business logic loss." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Gentium+Basic:wght@400&family=Gentium+Book+Plus:wght@400&family=Funnel+Sans:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Lustria&family=Funnel+Sans:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="gallop-tokens.css" />
 <link rel="stylesheet" href="d.css" />
 </head>
@@ -17,8 +17,7 @@
 <div class="navwrap">
   <header class="nav">
     <a class="nav-brand" href="d.html#top" aria-label="Gallop home">
-      <img src="assets/horse-mark.svg" alt="" />
-      <span class="wm">Gallop</span>
+      <img class="lockup" src="assets/gallop-lockup.svg" alt="Gallop" />
     </a>
     <button class="nav-toggle" aria-label="Menu" id="navToggle"><span></span><span></span><span></span></button>
     <nav class="nav-links" id="navLinks">
@@ -34,330 +33,360 @@
 
 <main id="top">
 
-  <!-- ===================== HERO — ochre field, agent prompt card ===================== -->
-  <section class="hero">
-    <img class="hero-stripes" src="assets/hero-stripes.png" alt="" aria-hidden="true" />
-    <img class="hero-dashes" src="assets/hero-dashes.png" alt="" aria-hidden="true" />
-    <div class="wrap hero-inner">
-      <div class="hero-copy">
-        <h1 class="hero-phrase reveal in">Modernizing the world's most critical systems with speed and precision.</h1>
-        <p class="hero-promise reveal in d1">Gallop reads your entire codebase, maps every business capability it holds,<br />and rebuilds it on modern foundations. <b>With zero business logic loss.</b></p>
+  <!-- ===================== HERO — stretched-texture gold field ===================== -->
+  <section class="xhero">
+    <div class="wrap xhero-inner">
+      <div class="xhero-copy">
+        <h1 class="reveal in">Gallop modernizes the world's most critical systems. Fast, and reliably.</h1>
+        <p class="xhero-sub reveal in d1">Gallop reads your entire codebase, maps every business capability it holds,<br />and rebuilds it on modern foundations. <b>With zero business logic loss.</b></p>
       </div>
-      <div class="agent-card reveal in d2" aria-label="Gallop agent prompt: Explain program ZP_012 at a high level — purpose, key dependencies, and potential issues. Model S4H, agent Functional Analyst.">
-        <div class="agent-q">
-          <img src="assets/horse-mark.svg" alt="" />
-          <p>Explain program ZP_012 at a high level: purpose, key dependencies, and potential issues.</p>
-        </div>
-        <div class="agent-row">
-          <span class="agent-chip"><b>S4H</b><i aria-hidden="true">▾</i></span>
-          <span class="agent-chip"><span class="agent-dot" aria-hidden="true"></span>Functional Analyst<i aria-hidden="true">▾</i></span>
-          <span class="agent-plus">+ Sources</span>
-          <span class="agent-send" aria-hidden="true">→</span>
-        </div>
-      </div>
+      <div class="xhero-ph reveal in d2" aria-hidden="true"><span>Graphic placeholder</span></div>
     </div>
   </section>
 
-  <!-- ===================== TRUST — sentence + logo row ===================== -->
-  <div class="wrap trustbar">
-    <p>Trusted by teams at <b>Google Cloud</b>, <b>Telefonica</b>, and <b>Victoria's Secret</b>.</p>
-    <div class="trust-logos" aria-hidden="true">
-      <span class="trust-pair"><img src="assets/logo-gc.png" alt="" /><img src="assets/logo-telefonica.png" alt="" /></span>
-      <span class="trust-pair"><img src="assets/logo-gc.png" alt="" /><img src="assets/logo-telefonica.png" alt="" /></span>
-      <span class="trust-pair"><img src="assets/logo-gc.png" alt="" /><img src="assets/logo-telefonica.png" alt="" /></span>
-      <span class="trust-pair"><img src="assets/logo-gc.png" alt="" /><img src="assets/logo-telefonica.png" alt="" /></span>
-    </div>
-  </div>
-
-  <!-- ===================== 01 — NEVER A CODING PROBLEM ===================== -->
-  <section class="sec has-codewall" id="what">
-    <div class="codewall" data-codewall style="left:-210px;top:60px;"></div>
+  <!-- ===================== LOGOS — built by, trusted, partnered ===================== -->
+  <section class="logoband has-codewall">
+    <div class="codewall" data-codewall style="right:-160px;top:-140px;" aria-hidden="true"></div>
     <div class="wrap">
-      <div class="split">
-        <div class="split-copy">
-          <h2 class="sec-title reveal">Modernization was never a coding problem.</h2>
-          <p class="split-body reveal d1">Only 30% of modernization is writing code. The other 70% is knowing exactly what a system does, deciding what it should become, and proving the rebuild still behaves. Most tools automate the 30%. Gallop runs all of it — as one system, under your control.</p>
-          <div class="statline split-stat reveal d2">
-            <p>70% understanding · 30% code</p>
-            <p>One platform runs the 100%.</p>
-          </div>
-        </div>
-        <div class="shot-panel reveal d1">
-          <div class="ui-mock" role="img" aria-label="Gallop Security screen for an ERP modernization: hold risky code at the gate — report, patch, approve. A security scan review packet lists legacy-xml-parser (high, Rust parser ready), oracle-driver-compat (medium, typed adapter patch), and commons-auth-bridge (high, credential flow isolated); the approval path shows security report generated, dependency check passed, execution waiting, with view report and approve actions.">
-            <aside class="ui-side">
-              <div class="ui-project">
-                <span class="ui-eyebrow">Gallop Intelligence</span>
-                <span class="ui-project-name">ERP modernization</span>
-              </div>
-              <ul class="ui-stages">
-                <li class="is-done"><i class="ui-dot"></i>Discovery</li>
-                <li class="is-done"><i class="ui-dot"></i>Specification</li>
-                <li class="is-done"><i class="ui-dot"></i>Codegen</li>
-                <li class="is-active"><i class="ui-dot"></i>Security</li>
-                <li><i class="ui-dot"></i>Evolution</li>
-              </ul>
-            </aside>
-            <div class="ui-main">
-              <header class="ui-head">
-                <p class="ui-title">Hold risky code at the gate.</p>
-                <p class="ui-sub">Report, patch, approve.</p>
-              </header>
-              <div class="ui-cols">
-                <section class="ui-card">
-                  <div class="ui-card-head"><span class="ui-eyebrow">Security scan</span><i class="ui-dot is-live"></i></div>
-                  <p class="ui-card-title">Review packet</p>
-                  <ul class="ui-scan">
-                    <li>
-                      <div class="ui-scan-top"><code>legacy-xml-parser</code><span class="ui-sev is-high">High</span></div>
-                      <p>Rust parser ready</p>
-                    </li>
-                    <li>
-                      <div class="ui-scan-top"><code>oracle-driver-compat</code><span class="ui-sev">Medium</span></div>
-                      <p>Typed adapter patch</p>
-                    </li>
-                    <li>
-                      <div class="ui-scan-top"><code>commons-auth-bridge</code><span class="ui-sev is-high">High</span></div>
-                      <p>Credential flow isolated</p>
-                    </li>
-                  </ul>
-                </section>
-                <section class="ui-card">
-                  <div class="ui-card-head"><span class="ui-eyebrow">Gate</span><i class="ui-dot is-live"></i></div>
-                  <p class="ui-card-title">Approval path</p>
-                  <ul class="ui-checks">
-                    <li><span>Security report</span><b class="is-ok">Generated</b></li>
-                    <li><span>Dependency check</span><b>Passed</b></li>
-                    <li><span>Execution</span><b class="is-wait">Waiting</b></li>
-                  </ul>
-                  <div class="ui-actions"><span class="ui-btn ui-btn-line">View report</span><span class="ui-btn">Approve</span></div>
-                </section>
-              </div>
-              <footer class="ui-foot">
-                <span class="ui-status"><i class="ui-dot is-live"></i>Review packet drafted</span>
-                <span class="ui-btn">View report</span>
-              </footer>
-            </div>
-          </div>
-        </div>
+      <p class="logoband-lead reveal">Built by, trusted and partnered with:</p>
+      <div class="logoband-row reveal d1">
+        <img src="assets/logo-ext-googlecloud.png" alt="Google Cloud" style="--lh:32px" />
+        <img src="assets/logo-haier.png" alt="Haier" style="--lh:22px" />
+        <img src="assets/logo-aws.png" alt="Amazon Web Services" style="--lh:29px" />
+        <img src="assets/logo-pepkor.png" alt="Pepkor" style="--lh:17px" />
+        <img src="assets/logo-azure.png" alt="Microsoft Azure" style="--lh:24px" />
+        <img class="blend" src="assets/logo-eoh.png" alt="EOH" style="--lh:39px" />
+        <img src="assets/logo-hpe.png" alt="Hewlett Packard Enterprise" style="--lh:19px" />
+        <img src="assets/logo-lovable.png" alt="Lovable" style="--lh:21px" />
       </div>
     </div>
   </section>
 
-  <!-- ===================== 02 — LEGACY / AGENTS / GALLOP ===================== -->
-  <section class="sec">
-    <div class="wrap">
-      <div class="conv-grid reveal">
-        <article class="conv-card">
-          <h3>Legacy systems</h3>
-          <p>Monoliths, mainframes, and undocumented repositories become readable maps.</p>
-        </article>
-        <article class="conv-card">
-          <h3>Autonomous agents</h3>
-          <p>Technical agents handle the heavy lifting of refactoring and porting logic.</p>
-        </article>
-        <article class="conv-card">
-          <h3>Gallop</h3>
-          <p>The platform that verifies every move, ensuring zero business logic is left behind.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== 03 — OUR PROTOCOL ===================== -->
-  <section class="sec has-codewall" id="protocol">
+  <!-- ===================== PROTOCOL — texture-card carousel ===================== -->
+  <section class="sec" id="protocol">
     <span id="pipeline" class="anchor-alias" aria-hidden="true"></span>
     <span id="how" class="anchor-alias" aria-hidden="true"></span>
-    <div class="codewall" data-codewall style="right:-210px;top:120px;"></div>
+    <div class="wrap proto-head">
+      <h2 class="hx reveal">The protocol that ensures smooth modernization.</h2>
+      <div class="proto-nav reveal">
+        <button class="proto-arrow" type="button" data-carousel-prev aria-label="Previous cards">←</button>
+        <button class="proto-arrow" type="button" data-carousel-next aria-label="Next cards">→</button>
+      </div>
+    </div>
+    <div class="proto-scroll reveal d1">
+      <div class="proto-track" data-carousel>
+        <article class="proto-card">
+          <div class="proto-media texfield tf-c1">
+            <img class="pm pm-arch" src="assets/mock-architecture.png" alt="Gallop target-architecture planning screen" />
+          </div>
+          <div class="proto-txt">
+            <span class="pn">1</span>
+            <div class="pt-body">
+              <p class="pt-name">Mapping</p>
+              <p class="pt-lead">Map your entire legacy system.</p>
+              <p class="pt-desc">Gallop reads your source repositories, databases, and documents, then builds verified documentation and user journey maps. You get a complete, auditable picture of your business logic before any transformation begins.</p>
+            </div>
+          </div>
+        </article>
+        <article class="proto-card">
+          <div class="proto-media texfield tf-c2">
+            <img class="pm pm-schema" src="assets/mock-schema.png" alt="Gallop schema mapping screen — agentic planner with tables and relations" />
+          </div>
+          <div class="proto-txt">
+            <span class="pn">2</span>
+            <div class="pt-body">
+              <p class="pt-name">Planning</p>
+              <p class="pt-lead">Plan the target system architecture.</p>
+              <p class="pt-desc">Gallop drafts the destination architecture, the migration path, and an effort estimate. Your team reviews and locks each decision before build starts.</p>
+            </div>
+          </div>
+        </article>
+        <article class="proto-card">
+          <div class="proto-media texfield tf-c3">
+            <div class="pm pm-writing"><img src="assets/mock-writing.png" alt="Gallop agent writing code in the editor" /></div>
+          </div>
+          <div class="proto-txt">
+            <span class="pn">3</span>
+            <div class="pt-body">
+              <p class="pt-name">Execution</p>
+              <p class="pt-lead">Agents write the code. Engineers approve it.</p>
+              <p class="pt-desc">Agents handle refactoring, code generation, and test generation, story by story. Engineers stay focused on architecture decisions and final sign-off. Every user story ships to a sandbox for review before it moves forward.</p>
+            </div>
+          </div>
+        </article>
+        <article class="proto-card">
+          <div class="proto-media texfield tf-c4">
+            <img class="pm pm-tests" src="assets/mock-running-tests.png" alt="Gallop parity tests running against the legacy system" />
+          </div>
+          <div class="proto-txt">
+            <span class="pn">4</span>
+            <div class="pt-body">
+              <p class="pt-name">Validation</p>
+              <p class="pt-lead">Every feature audited and verified.</p>
+              <p class="pt-desc">Gallop confirms that every piece of business logic carries over exactly. Automated parity testing replaces manual regression work and removes the risk of human error at scale.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PLATFORM MAP — the real work ===================== -->
+  <section class="sec" id="what">
+    <div class="codewall" data-codewall style="left:-210px;top:120px;"></div>
     <div class="wrap">
-      <h2 class="sec-kicker reveal">Our protocol</h2>
-      <div class="protocol">
-        <div class="protocol-row reveal">
-          <span class="protocol-num">1</span>
-          <div class="protocol-body">
-            <span class="protocol-name">Mapping</span>
-            <h3>Map your entire legacy system.</h3>
-            <p>Gallop reads your source repositories, databases, and documents, then builds verified documentation and user journey maps. You get a complete, auditable picture of your business logic before any transformation begins.</p>
+      <div class="mb-head reveal">
+        <h2 class="hx">The real work happens before the first line of code.</h2>
+        <p class="mb-body">Every modernization starts the same way, someone has to figure out what the current system actually does. Most tools treat that as a quick first pass, then move on to writing code. Gallop treats it as the job. It maps every repository, every dependency, every business rule, and keeps that map current as the rebuild happens. Code only gets written against a system Gallop has already confirmed it understands.</p>
+      </div>
+      <div class="disc-grid reveal d1">
+        <div class="disc-col">
+          <div class="disc-head">
+            <p class="disc-name">Gallop Discover</p>
+            <p class="disc-sub">Standalone</p>
+          </div>
+          <div class="disc-media texfield tf-disc">
+            <img src="assets/mock-dependency-map.png" alt="Gallop Discover: dependency map of the system, services grouped by domain with typed edges and node health" />
+          </div>
+          <div class="disc-txt">
+            <p class="disc-headline">AI-driven comprehension of the system nobody fully understands.</p>
+            <ul class="disc-list">
+              <li>Business and functional logic, extracted and readable</li>
+              <li>Dependency graphs: what touches what, what's safe to change</li>
+              <li>Risks and vulnerabilities, surfaced and prioritized</li>
+              <li>Architecture options with cost attached, delivered as a decision pack</li>
+            </ul>
           </div>
         </div>
-        <div class="protocol-row reveal">
-          <span class="protocol-num">2</span>
-          <div class="protocol-body">
-            <span class="protocol-name">Planning</span>
-            <h3>Plan the target system architecture.</h3>
-            <p>Gallop drafts the destination architecture, the migration path, and an effort estimate. Your team reviews and locks each decision before build starts.</p>
+        <div class="disc-col">
+          <div class="disc-head">
+            <p class="disc-name">Gallop Modernization</p>
+            <p class="disc-sub">When you're ready</p>
           </div>
-        </div>
-        <div class="protocol-row reveal">
-          <span class="protocol-num">3</span>
-          <div class="protocol-body">
-            <span class="protocol-name">Execution</span>
-            <h3>Agents write the code. Engineers approve it.</h3>
-            <p>Agents handle refactoring, code generation, and test generation, story by story. Engineers stay focused on architecture decisions and final sign-off. Every user story ships to a sandbox for review before it moves forward.</p>
+          <div class="disc-media texfield tf-mod">
+            <img src="assets/mock-dependency-map.png" alt="Gallop Modernization: the rebuilt system mapped and verified before cutover" />
           </div>
-        </div>
-        <div class="protocol-row reveal">
-          <span class="protocol-num">4</span>
-          <div class="protocol-body">
-            <span class="protocol-name">Reliability Mesh</span>
-            <h3>Every feature audited and verified.</h3>
-            <p>Gallop confirms that every piece of business logic carries over exactly. Automated parity testing replaces manual regression work and removes the risk of human error at scale.</p>
-          </div>
-        </div>
-        <div class="protocol-row reveal">
-          <span class="protocol-num">5</span>
-          <div class="protocol-body">
-            <span class="protocol-name">Host and Maintenance</span>
-            <h3>Your system stays secure after go-live.</h3>
-            <p>Gallop hosts and monitors your system for security advisories, runtime upgrades, and open issues. When it finds something, it writes the fix, runs tests, and opens a pull request. Your engineers review and merge.</p>
+          <div class="disc-txt">
+            <p class="disc-headline">An AI-native rebuild, steered by your own small team.</p>
+            <ul class="disc-list">
+              <li>Custom-built for your business logic and rules</li>
+              <li>Evidence-based validation against real behavior</li>
+              <li>GCP, AWS, or Azure, matched to the architecture that fits you</li>
+              <li>Your software, your IP. Never billed for it again</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== 04 — DEPLOYMENT RECORDS ===================== -->
+  <!-- ===================== TRACK RECORD ===================== -->
   <section class="sec" id="records">
     <div class="wrap">
-      <div class="sec-head">
-        <h2 class="sec-kicker reveal">Modernization in days, not years.<br />with zero business logic loss.</h2>
-        <p class="records-sub reveal d1">Trusted by teams at Google Cloud, Telefonica, and Victoria's Secret.</p>
-      </div>
-      <div class="records reveal d1">
-        <article class="record record--tall">
-          <span class="record-meta">7M-line monolith · 3 wks</span>
-          <div class="record-main">
-            <div class="record-title">Cloud &amp; retail</div>
-            <p>A global clothing retailer migrated their core inventory monolith to Google Cloud with zero downtime.</p>
+      <p class="track-label reveal">A proven track record.</p>
+      <h2 class="hx reveal">Modernization in days, not years.<br />With zero business logic loss.</h2>
+      <div class="track reveal d1">
+        <article class="track-card" style="background:var(--color-ochre);">
+          <span class="tc-meta">7M-line monolith · 3 weeks</span>
+          <div class="tc-main">
+            <p class="tc-title">Cloud &amp; retail</p>
+            <p class="tc-desc">A global clothing retailer migrated their core inventory monolith to Google Cloud with zero downtime.</p>
           </div>
-          <span class="record-foot">Figures illustrative — full study on request.</span>
         </article>
-        <article class="record record--tall">
-          <span class="record-meta">core platform · 72 hrs</span>
-          <div class="record-main">
-            <div class="record-title">Enterprise retail</div>
-            <p>A Fortune 500 retailer ported their promotion engine logic to a modern AI-ready API stack.</p>
+        <article class="track-card" style="background:var(--color-sage);">
+          <span class="tc-meta">core platform · 72 hours</span>
+          <div class="tc-main">
+            <p class="tc-title">Enterprise retail</p>
+            <p class="tc-desc">A Fortune 500 retailer ported their promotion engine logic to a modern AI-ready API stack.</p>
           </div>
-          <span class="record-foot">Figures illustrative — full study on request.</span>
         </article>
-        <article class="record record--tall">
-          <span class="record-meta">billing stack · ROI+</span>
-          <div class="record-main">
-            <div class="record-title">Telecom</div>
-            <p>A major carrier eliminated $12M in maintenance costs by porting their COBOL billing logic to Java.</p>
+        <article class="track-card" style="background:var(--color-lemon);">
+          <span class="tc-meta">billing stack · ROI+</span>
+          <div class="tc-main">
+            <p class="tc-title">Telecom</p>
+            <p class="tc-desc">A major carrier eliminated $12M in maintenance costs by porting their COBOL billing logic to Java.</p>
           </div>
-          <span class="record-foot">Figures illustrative — full study on request.</span>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ===================== 05 — SPEED YOU CAN TRUST ===================== -->
+  <!-- ===================== CORE FEATURES — pinned scroll-through scene ===================== -->
+  <section class="cf-scene" id="features" data-steps="4">
+    <div class="cf-sticky">
+    <div class="wrap cf-grid" id="featSection">
+      <div class="cf-media texfield tf-cf reveal">
+        <div class="cf-gallery">
+          <img class="cf-shot is-active" data-i="0" src="assets/mock-architecture.png" alt="Gallop legacy-system audit: mapped architecture" />
+          <img class="cf-shot" data-i="1" src="assets/mock-writing.png" alt="Gallop documentation updating as the system changes" />
+          <img class="cf-shot" data-i="2" src="assets/mock-running-tests.png" alt="Gallop testing migrated behavior against the original system" />
+          <img class="cf-shot" data-i="3" src="assets/mock-dependency-map.png" alt="Gallop full-estate dependency, risk and coverage map" />
+        </div>
+      </div>
+      <div class="cf-copy">
+        <h2 class="hx reveal">The core features</h2>
+        <p class="cf-sub reveal d1">Designed to help you modernize quickly.</p>
+        <div class="feat-list reveal d1" id="featList">
+          <button class="feat is-active" type="button" data-i="0">
+            <h3>Legacy system audit</h3>
+            <p>Gallop reads source repositories, databases, and documents, and generates a verified, auditable picture of your business logic before any transformation begins.</p>
+          </button>
+          <button class="feat" type="button" data-i="1">
+            <h3>Continuous knowledge updates</h3>
+            <p>Documentation updates as the system changes, so knowledge doesn't sit with two people who are about to retire.</p>
+          </button>
+          <button class="feat" type="button" data-i="2">
+            <h3>System behavior testing</h3>
+            <p>Every migrated component is tested against the original system's behavior. Discrepancies are surfaced automatically, not discovered after go-live.</p>
+          </button>
+          <button class="feat" type="button" data-i="3">
+            <h3>Full visibility transformation</h3>
+            <p>See dependencies, risk, and coverage across your entire estate before you commit to a single line of the rewrite.</p>
+          </button>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ===================== STATS ===================== -->
+  <section class="sec" id="stats">
+    <div class="wrap">
+      <h2 class="hx reveal">Multiply what your team can take on.</h2>
+      <div class="stats reveal d1">
+        <div class="stat">
+          <span class="stat-num">20x</span>
+          <p class="stat-label">Less effort than legacy modernization approaches</p>
+          <p class="stat-body">20x less effort per system means AI spend that converts into something concrete: a modernized system, retired maintenance cost, decommissioned licenses. Numbers your CFO can see. Systems that were out of reach are now on the roadmap.</p>
+        </div>
+        <div class="stat">
+          <span class="stat-num">3x faster</span>
+          <p class="stat-label">With Gallop versus traditional rebuild</p>
+          <p class="stat-body">A year of work in one quarter. 8,000 person-hours delivered in roughly 400 at a Fortune-scale retailer. Assessment in weeks, production in 90 days.</p>
+        </div>
+        <div class="stat">
+          <span class="stat-num">Stay in control</span>
+          <p class="stat-label">Stop renting your own systems</p>
+          <p class="stat-body">The understanding, the spec, and the software stay yours, permanently, never billable again. The new stack is built for what runs your business next.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PARITY — texture band ===================== -->
   <section class="sec" id="validation">
     <div class="wrap">
-      <div class="validate-grid">
-        <div class="validate-copy">
-          <h2 class="sec-title reveal">Speed you can trust is the hard part.</h2>
-          <p class="reveal d1">Modernization fails when business logic is lost in translation. Gallop automates parity checking. We run millions of inputs through both legacy and modern codebases to ensure behavior is identical down to the last decimal point.</p>
-        </div>
-        <div class="panel reveal d1" role="img" aria-label="Parity verification panel: three of three capabilities verified, awaiting human approval">
-          <div class="panel-head"><span class="k">parity_verification_v4</span><span class="id">ID: G-8812</span></div>
-          <div class="panel-row"><span class="nm">invoice.total</span><span class="old">242.00</span><span>242.00</span><span class="match">match</span></div>
-          <div class="panel-row"><span class="nm">tax.apply()</span><span class="old">0.15</span><span>0.15</span><span class="match">match</span></div>
-          <div class="panel-row"><span class="nm">ledger.post</span><span class="old">done</span><span>done</span><span class="match">match</span></div>
-          <div class="panel-foot"><span>3/3 capabilities verified</span><span>awaiting human approval</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== 06 — FEATURES ===================== -->
-  <section class="sec" id="features">
-    <div class="wrap">
-      <div class="split">
-        <div class="split-copy">
-          <h2 class="sec-kicker reveal">Features</h2>
-          <p class="feat-kicker reveal d1">Designed to move.</p>
-          <div class="feat-list reveal d1" id="featList">
-            <button class="feat active" type="button">
-              <h3>Legacy system audit.</h3>
-              <p>Gallop reads source repositories, databases, and documents, and generates a verified, auditable picture of your business logic before any transformation begins.</p>
-            </button>
-            <button class="feat" type="button">
-              <h3>Continuous knowledge updates</h3>
-              <p>Documentation updates as the system changes, so knowledge doesn't sit with two people who are about to retire.</p>
-            </button>
-            <button class="feat" type="button">
-              <h3>System behavior testing</h3>
-              <p>Every migrated component is tested against the original system's behavior. Discrepancies are surfaced automatically, not discovered after go-live.</p>
-            </button>
-            <button class="feat" type="button">
-              <h3>Full visibility transformation</h3>
-              <p>See dependencies, risk, and coverage across your entire estate before you commit to a single line of the rewrite.</p>
-            </button>
+      <div class="parity-band texfield tf-parity reveal">
+        <div class="pb-inner">
+          <div class="pb-copy">
+            <h2 class="hx">Behavior is identical down to the last decimal point.</h2>
+            <p>Modernization fails when business logic is lost in translation. Gallop automates parity checking. We run millions of inputs through both legacy and modern codebases to ensure behavior is identical down to the last decimal point.</p>
+          </div>
+          <div class="panel" role="img" aria-label="Parity verification panel: three of three capabilities verified, awaiting human approval">
+            <div class="panel-head"><span class="k">parity_verification_v4</span><span class="id">ID: G-8812</span></div>
+            <div class="panel-row"><span class="nm">invoice.total</span><span class="old">242.00</span><span>242.00</span><span class="match">match</span></div>
+            <div class="panel-row"><span class="nm">tax.apply()</span><span class="old">0.15</span><span>0.15</span><span class="match">match</span></div>
+            <div class="panel-row"><span class="nm">ledger.post</span><span class="old">done</span><span>done</span><span class="match">match</span></div>
+            <div class="panel-foot"><span>3/3 capabilities verified</span><span>awaiting human approval</span></div>
           </div>
         </div>
-        <div class="shot-panel reveal d1">
-          <img src="assets/mock-dependency-map.png" alt="Gallop platform dependency map: services grouped by domain with typed producer, uses and consumes edges, node health, and a selected-service inspector — a brand-styled recreation of the product's system-map view" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TEAM TRUST ===================== -->
+  <section class="sec" id="team">
+    <div class="wrap team-grid">
+      <div class="team-left">
+        <p class="team-kicker reveal">Built by a team you can trust</p>
+        <div class="team-badges reveal d1">
+          <span class="badge"><img src="assets/badge-soc2.png" alt="" />SOC2 Type II</span>
+          <span class="badge"><img src="assets/badge-iso.png" alt="" />ISO 27001</span>
+        </div>
+      </div>
+      <div class="team-right">
+        <div class="team-photos reveal" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="team-body reveal d1">Gallop's engineering team spent years building and migrating production systems at Amazon and Google. They've seen what it actually takes to move a critical system without breaking it: staged rollouts, exhaustive testing before a single customer sees a change, and engineers who stay accountable after ship, not just at launch. That's the standard Gallop holds itself to.</p>
+        <div class="team-logos reveal d1">
+          <img src="assets/logo-aws.png" alt="Amazon Web Services" style="--lh:63px" />
+          <img src="assets/logo-amazon.png" alt="Amazon" style="--lh:53px" />
+          <img src="assets/logo-google.png" alt="Google" style="--lh:44px" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== 07 — STATS ===================== -->
-  <section class="sec">
-    <div class="wrap stats reveal">
-      <div class="stat"><span class="stat-num">20x</span><p>less effort than legacy modernization approaches</p></div>
-      <div class="stat"><span class="stat-num">100%</span><p>business logic verified, not assumed</p></div>
-      <div class="stat"><span class="stat-num">Weeks</span><p>not years, from assessment to go-live</p></div>
-    </div>
-  </section>
-
-  <!-- ===================== 08 — FAQ ===================== -->
-  <section class="sec" id="faq">
+  <!-- ===================== FAQ — surface band ===================== -->
+  <section class="shift" id="faq">
     <div class="wrap faq-grid">
-      <h2 class="reveal">The questions a CIO asks first.</h2>
+      <h2 class="hx reveal">The questions a CIO asks first.</h2>
       <div class="faq-list reveal d1">
         <details class="faq-item">
-          <summary><span class="q">Will this break the business?</span><span class="ind" aria-hidden="true"></span></summary>
+          <summary><span class="q">How is this different from a code translator?</span><span class="ind" aria-hidden="true"></span></summary>
           <div class="a">
-            <p>No. Every capability is rebuilt and re-run against the original in a sandbox before anything reaches you. The new system is validated for business-logic parity — it behaves exactly like the old one, unless you decide otherwise.</p>
-            <p>Nothing cuts over on a single high-risk date; you move capability by capability, verified as you go.</p>
+            <p>Translators convert syntax and carry your legacy's flaws into a new language. Gallop comprehends the business logic first, what the system actually does, then re-engineers it natively. Comprehension, not translation.</p>
           </div>
         </details>
         <details class="faq-item">
-          <summary><span class="q">How long does it actually take?</span><span class="ind" aria-hidden="true"></span></summary>
+          <summary><span class="q">How do I know the new system does everything the old one did?</span><span class="ind" aria-hidden="true"></span></summary>
           <div class="a">
-            <p>Assessment of a live system runs in days, not months — a 7M-line core has been mapped in a week. Planning is as fast as your team can make decisions; rebuild and validation run continuously in the background.</p>
-            <p>The constraint isn’t the machine — it’s how quickly your people want to approve each step.</p>
+            <p>Nothing reaches production on faith. The rebuild is validated in a sandbox, then deployed to your own UAT for your team to test, then run in parallel on limited traffic, proving parity against the live system before a single production cutover. You move forward only once that's proven.</p>
           </div>
         </details>
         <details class="faq-item">
-          <summary><span class="q">Do we lose control to the AI?</span><span class="ind" aria-hidden="true"></span></summary>
+          <summary><span class="q">Does this replace my team, or my SI?</span><span class="ind" aria-hidden="true"></span></summary>
           <div class="a">
-            <p>No. Gallop is built as two layers: agents do the work, your team holds the judgment. Engineering, product, data, and legal review and approve every decision on one platform.</p>
-            <p>Nothing autonomous reaches production without a human sign-off, and every action is logged.</p>
+            <p>Neither. Your team is put back in control. Gallop's agents do the heavy lifting. Your people make every decision on architecture, trade-offs, and cutover. The understanding stays in-house instead of leaving with the consultants.</p>
           </div>
         </details>
         <details class="faq-item">
-          <summary><span class="q">Is our code and IP safe?</span><span class="ind" aria-hidden="true"></span></summary>
+          <summary><span class="q">Where does my code run? Is it secure?</span><span class="ind" aria-hidden="true"></span></summary>
           <div class="a">
-            <p>Yes. Gallop runs in your environment; your code and data stay under your control, with a full audit trail on every change.</p>
-            <p class="note">Certifications, deployment model &amp; data-handling specifics listed as confirmed.</p>
+            <p>Your code and business logic never leave your control. Deploy the Gallop Platform in your own cloud, on-prem, or fully air-gapped, with role-based access and a full audit trail on every extraction, decision, and change.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary><span class="q">Do I have to commit to a full modernization to start?</span><span class="ind" aria-hidden="true"></span></summary>
+          <div class="a">
+            <p>No. Gallop Discover stands alone. It gives you deep comprehension plus a priced, agent-ready target architecture in weeks. You get a board-ready decision pack first. Everything after that is your choice.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary><span class="q">Do you only modernize legacy systems, or build new ones too?</span><span class="ind" aria-hidden="true"></span></summary>
+          <div class="a">
+            <p>Both. The same platform that comprehends and rebuilds legacy systems can build net-new systems on a modern, agent-ready foundation. Replacing something twenty years old and building something that doesn't exist yet use the same process.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary><span class="q">What happens after, who supports the modernized system?</span><span class="ind" aria-hidden="true"></span></summary>
+          <div class="a">
+            <p>You do, and that's the point. The system is yours: your architecture, your standards, your IP. Your team owns and evolves it, with the living model kept current so the understanding compounds instead of decaying. Gallop stays available for the next system, not as a permanent dependency.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary><span class="q">Which LLMs does this use, am I locked into one vendor's model?</span><span class="ind" aria-hidden="true"></span></summary>
+          <div class="a">
+            <p>No lock-in. Gallop orchestrates the best model for each task and stays model-agnostic, commercial or open-source, today's leading models or tomorrow's. As the frontier moves, your platform moves with it.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary><span class="q">Is my system too large or too complex for this?</span><span class="ind" aria-hidden="true"></span></summary>
+          <div class="a">
+            <p>Gallop is built for the most complex estates: systems with hundreds of millions of lines, decades of history, hundreds of integrations. Enterprises have already entrusted Gallop with millions lines of code.</p>
           </div>
         </details>
       </div>
     </div>
   </section>
 
-  <!-- ===================== CLOSING + FOOTER — the ochre field returns ===================== -->
+  <!-- ===================== CLOSING + FOOTER — the textured field returns ===================== -->
   <section class="close-field" id="cta">
     <div class="wrap close-inner">
-      <img class="close-horse-img" src="assets/horse-leap.png" alt="" aria-hidden="true" />
       <div class="close-block">
         <h2 class="reveal">Modernizing the world's most critical systems with speed and precision.</h2>
         <p class="close-body reveal d1">See Gallop read a real system, map it, and plan its modern future, live, on your own architecture.</p>
         <div class="close-actions reveal d2">
-          <a href="d-contact.html" class="close-link">Start a 2-week discovery sprint →</a>
+          <a href="d-contact.html" class="btn btn-ochre">Start a 2-week discovery sprint</a>
         </div>
       </div>
     </div>
@@ -368,8 +397,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <div class="mark-row">
-          <img src="assets/horse-mark.svg" alt="" />
-          <span class="wm">Gallop</span>
+          <img class="lockup" src="assets/gallop-lockup.svg" alt="Gallop" />
         </div>
         <p class="footer-tag">Modernizing the world's most critical systems with speed and precision.</p>
       </div>
@@ -395,7 +423,6 @@
       <span><a href="d-privacy.html">Privacy</a> &nbsp;&nbsp; <a href="d-terms.html">Terms</a></span>
     </div>
   </div>
-  <div class="stripes" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
 </footer>
 <!-- site-footer:end -->
   </section>

@@ -46,6 +46,12 @@
   --space-section: clamp(5.5rem, 10vw, var(--gallop-space-section));
   --space-section-sm: clamp(3.4rem, 6vw, 6.5rem);
 
+  /* ---- [EXT] film-grain texture (reused across gold/green blocks) ---- */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+
+  /* ---- Full-bleed rail gutter (space outside the 1440 content column) ---- */
+  --gutter: max(calc((100vw - var(--gallop-canvas-max)) / 2), 0px);
+
   /* ---- Motion ---- */
   --dur-fast: 160ms;
   --dur: 320ms;
@@ -127,6 +133,10 @@ img,svg,video{display:block;max-width:100%;}
 .btn-ochre:hover{background:var(--color-ochre-2);}
 .btn-line{background:transparent;color:var(--color-ink);border-color:var(--hairline-strong);}
 .btn-line:hover{background:var(--color-ink);color:var(--color-bg);border-color:var(--color-ink);}
+/* On the dark-green corner of the [EXT] closing field the ink ghost button
+   disappears — swap to the light scheme the white headline already uses. */
+.close-field .btn-line{color:var(--color-white);border-color:rgba(255,255,255,.55);}
+.close-field .btn-line:hover{background:var(--color-white);color:var(--color-ink);border-color:var(--color-white);}
 
 /* =====================  NAV — floating paper bar  ===================== */
 .navwrap{position:sticky;top:14px;z-index:60;padding-inline:clamp(.9rem,2.5vw,2.6rem);}
@@ -140,7 +150,6 @@ img,svg,video{display:block;max-width:100%;}
 }
 .nav-brand{display:flex;align-items:center;gap:.5rem;}
 .nav-brand img{height:20px;width:auto;}
-.nav-brand .wm{font-family:var(--font-serif);font-size:1.55rem;letter-spacing:var(--gallop-tracking);line-height:1;}
 .nav-links{display:flex;gap:1.9rem;align-items:center;}
 .nav-links a{
   font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;
@@ -155,46 +164,13 @@ img,svg,video{display:block;max-width:100%;}
 .nav-links .nav-cta:hover{background:var(--color-ochre-2);}
 .nav-toggle{display:none;}
 
-/* =====================  HERO — ochre field, agent prompt card  ===================== */
-.hero{position:relative;background-color:var(--color-ochre);
-  background-image:linear-gradient(90deg,var(--color-ochre) 0%,var(--color-ochre) 30%,rgba(244,226,123,.45) 66%,rgba(244,226,123,0) 100%),url("assets/texture-green-gold-wide.png");
-  background-size:cover;background-position:center;background-repeat:no-repeat;
-  overflow:hidden;margin-top:calc(-1 * (66px + 14px));padding-top:calc(66px + 14px);}
+/* =====================  HERO helpers shared with subpage page-hero  ===================== */
 .hero-horse{position:absolute;right:2%;bottom:-4%;width:min(560px,42vw);aspect-ratio:232/210;opacity:.9;pointer-events:none;}
-.hero-stripes{position:absolute;right:0;top:0;height:100%;width:auto;pointer-events:none;}
-.hero-dashes{position:absolute;left:47%;top:0;width:min(270px,19vw);height:auto;pointer-events:none;}
 .hero-inner{position:relative;z-index:1;}
-.hero .hero-inner{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(2rem,4vw,4.5rem);align-items:end;padding-block:clamp(6.5rem,13vw,11rem) clamp(3rem,5vw,4rem);}
-.hero-phrase{font-size:clamp(2.1rem,3.3vw,2.95rem);letter-spacing:var(--gallop-tracking);line-height:1.14;max-width:24ch;}
-.hero-promise{margin-top:1.4rem;font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:400;letter-spacing:var(--gallop-tracking);text-transform:uppercase;line-height:1.6;max-width:74ch;color:var(--color-ink);}
-.hero-promise b{font-weight:500;}
 
-/* agent prompt card (hero right) */
-.agent-card{background:var(--gallop-white);border-radius:14px;padding:1.35rem 1.35rem 1.15rem;box-shadow:0 22px 50px -32px rgba(54,47,44,.5);max-width:640px;width:100%;justify-self:end;}
-.agent-q{display:flex;gap:.9rem;align-items:flex-start;}
-.agent-q img{height:22px;width:auto;margin-top:.15rem;}
-.agent-q p{font-size:1.06rem;letter-spacing:-.01em;line-height:1.42;color:var(--color-ink);max-width:34rem;}
-.agent-row{display:flex;align-items:center;gap:.6rem;margin-top:1.35rem;}
-.agent-chip{display:inline-flex;align-items:center;gap:.45rem;background:var(--color-white);border:1px solid var(--hairline);border-radius:999px;padding:.5rem .95rem;font-size:.92rem;letter-spacing:-.01em;white-space:nowrap;}
-.agent-chip b{font-weight:500;}
-.agent-chip i{font-style:normal;font-size:.68rem;color:var(--ink-50);}
-.agent-dot{width:13px;height:13px;border-radius:50%;background:var(--gallop-blue-800);display:inline-block;flex:none;}
-.agent-plus{font-size:.95rem;color:var(--ink-50);letter-spacing:-.01em;white-space:nowrap;}
-.agent-send{margin-left:auto;width:38px;height:38px;flex:none;border-radius:50%;border:1px solid var(--hairline-strong);display:inline-flex;align-items:center;justify-content:center;color:var(--color-ink);}
 
-/* trust line + logo row under the hero band */
-.trustbar{padding-block:clamp(2.6rem,5vw,4rem) 0;text-align:center;}
-.trustbar p{font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);color:var(--color-ink);}
-.trustbar p b{font-weight:500;}
-.trust-logos{margin-top:1.7rem;display:flex;flex-wrap:wrap;gap:1.4rem clamp(2rem,6vw,6.5rem);justify-content:center;align-items:center;}
-.trust-pair{display:inline-flex;align-items:center;gap:2rem;}
-.trust-pair img{height:30px;width:auto;opacity:.92;}
-.trust-pair img:first-child{height:38px;}
 
-/* =====================  01 — WHAT GALLOP IS  ===================== */
-.conv-grid{margin-top:clamp(3rem,6vw,5rem);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.4rem,2.2vw,1.9rem);}
-.conv-card h3{font-size:var(--type-h-xl);letter-spacing:var(--gallop-tracking-display);line-height:var(--gallop-leading-heading-xl);}
-.conv-card p{margin-top:1.6rem;font-family:var(--font-mono);font-size:var(--type-label-md);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;line-height:var(--gallop-leading-label);}
+/* =====================  shared editorial bits  ===================== */
 .statline{margin-top:clamp(3.4rem,6vw,5.4rem);}
 .statline p{font-family:var(--font-serif);font-size:var(--type-h-lg);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-heading-lg);}
 
@@ -218,19 +194,10 @@ img,svg,video{display:block;max-width:100%;}
 .role-row:hover .arw{transform:translateX(3px);}
 .gates--3{grid-template-columns:repeat(3,1fr);}
 
-/* =====================  03 — OUR PROTOCOL (numbered ledger)  ===================== */
-.protocol{margin-top:clamp(3rem,6vw,5rem);display:flex;flex-direction:column;gap:clamp(3rem,5.5vw,4.6rem);}
-.protocol-row{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1fr);gap:2rem;align-items:start;}
-.protocol-num{font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);color:var(--color-ink);}
-.protocol-name{display:block;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);color:var(--color-ink);}
-.protocol-body h3{font-family:var(--font-body);font-weight:500;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.3;margin-top:.25rem;}
-.protocol-body p{margin-top:.4rem;font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.35;color:var(--ink-50);max-width:505px;}
+
 .anchor-alias{position:absolute;}
 
 /* =====================  04 — VALIDATION & CONTROL  ===================== */
-.validate-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(2.4rem,5vw,5.5rem);align-items:center;}
-.validate-copy p{margin-top:1.6rem;font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-body);max-width:48ch;}
-.validate-copy p b{font-weight:400;}
 
 /* dark parity panel */
 .panel{background:var(--color-ink);border-radius:8px;padding:1.5rem;color:var(--color-white);font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;line-height:var(--gallop-leading-label);}
@@ -267,86 +234,9 @@ img,svg,video{display:block;max-width:100%;}
 .ledger-foot{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;align-items:center;justify-content:space-between;padding:1rem 1.15rem;background:var(--color-surface);border-top:1px solid var(--hairline);font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--ink-50);}
 .ledger-foot b{font-weight:500;color:var(--color-ink);}
 
-/* =====================  SPLIT — copy left, product shot on ochre panel right  ===================== */
-.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.28fr);gap:clamp(2.4rem,5vw,5rem);align-items:stretch;}
-.split-copy{display:flex;flex-direction:column;max-width:520px;}
-.split-body{margin-top:1.6rem;font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.35;color:var(--color-ink);}
-.split-stat{margin-top:auto;padding-top:3rem;}
-.shot-panel{background:var(--color-ochre);padding:clamp(2.2rem,4.5vw,4.2rem) 0 0 clamp(2.2rem,4.5vw,4.2rem);margin-right:calc(-1 * var(--space-page-x));overflow:hidden;display:flex;}
-.shot-panel img{width:100%;height:auto;align-self:flex-start;border-radius:12px 0 0 0;box-shadow:0 24px 60px -40px rgba(54,47,44,.5);}
 
-/* Security-gate UI mock — brand-styled recreation of the product's Security
-   screen from gallopintelligence.ai ("Hold risky code at the gate", shown
-   under "Your legacy system, rebuilt for the AI era"). Same content, re-lit
-   per ui-brand.md: Funnel Sans titles/body + Geist Mono labels/code, flat
-   brand colour blocks, no serif inside UI.
-   Every size is a multiple of --u (1px at the 620px design width), so the
-   whole mock scales proportionally with its panel — same responsive
-   behaviour as an image. */
-.shot-panel{container-type:inline-size;}
-.ui-mock{--u:1px;--u:calc(100cqi / 620);width:100%;align-self:flex-start;display:grid;grid-template-columns:calc(var(--u)*180) minmax(0,1fr);gap:calc(var(--u)*18);background:var(--color-white);border-radius:calc(var(--u)*12) 0 0 0;padding:calc(var(--u)*22);}
-.ui-eyebrow{font-family:var(--font-mono);font-size:calc(var(--u)*11.5);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--gallop-text-secondary);line-height:var(--gallop-leading-label);}
-.ui-dot{width:calc(var(--u)*9);height:calc(var(--u)*9);border-radius:50%;background:var(--gallop-neutral-200);display:inline-block;flex:none;}
-.ui-dot.is-live{background:var(--gallop-blue-800);}
-.ui-side{display:flex;flex-direction:column;gap:calc(var(--u)*18);min-width:0;}
-.ui-project{background:var(--color-surface);border-radius:calc(var(--u)*4);padding:calc(var(--u)*13) calc(var(--u)*14);display:flex;flex-direction:column;gap:calc(var(--u)*5);}
-.ui-project-name{font-size:calc(var(--u)*15);font-weight:500;letter-spacing:var(--gallop-tracking);color:var(--color-ink);}
-.ui-stages{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:calc(var(--u)*6);}
-.ui-stages li{display:flex;align-items:center;gap:calc(var(--u)*9);background:var(--color-bg);border-radius:calc(var(--u)*4);padding:calc(var(--u)*10) calc(var(--u)*14);font-size:calc(var(--u)*14);letter-spacing:var(--gallop-tracking);color:var(--gallop-text-secondary);}
-.ui-stages li.is-done .ui-dot{background:var(--gallop-accent-green);}
-.ui-stages li.is-active{background:var(--color-surface);color:var(--color-ink);font-weight:500;}
-.ui-stages li.is-active .ui-dot{background:var(--gallop-blue-800);}
-.ui-main{display:flex;flex-direction:column;gap:calc(var(--u)*18);min-width:0;}
-.ui-title{font-size:calc(var(--u)*25);font-weight:500;letter-spacing:var(--gallop-tracking);line-height:1.1;color:var(--color-ink);}
-.ui-sub{margin-top:calc(var(--u)*5);font-size:calc(var(--u)*15);font-weight:300;letter-spacing:var(--gallop-tracking);color:var(--gallop-text-secondary);}
-.ui-cols{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:calc(var(--u)*16);}
-.ui-card{background:var(--color-surface);border-radius:calc(var(--u)*4);padding:calc(var(--u)*16);display:flex;flex-direction:column;gap:calc(var(--u)*11);min-width:0;}
-.ui-card-head{display:flex;align-items:center;justify-content:space-between;gap:calc(var(--u)*10);}
-.ui-card-title{font-size:calc(var(--u)*17.6);font-weight:500;letter-spacing:var(--gallop-tracking);color:var(--color-ink);}
-.ui-scan{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:calc(var(--u)*7);}
-.ui-scan li{background:var(--color-white);border-radius:calc(var(--u)*2);padding:calc(var(--u)*9) calc(var(--u)*11);display:flex;flex-direction:column;gap:calc(var(--u)*4);min-width:0;}
-.ui-scan-top{display:flex;align-items:center;justify-content:space-between;gap:calc(var(--u)*10);}
-.ui-scan code{font-family:var(--font-mono);font-size:calc(var(--u)*11.5);letter-spacing:var(--gallop-tracking);color:var(--color-ink);line-height:1.3;min-width:0;overflow-wrap:break-word;}
-.ui-sev{font-family:var(--font-mono);font-size:calc(var(--u)*9.5);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--color-ink);background:var(--gallop-ochre-200);border-radius:calc(var(--u)*2);padding:calc(var(--u)*3) calc(var(--u)*7);flex:none;}
-.ui-sev.is-high{background:var(--color-ochre);}
-.ui-scan p{font-size:calc(var(--u)*12.5);font-weight:300;letter-spacing:var(--gallop-tracking);color:var(--gallop-text-secondary);}
-.ui-checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:calc(var(--u)*7);}
-.ui-checks li{display:flex;align-items:baseline;justify-content:space-between;gap:calc(var(--u)*12);background:var(--color-white);border-radius:calc(var(--u)*2);padding:calc(var(--u)*9) calc(var(--u)*11);}
-.ui-checks span{font-family:var(--font-mono);font-size:calc(var(--u)*10.5);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--gallop-text-secondary);}
-.ui-checks b{font-size:calc(var(--u)*13.5);font-weight:500;letter-spacing:var(--gallop-tracking);color:var(--color-ink);}
-.ui-checks b.is-ok{color:var(--gallop-green-800);}
-.ui-checks b.is-wait{color:var(--gallop-ochre-800);}
-.ui-actions{display:flex;flex-wrap:wrap;gap:calc(var(--u)*7);margin-top:auto;padding-top:calc(var(--u)*4);}
-.ui-btn{background:var(--color-ink);color:var(--color-surface);border-radius:calc(var(--u)*2);padding:calc(var(--u)*8) calc(var(--u)*15);font-size:calc(var(--u)*13.5);font-weight:500;letter-spacing:var(--gallop-tracking);white-space:nowrap;}
-.ui-btn-line{background:transparent;color:var(--color-ink);border:1px solid var(--hairline-strong);padding:calc(var(--u)*7) calc(var(--u)*14);}
-.ui-foot{display:flex;align-items:center;justify-content:space-between;gap:calc(var(--u)*16);background:var(--color-bg);border-radius:calc(var(--u)*4);padding:calc(var(--u)*11) calc(var(--u)*14);}
-.ui-status{display:inline-flex;align-items:center;gap:calc(var(--u)*9);font-family:var(--font-mono);font-size:calc(var(--u)*12.5);letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--color-ink);}
 
-/* features list (active item dark, rest faded) */
-.feat-kicker{margin-top:1.2rem;font-size:var(--type-body-lg);font-weight:300;color:var(--ink-50);letter-spacing:var(--gallop-tracking);}
-.feat-list{margin-top:clamp(2rem,4vw,3rem);display:flex;flex-direction:column;gap:clamp(1.8rem,3vw,2.6rem);}
-.feat{appearance:none;background:none;border:none;padding:0;text-align:left;cursor:pointer;font-family:var(--font-body);opacity:.35;transition:opacity var(--dur) var(--ease);}
-.feat.active,.feat:hover{opacity:1;}
-.feat h3{font-family:var(--font-body);font-weight:500;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);color:var(--color-ink);}
-.feat p{margin-top:.4rem;font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.35;color:var(--ink-70);max-width:505px;}
 
-/* stats band */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,2.5rem);}
-.stat-num{font-family:var(--font-serif);font-size:var(--type-h-xl);letter-spacing:var(--gallop-tracking);line-height:1;}
-.stat p{margin-top:1.1rem;font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);color:var(--ink-70);max-width:22rem;}
-
-/* =====================  05 — DEPLOYMENT RECORDS (tinted cards)  ===================== */
-.records{margin-top:clamp(2.6rem,5vw,4rem);display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gallop-space-card-gap);}
-.record{display:flex;flex-direction:column;justify-content:space-between;gap:2.5rem;padding:var(--gallop-space-card-pad);min-height:420px;border-radius:2px;}
-.record:nth-child(1){background:var(--color-ochre);}
-.record:nth-child(2){background:var(--color-ochre-2);}
-.record:nth-child(3){background:var(--color-surface);}
-.record-meta{font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;opacity:.8;}
-.record-main .record-title{font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-body);}
-.record-main p{margin-top:.35rem;font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-body);opacity:.5;}
-.record-foot{font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;opacity:.4;}
-.record--tall{min-height:482px;}
-.records-sub{margin-top:1.4rem;font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);color:var(--color-ink);}
 
 /* =====================  06 — FAQ  ===================== */
 .faq-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(2.5rem,8vw,10rem);align-items:start;}
@@ -366,9 +256,20 @@ img,svg,video{display:block;max-width:100%;}
 .faq-item .a .note{margin-top:1rem;font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--ink-40);}
 
 /* =====================  CLOSING + FOOTER — the ochre field returns  ===================== */
+/* [EXT] closing block, matched to Figma FOOTER node 2307:9775. The mosaic
+   texture (texture-green-gold-stretch.jpg) is Figma's own render of the fill:
+   the near-square source is stretched ~1.75× wider than tall, giving the
+   signature horizontal-rectangle pixels — the stretch is baked into the asset,
+   so any uniform scaling (cover) preserves it. Over it, a 64.75° gold gradient
+   sweeps up from the lower-left; the texture's dark-green upper-right corner
+   carries the white headline. */
 .close-field{position:relative;background-color:var(--color-ochre);
-  background-image:linear-gradient(90deg,rgba(244,226,123,0) 0%,rgba(244,226,123,.45) 55%,rgba(244,226,123,.72) 100%),url("assets/texture-green-gold-wide.png");
-  background-size:cover;background-position:center;background-repeat:no-repeat;
+  background-image:
+    linear-gradient(64.75deg, var(--color-ochre) 15.4%, rgba(244,226,123,0) 55.71%),
+    url("assets/texture-green-gold-stretch.jpg");
+  background-size:100% 100%, cover;
+  background-repeat:no-repeat, no-repeat;
+  background-position:center, center bottom;
   overflow:hidden;margin-top:var(--space-section-sm);}
 /* Horses live inside .close-inner and anchor to its bottom edge, so they
    can never bleed down into the footer regardless of viewport size. */
@@ -378,23 +279,26 @@ img,svg,video{display:block;max-width:100%;}
 .close-link:hover{border-color:var(--color-ink);}
 .close-inner{position:relative;z-index:1;padding-block:clamp(4.5rem,9vw,8rem) clamp(3rem,6vw,5rem);display:flex;justify-content:flex-end;}
 .close-block{max-width:568px;display:flex;flex-direction:column;align-items:flex-end;gap:2.2rem;text-align:right;}
-.close-block h2{font-size:var(--type-h-md);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-heading-md);}
-.close-block .close-body{font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-body);max-width:44ch;}
+.close-block h2{font-size:var(--type-h-md);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-heading-md);color:var(--color-white);}
+.close-block .close-body{font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-body);max-width:44ch;color:var(--color-white);opacity:.92;}
 .close-actions{display:flex;gap:.9rem;flex-wrap:wrap;justify-content:flex-end;}
 
 .footer{position:relative;z-index:1;padding-block:clamp(3rem,6vw,5rem) 0;}
-.footer-top{display:flex;flex-wrap:wrap;gap:2.5rem;justify-content:space-between;align-items:flex-start;}
-.footer-brand .mark-row{display:flex;align-items:center;gap:1.3rem;}
-.footer-brand .mark-row img{height:clamp(2.6rem,5vw,3.7rem);width:auto;}
-.footer-brand .wm{font-family:var(--font-serif);font-size:clamp(3rem,6vw,5.25rem);letter-spacing:var(--gallop-tracking);line-height:1;}
+/* Figma constrains all footer content (lockup, columns, legal row) to a 683px
+   column on the gold side of the texture — nothing drifts onto the green. */
+.footer-top{display:flex;flex-wrap:wrap;gap:clamp(3rem,7vw,7rem);justify-content:space-between;align-items:flex-start;max-width:683px;}
+.footer-brand .mark-row{display:flex;align-items:center;}
+/* [EXT] lockup (bars glyph + wordmark) exported from Figma node 2309:9776;
+   354×104 at the 1441 frame → scale proportionally with the viewport. */
+.footer-brand .mark-row img.lockup{height:clamp(3.2rem,7vw,6.2rem);width:auto;}
 .footer-tag{margin-top:1.4rem;font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-body);max-width:300px;}
-.footer-cols{display:flex;gap:clamp(2.5rem,5vw,5rem);flex-wrap:wrap;}
+.footer-cols{display:flex;gap:clamp(2.5rem,5vw,5rem);flex-wrap:wrap;margin-top:clamp(2rem,6.6vw,6rem);}
 .footer-col h4{font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;margin:0 0 1rem;}
 .footer-col a{display:block;font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);padding:.3rem 0;opacity:.9;transition:opacity var(--dur-fast) var(--ease);}
 .footer-col a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px;}
 .footer-built{margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid var(--ink-20);font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);line-height:1.4;max-width:72ch;}
 .footer-built b{font-weight:500;}
-.footer-bottom{margin-top:1.6rem;padding-block:1.2rem 3.4rem;display:flex;flex-wrap:wrap;gap:.8rem 1.6rem;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;}
+.footer-bottom{margin-top:1.6rem;padding-block:1.2rem 3.4rem;display:flex;flex-wrap:wrap;gap:.8rem 1.6rem;justify-content:space-between;align-items:center;max-width:683px;font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;}
 
 /* =====================  SUBPAGES — page hero + form  ===================== */
 .page-hero{background:var(--color-ochre);position:relative;overflow:hidden;margin-top:calc(-1 * (66px + 14px));padding-top:calc(66px + 14px);}
@@ -526,18 +430,16 @@ img,svg,video{display:block;max-width:100%;}
 
 /* =====================  RESPONSIVE  ===================== */
 @media (max-width:1100px){
-  .validate-grid,.faq-grid{grid-template-columns:1fr;}
+  /* [EXT] closing block stacks left below desktop; wash the top green (white
+     headline stays legible) and keep the bottom gold (dark footer legible).
+     Same stretch-baked texture as desktop — cover keeps the wide pixels. */
+  .close-field{background-image:
+    linear-gradient(0deg, var(--color-ochre) 6%, rgba(244,226,123,.92) 20%, rgba(244,226,123,0) 50%),
+    linear-gradient(180deg, rgba(20,54,31,.92) 0%, rgba(20,54,31,.5) 26%, rgba(20,54,31,0) 54%),
+    url("assets/texture-green-gold-stretch.jpg");
+    background-size:cover, cover, cover;}
   .gates{grid-template-columns:repeat(2,1fr);}
-  .conv-grid{grid-template-columns:1fr;gap:2.6rem;}
-  .records{grid-template-columns:1fr;}
-  .record{min-height:0;gap:2rem;}
-  .record--tall{min-height:0;}
   .hero-horse{opacity:.35;}
-  .hero .hero-inner{grid-template-columns:1fr;align-items:start;}
-  .agent-card{justify-self:start;}
-  .hero-stripes{opacity:.4;}
-  .split{grid-template-columns:1fr;}
-  .split-copy{max-width:62ch;}
   .stats{grid-template-columns:1fr;gap:2.8rem;}
   .close-horse{opacity:.3;left:-8vw;}
   .close-horse-img{opacity:.35;left:-12vw;width:56vw;}
@@ -562,15 +464,9 @@ img,svg,video{display:block;max-width:100%;}
   .navwrap{position:relative;}
   .hero,.page-hero{margin-top:calc(-1 * (58px + 8px));padding-top:calc(58px + 8px);}
   .hero-horse{width:78vw;right:-14%;bottom:-2%;opacity:.25;}
-  .hero .hero-inner{padding-block:3rem 3.2rem;}
-  .hero-stripes{opacity:.3;height:60%;top:auto;bottom:0;}
   .hero-dashes{display:none;}
-  .agent-card{padding:1.1rem;}
   .agent-row{flex-wrap:wrap;gap:.5rem;}
   .agent-send{margin-left:0;}
-  .trust-pair{gap:1rem;}
-  .trust-logos{gap:1rem 1.8rem;}
-  .protocol-row{grid-template-columns:34px minmax(0,1fr);gap:1.2rem;}
   .gates{grid-template-columns:1fr;}
   .panel{padding:1.1rem;}
   .panel-row{gap:.8rem;flex-wrap:wrap;}
@@ -603,3 +499,252 @@ img,svg,video{display:block;max-width:100%;}
 /* ?noanim debug hook (set by d.js): instant render, no reveal/scroll animation */
 .noanim{scroll-behavior:auto;}
 .noanim .reveal{opacity:1;transform:none;transition:none;}
+
+/* =========================================================================
+   METHODOLOGY — elevated brand-native visuals (recreated from
+   gallopintelligence.ai/transform under ui-brand.md).
+   These are UI graphics: Funnel Sans + Geist Mono only (NO serif),
+   flat colour blocks, square corners, no shadows. Ochre = accent,
+   blue = verification, green = success/"safe" per DESIGN-SYSTEM.md.
+   ========================================================================= */
+
+/* -- Principle 03 · Defense-in-depth (layered stack) ---------------------- */
+.ddepth{margin-top:2rem;display:flex;flex-direction:column;gap:2px;}
+.ddepth-layer{
+  display:grid;grid-template-columns:168px minmax(0,1fr);gap:1.5rem;
+  align-items:center;background:var(--color-surface);padding:1.05rem 1.15rem;
+}
+.ddepth-layer .lyr-tag{
+  font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;
+  letter-spacing:var(--gallop-tracking);text-transform:uppercase;
+  color:var(--ink-50);line-height:1.35;
+}
+.ddepth-layer .lyr-tag b{display:block;color:var(--color-ink);font-weight:500;}
+.ddepth-steps{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .55rem;}
+.ddepth-step{
+  font-family:var(--font-mono);font-size:var(--type-label-sm);
+  letter-spacing:var(--gallop-tracking);text-transform:uppercase;
+  color:var(--color-ink);background:var(--color-white);padding:.36rem .72rem;
+  white-space:nowrap;
+}
+.ddepth-sep{color:var(--ink-40);font-family:var(--font-mono);font-size:.78rem;}
+.ddepth-layer.is-verify{background:var(--gallop-blue-100);}
+.ddepth-layer.is-verify .ddepth-step{background:var(--gallop-blue-50);}
+.ddepth-step.is-safe{background:var(--gallop-green-500);font-weight:500;}
+.ddepth-cap{
+  margin-top:1rem;font-family:var(--font-mono);font-size:var(--type-label-sm);
+  letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--ink-40);
+}
+
+/* -- Principle 06 · Phase items with AI-acceleration bars ----------------- */
+.ph-item{padding-block:.65rem;border-bottom:1px solid var(--hairline);}
+.ph-item:last-child{border-bottom:none;}
+.ph-item .ph-top{
+  display:flex;justify-content:space-between;gap:1rem;align-items:baseline;
+  font-family:var(--font-mono);font-size:var(--type-label-sm);
+  letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--ink-70);
+}
+.ph-item .ph-top b{font-weight:500;color:var(--color-ink);}
+.ph-bar{margin-top:.5rem;height:4px;background:var(--hairline);overflow:hidden;}
+.ph-fill{display:block;height:100%;background:var(--color-ochre);width:var(--pct,0%);}
+
+/* -- Principle 05 · Reference table · LOC-shrink cue ---------------------- */
+.loc-cell{display:flex;flex-direction:column;gap:.55rem;align-items:flex-start;}
+.loc-shrink{position:relative;height:5px;width:120px;max-width:100%;background:var(--gallop-ochre-200);}
+.loc-shrink i{display:block;height:100%;background:var(--color-ink);width:var(--keep,10%);}
+
+@media (max-width:720px){
+  .ddepth-layer{grid-template-columns:1fr;gap:.7rem;}
+}
+
+/* =========================================================================
+   [EXT] HOMEPAGE — recoded to the Figma WEB DESIGN node 2295:8604.
+   New visual system: Lustria display serif for the hero, Funnel Sans 30px
+   section heads (.hx), and ONE stretch-baked green→gold texture asset
+   cropped at different positions/flips per section (.texfield + vars).
+   ========================================================================= */
+:root{
+  --font-display:"Lustria", Georgia, serif;  /* [EXT] hero display serif */
+  --color-sage:#C9D29D;   /* [EXT] case-card tints from Figma 2295:8808/8813 — */
+  --color-lemon:#EEEDB5;  /* not yet in gallop-tokens.css; flag for token adoption */
+}
+
+/* 30px section heading (replaces the serif sec-kicker on the homepage) */
+.hx{font-family:var(--font-body);font-weight:400;font-size:clamp(1.5rem,2.1vw,1.875rem);line-height:1.04;letter-spacing:var(--gallop-tracking);}
+
+/* --- texture fields: per-section renders exported straight from Figma
+   (crop, ~1.75× pixel stretch, flip and gold gradient baked into each). --- */
+.texfield{position:relative;overflow:hidden;background:var(--color-ochre);}
+.texfield::before{content:"";position:absolute;inset:0;
+  background:var(--tex-img) no-repeat center / cover;}
+.texfield::after{content:"";position:absolute;inset:0;background:var(--tex-grad,none);}
+.texfield>*{position:relative;z-index:1;}
+
+/* --- HERO — light gold texture field, Lustria headline ------------------- */
+.xhero{position:relative;background:var(--color-ochre) url("assets/tex-hero.jpg") no-repeat center bottom / cover;
+  overflow:hidden;
+  margin-top:calc(-1 * (66px + 14px));padding-top:calc(66px + 14px);}
+.xhero-inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(2rem,4vw,4rem);align-items:end;padding-top:clamp(4.5rem,9vw,8rem);}
+.xhero-copy{padding-bottom:clamp(2.6rem,5.5vw,5.3rem);}
+.xhero-copy h1{font-family:var(--font-display);font-weight:400;font-size:clamp(1.9rem,2.8vw,2.5rem);line-height:1.02;letter-spacing:-.03em;max-width:16ch;}
+.xhero-sub{margin-top:20px;font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;line-height:1.2;color:var(--color-ink);}
+.xhero-sub b{font-weight:500;}
+.xhero-ph{background:var(--color-surface);border-radius:3px;aspect-ratio:623/363;display:flex;align-items:center;justify-content:center;}
+.xhero-ph span{font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);color:var(--color-ink);}
+
+/* --- LOGO BAND ------------------------------------------------------------ */
+.logoband{padding-top:clamp(4rem,8.5vw,8.2rem);text-align:center;}
+.logoband-lead{font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);}
+.logoband-row{margin-top:clamp(2rem,3.5vw,2.95rem);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1.5rem clamp(2rem,4.7vw,4.25rem);opacity:.8;}
+.logoband-row img{height:var(--lh,24px);width:auto;}
+.logoband-row img.blend{mix-blend-mode:multiply;}
+
+/* --- PROTOCOL — texture-card carousel -------------------------------------- */
+.proto-head{display:flex;align-items:center;justify-content:space-between;gap:2rem;}
+.proto-head .hx{max-width:26ch;}
+.proto-nav{display:flex;gap:10px;}
+.proto-arrow{width:44px;height:42px;border-radius:36px;border:1px solid var(--hairline-strong);background:transparent;color:var(--color-ink);font-size:1rem;line-height:1;cursor:pointer;transition:background var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease);}
+.proto-arrow:hover{background:var(--color-ink);color:var(--color-bg);}
+.proto-scroll{margin-top:42px;}
+.proto-track{display:flex;gap:25px;overflow-x:auto;scrollbar-width:none;
+  width:100vw;margin-left:calc(50% - 50vw);
+  padding-left:calc(var(--gutter) + 40px);padding-right:40px;
+  padding-bottom:.5rem;}
+.proto-track::-webkit-scrollbar{display:none;}
+.proto-card{flex:0 0 min(563px,86vw);display:flex;flex-direction:column;gap:clamp(2.6rem,4.5vw,4rem);}
+.proto-media{height:clamp(330px,36vw,501px);}
+.proto-media .pm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:auto;}
+.pm-arch{width:72.5%;}
+.pm-schema{width:88.7%;}
+.pm-writing{width:67%;aspect-ratio:377/282;overflow:hidden;}
+.pm-writing img{position:absolute;left:-9.4%;top:-23%;width:215.25%;max-width:none;height:auto;}
+.pm-tests{width:82.7%;}
+.tf-c1{--tex-img:url("assets/tex-c1.jpg");}
+.tf-c2{--tex-img:url("assets/tex-c2.jpg");}
+.tf-c3{--tex-img:url("assets/tex-c3.jpg");}
+.tf-c4{--tex-img:url("assets/tex-c4.jpg");}
+.proto-txt{display:flex;gap:40px;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--color-ink);}
+.proto-txt .pn{width:20px;flex:none;}
+.pt-body{display:flex;flex-direction:column;gap:2px;}
+.pt-name,.pt-lead{font-weight:400;}
+.pt-desc{font-weight:300;opacity:.5;}
+
+/* --- PLATFORM MAP — the real work ------------------------------------------ */
+.mb-head{display:flex;justify-content:space-between;gap:3rem;align-items:flex-start;}
+.mb-head .hx{max-width:28ch;flex:none;}
+.mb-body{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;max-width:670px;}
+/* Two-column split: Gallop Discover + Gallop Modernization, each a labelled
+   texture panel (map screenshot) over a headline + mechanism bullet list. */
+/* Horizontal scroll: card 1 sits fully in view, card 2 bleeds off the right
+   edge to imply "scroll for more" (matches the Figma). */
+.disc-grid{margin-top:clamp(3rem,5.9vw,5rem);display:flex;gap:24px;align-items:flex-start;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  width:100vw;margin-left:calc(50% - 50vw);
+  padding-left:calc(var(--gutter) + 40px);padding-right:40px;}
+.disc-grid::-webkit-scrollbar{display:none;}
+.disc-col{flex:0 0 min(896px,74vw);display:flex;flex-direction:column;gap:22px;}
+.disc-head{display:flex;flex-direction:column;font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.24;}
+.disc-name{color:var(--color-ink);}
+.disc-sub{color:var(--gallop-text-secondary);}
+.disc-media{height:clamp(300px,34vw,500px);}
+.disc-media img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:82%;height:auto;}
+.tf-disc{--tex-img:url("assets/tex-disc.jpg");}
+.tf-mod{--tex-img:url("assets/tex-mod.jpg");}
+.disc-txt{display:flex;flex-direction:column;gap:20px;}
+.disc-headline{font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--color-ink);max-width:34ch;}
+.disc-list{margin:0;padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem;list-style:disc;}
+.disc-list li{font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--gallop-text-secondary);padding-left:.3rem;}
+
+/* --- TRACK RECORD ----------------------------------------------------------- */
+.track-label{font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);}
+.track-label+.hx{margin-top:22px;max-width:34ch;}
+.track{margin-top:54px;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gallop-space-card-gap);}
+.track-card{min-height:clamp(360px,33.5vw,483px);padding:var(--gallop-space-card-pad);display:flex;flex-direction:column;justify-content:space-between;gap:2rem;}
+.tc-meta{font-family:var(--font-mono);font-size:var(--type-label-md);letter-spacing:var(--gallop-tracking);text-transform:uppercase;opacity:.8;}
+.tc-main{display:flex;flex-direction:column;gap:2px;}
+.tc-title{font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.24;}
+.tc-desc{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;opacity:.5;}
+
+/* --- CORE FEATURES ----------------------------------------------------------- */
+/* Pinned scroll-through: the scene reserves extra scroll height, its inner
+   grid locks to the viewport, and scroll progress drives the active feature
+   + cross-fades the screenshot (see d.js). --steps set on the section. */
+.cf-scene{position:relative;height:340vh;}
+.cf-sticky{position:sticky;top:0;min-height:100vh;display:flex;align-items:center;padding-block:clamp(2rem,6vh,5rem);}
+.cf-grid{display:grid;grid-template-columns:minmax(0,764fr) minmax(0,505fr);gap:clamp(3rem,6.3vw,5.6rem);align-items:center;width:100%;}
+.cf-media{position:relative;height:clamp(420px,42vw,600px);}
+.tf-cf{--tex-img:url("assets/tex-cf.jpg");}
+.cf-gallery{position:absolute;inset:8% 9.2%;}
+.cf-shot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:100%;max-height:100%;width:auto;height:auto;opacity:0;transition:opacity var(--dur) var(--ease);pointer-events:none;}
+.cf-shot.is-active{opacity:1;}
+.cf-sub{margin-top:22px;font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);color:var(--color-ink);}
+.feat-list{margin-top:clamp(2.5rem,4vw,3.4rem);display:flex;flex-direction:column;}
+.feat{appearance:none;background:none;border:none;padding:clamp(1rem,2.4vh,1.7rem) 0;text-align:left;cursor:pointer;font-family:var(--font-body);opacity:.3;transition:opacity var(--dur) var(--ease);border-top:1px solid var(--hairline);}
+.feat:first-child{border-top:none;}
+.feat.is-active,.feat:hover{opacity:1;}
+.feat h3{font-family:var(--font-body);font-weight:400;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;}
+.feat.is-active h3{font-weight:500;}
+.feat p{margin-top:2px;font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;opacity:.5;}
+
+/* --- STATS -------------------------------------------------------------------- */
+.stats{margin-top:clamp(3.5rem,9vw,8rem);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(2rem,5vw,5.6rem);}
+.stat{display:flex;flex-direction:column;}
+.stat-num{font-family:var(--font-body);font-size:clamp(1.7rem,2.4vw,2.125rem);letter-spacing:var(--gallop-tracking);line-height:1.04;}
+.stat-label{margin-top:clamp(1.4rem,2vw,1.85rem);font-family:var(--font-mono);font-weight:500;font-size:var(--type-label-md);letter-spacing:var(--gallop-tracking);text-transform:uppercase;line-height:1.2;color:var(--color-ink);max-width:18rem;}
+.stat-body{margin-top:clamp(1.4rem,2.4vw,2rem);font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--ink-50);max-width:34ch;}
+
+/* --- PARITY — texture band ------------------------------------------------------ */
+.parity-band{min-height:clamp(420px,35vw,501px);display:flex;align-items:center;}
+/* FAQ surface band butts straight into the textured footer field (no gap). */
+#faq{padding-bottom:clamp(3.5rem,6.6vw,6rem);}
+#faq + .close-field{margin-top:0;}
+.tf-parity{--tex-img:url("assets/tex-parity.jpg");--tex-grad:linear-gradient(74.1deg,var(--color-ochre) 1.8%,rgba(244,226,123,0) 53.67%);}
+.pb-inner{width:100%;display:flex;justify-content:space-between;gap:3rem;align-items:center;padding:clamp(2rem,4vw,3.2rem) clamp(1.4rem,3.2vw,2.75rem);}
+.pb-copy{max-width:500px;display:flex;flex-direction:column;gap:32px;}
+.pb-copy .hx{max-width:26ch;}
+.pb-copy p{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;}
+.pb-inner .panel{flex:0 1 560px;border-radius:0;}
+
+/* --- TEAM TRUST ------------------------------------------------------------------ */
+.team-grid{display:flex;justify-content:space-between;gap:3rem;align-items:flex-start;}
+.team-kicker{font-family:var(--font-mono);font-weight:500;font-size:var(--type-label-md);letter-spacing:var(--gallop-tracking);text-transform:uppercase;}
+.team-badges{margin-top:47px;display:flex;flex-direction:column;gap:12px;}
+.badge{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-weight:500;font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;}
+.badge img{width:44px;height:44px;border-radius:50%;object-fit:cover;}
+.team-right{width:min(784px,100%);display:flex;flex-direction:column;gap:50px;}
+.team-photos{display:flex;gap:24px;opacity:.8;}
+.team-photos span{flex:1;height:clamp(150px,15.7vw,227px);background:var(--color-surface);}
+.team-body{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;max-width:657px;}
+.team-logos{display:flex;gap:38px;align-items:center;opacity:.8;}
+.team-logos img{height:var(--lh,44px);width:auto;}
+
+/* --- FAQ — surface band ------------------------------------------------------------ */
+.faq-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:clamp(2.5rem,8vw,9rem);align-items:start;padding-block:clamp(3.5rem,6.6vw,6rem);}
+
+/* --- nav lockup sizing -------------------------------------------------------------- */
+.nav-brand img.lockup{height:clamp(1.5rem,2vw,1.85rem);width:auto;}
+
+/* --- responsive for the [EXT] homepage ----------------------------------------------- */
+@media (max-width:1100px){
+  .xhero-inner{grid-template-columns:1fr;align-items:start;}
+  .xhero-copy{padding-bottom:0;}
+  .xhero-ph{width:100%;margin-bottom:2.5rem;}
+  .mb-head{flex-direction:column;gap:1.6rem;}
+  .cf-scene{height:auto;}
+  .cf-sticky{position:static;min-height:0;display:block;padding-block:0;}
+  .cf-grid{grid-template-columns:1fr;}
+  .track{grid-template-columns:1fr;}
+  .track-card{min-height:300px;}
+  .team-grid{flex-direction:column;}
+  .pb-inner{flex-direction:column;align-items:flex-start;}
+  .pb-inner .panel{flex:none;width:100%;max-width:560px;}
+  .faq-grid{grid-template-columns:1fr;gap:2.2rem;}
+}
+@media (max-width:760px){
+  .proto-card{flex-basis:86vw;}
+  .proto-txt{gap:1.4rem;}
+  .disc-col{flex-basis:86vw;}
+  .proto-track,.disc-grid{padding-left:var(--space-page-x);padding-right:var(--space-page-x);}
+  .team-photos{flex-wrap:wrap;}
+  .team-logos{gap:1.6rem;}
+  .team-logos img{height:calc(var(--lh,44px)*.7);}
+}
