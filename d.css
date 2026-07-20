@@ -909,3 +909,35 @@ img,svg,video{display:block;max-width:100%;}
   .prin-grid{grid-template-columns:1fr;}
   .prin-card{padding-block:20px;}
 }
+
+/* =========================================================================
+   [WEB] METHODOLOGY — reskinned to the About-page idiom: paper hero with the
+   fading glyph, mono-kicker prose rows on hairline rules, Funnel Sans
+   principle headings (no serif), and flat ochre statement bands. The existing
+   defense-in-depth / ledger / phase visuals are re-homed full-width on paper.
+   ========================================================================= */
+
+/* principle rows: kicker column + a single readable prose measure */
+.about-row.is-principle .about-copy{max-width:66ch;}
+/* Funnel Sans heading that opens each principle (overrides the serif h2 default) */
+.prin-title{font-family:var(--font-body);font-weight:400;
+  font-size:clamp(1.3rem,1.95vw,var(--gallop-text-heading-xs));
+  line-height:var(--gallop-leading-heading-xs);letter-spacing:var(--gallop-tracking);
+  color:var(--color-ink);margin:0 0 clamp(1rem,1.7vw,1.45rem);}
+.prin-title b{font-weight:500;}
+
+/* full-width figures (defense-in-depth, ledger, phase gates) sit below their
+   row on the paper canvas, capped to the content column */
+.meth-figure{margin-top:clamp(2rem,3.4vw,3rem);}
+
+/* ochre statement band, methodology variant: shorter than the About closer and
+   carrying a lighter second line */
+.about-band.is-wide .wrap{padding-block:clamp(3.4rem,6vw,5.6rem);}
+.about-band.is-wide .statement{max-width:30ch;}
+.about-band .statement-sub{display:block;margin-top:.4em;
+  font-size:clamp(1.05rem,1.7vw,1.5rem);line-height:1.14;
+  letter-spacing:var(--gallop-tracking);opacity:.66;}
+
+@media (max-width:1100px){
+  .about-row.is-principle .about-copy{max-width:none;}
+}
