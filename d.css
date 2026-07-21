@@ -48,6 +48,7 @@
 
   /* ---- Spacing (DESIGN-SYSTEM.md scale via gallop tokens) ---- */
   --space-page-x: clamp(1.15rem, 4.5vw, var(--gallop-space-40));
+  --nav-pad: 1.1rem;  /* nav bar's inner padding; also how far the bar overhangs the content grid so the logo/CTA align with page content */
   --space-section: clamp(5.5rem, 10vw, var(--gallop-space-section));
   --space-section-sm: clamp(3.4rem, 6vw, 6.5rem);
 
@@ -137,13 +138,19 @@ img,svg,video{display:block;max-width:100%;}
 .close-field .btn-line:hover{background:var(--color-white);color:var(--color-ink);border-color:var(--color-white);}
 
 /* =====================  NAV — floating paper bar  ===================== */
-.navwrap{position:sticky;top:14px;z-index:60;padding-inline:clamp(.9rem,2.5vw,2.6rem);}
+/* navwrap mirrors the .wrap content grid exactly (same max-width + side padding),
+   so the nav aligns to page content at every width */
+.navwrap{position:sticky;top:14px;z-index:60;
+  max-width:var(--gallop-canvas-max);margin-inline:auto;
+  padding-inline:var(--space-page-x);}
 .nav{
   background:var(--color-bg);
   border-radius:4px;
   display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
-  padding:.9rem 1.4rem;
-  max-width:1360px;margin-inline:auto;
+  /* bar overhangs the grid by --nav-pad, then pads its contents back in by the
+     same amount → logo/CTA sit on the content edges while the bar floats wider */
+  margin-inline:calc(-1 * var(--nav-pad));
+  padding:.9rem var(--nav-pad);
 }
 /* left cluster: logo + nav links sit together, with the CTA pushed to the
    far right (Figma [WEB] nav, node 4033:3355) */
@@ -443,7 +450,7 @@ img,svg,video{display:block;max-width:100%;}
 }
 @media (max-width:760px){
   .navwrap{top:8px;padding-inline:.6rem;}
-  .nav{padding:.75rem 1rem;}
+  .nav{padding:.75rem 1rem;margin-inline:0;}  /* no overhang on mobile — keeps the bar inside the screen */
   .nav-links{display:none;}
   .nav-links.open{display:flex;position:absolute;top:calc(100% + 6px);left:.6rem;right:.6rem;flex-direction:column;align-items:stretch;gap:0;background:var(--color-bg);border:1px solid var(--hairline);border-radius:4px;padding:.4rem 1rem .9rem;box-shadow:0 12px 30px -18px rgba(54,47,44,.35);}
   .nav-links.open a{padding:.85rem 0;border-bottom:1px solid var(--hairline);font-size:.85rem;}
@@ -823,34 +830,17 @@ img,svg,video{display:block;max-width:100%;}
    Body: mono-kicker rows, principle cards, stat tiles, ochre statement band.
    ========================================================================= */
 
-/* --- the 9-bar logo glyph, reusable at any size via width + aspect-ratio.
-   Geometry in % of the Figma glyph box (226.98 × 296.31, node 4067:3879);
-   colour rides on currentColor so modifiers just set `color`. --- */
-.hglyph{position:relative;display:block;aspect-ratio:227/297;}
-.hglyph span{position:absolute;background:currentColor;height:10.29%;}
-.hglyph span:nth-child(1){left:47.70%;top:0;width:47.04%;}
-.hglyph span:nth-child(2){left:17.70%;top:14.95%;width:82.06%;}
-.hglyph span:nth-child(3){left:4.15%;top:29.90%;width:95.60%;}
-.hglyph span:nth-child(4){left:0;top:44.85%;width:39.57%;}
-.hglyph span:nth-child(5){left:67.21%;top:44.85%;width:32.54%;}
-.hglyph span:nth-child(6){left:0;top:59.81%;width:51.97%;}
-.hglyph span:nth-child(7){left:83.21%;top:59.81%;width:16.55%;}
-.hglyph span:nth-child(8){left:0;top:74.76%;width:65.55%;}
-.hglyph span:nth-child(9){left:0;top:89.71%;width:80.47%;}
-/* hero variant: rows dissolve toward the headline (opacities from Figma) */
-.hglyph--fade span:nth-child(3){opacity:.7;}
-.hglyph--fade span:nth-child(4){opacity:.6;}
-.hglyph--fade span:nth-child(5){opacity:.5;}
-.hglyph--fade span:nth-child(6),
-.hglyph--fade span:nth-child(7){opacity:.4;}
-.hglyph--fade span:nth-child(8){opacity:.3;}
-.hglyph--fade span:nth-child(9){opacity:.2;}
+/* --- the Gallop mark, reusable at any size via width. Inline SVG (assets/
+   gallop-mark.svg, node 4076:4706); fill rides on currentColor so modifiers
+   just set `color`. Landscape 86×68 box. --- */
+.hglyph{display:block;aspect-ratio:86/68;color:var(--color-ink);}
+.hglyph svg,.hglyph img{display:block;width:100%;height:auto;}
 
 /* --- hero ----------------------------------------------------------------- */
 .about-hero-inner{display:flex;flex-direction:column;align-items:center;text-align:center;
   padding-block:clamp(2rem,4vw,3.4rem) clamp(3.4rem,7vw,6rem);}
-.about-hero-inner .hglyph{width:clamp(150px,15.8vw,227px);color:var(--color-ochre);
-  margin-bottom:calc(clamp(150px,15.8vw,227px) * -.36);} /* headline overlaps the faded rows, as in Figma */
+.about-hero-inner .hglyph{--hero-glyph-w:clamp(240px,34vw,490px);width:var(--hero-glyph-w);color:var(--color-ochre);
+  margin-bottom:calc(var(--hero-glyph-w) * -.4);} /* faded glyph sits behind the headline, which overlaps its lower half (Figma) */
 .about-hero-inner h1{position:relative;font-family:var(--font-display);font-weight:400;
   font-size:clamp(calc(1.8rem * var(--lustria-scale)),calc(2.65vw * var(--lustria-scale)),calc(2.375rem * var(--lustria-scale)));line-height:1.08;letter-spacing:var(--gallop-tracking);max-width:633px;}
 .about-hero-inner .sub{position:relative;margin-top:20px;font-family:var(--font-mono);
