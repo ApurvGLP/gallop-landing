@@ -279,13 +279,13 @@ img,svg,video{display:block;max-width:100%;}
   overflow:hidden;margin-top:var(--space-section-sm);}
 .close-link{font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);border-bottom:1px solid var(--hairline-strong);padding-bottom:.2rem;transition:border-color var(--dur-fast) var(--ease);}
 .close-link:hover{border-color:var(--color-ink);}
-.close-inner{position:relative;z-index:1;padding-block:clamp(4.5rem,9vw,8rem) clamp(3rem,6vw,5rem);display:flex;justify-content:flex-end;}
+.close-inner{position:relative;z-index:1;padding-block:clamp(3rem,6vw,5rem) clamp(2.25rem,4.5vw,3.5rem);display:flex;justify-content:flex-end;}
 .close-block{max-width:568px;display:flex;flex-direction:column;align-items:flex-end;gap:2.2rem;text-align:right;}
-.close-block h2{font-size:var(--type-h-md);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-heading-md);color:var(--color-white);}
+.close-block h2{font-family:var(--font-body);font-weight:400;font-size:var(--type-h-md);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-heading-md);color:var(--color-white);}
 .close-block .close-body{font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-body);max-width:44ch;color:var(--color-white);opacity:.92;}
 .close-actions{display:flex;gap:.9rem;flex-wrap:wrap;justify-content:flex-end;}
 
-.footer{position:relative;z-index:1;padding-block:clamp(3rem,6vw,5rem) 0;}
+.footer{position:relative;z-index:1;padding-block:clamp(1.75rem,3.5vw,3rem) 0;}
 /* Figma constrains all footer content (lockup, columns, legal row) to a 683px
    column on the gold side of the texture — nothing drifts onto the green. */
 .footer-top{display:flex;flex-wrap:wrap;gap:clamp(3rem,7vw,7rem);justify-content:space-between;align-items:flex-start;max-width:683px;}
@@ -294,13 +294,13 @@ img,svg,video{display:block;max-width:100%;}
    354×104 at the 1441 frame → scale proportionally with the viewport. */
 .footer-brand .mark-row img.lockup{height:clamp(3.2rem,7vw,6.2rem);width:auto;}
 .footer-tag{margin-top:1.4rem;font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-body);max-width:300px;}
-.footer-cols{display:flex;gap:clamp(2.5rem,5vw,5rem);flex-wrap:wrap;margin-top:clamp(2rem,6.6vw,6rem);}
+.footer-cols{display:flex;gap:clamp(2.5rem,5vw,5rem);flex-wrap:wrap;margin-top:clamp(1.5rem,3.4vw,2.75rem);}
 .footer-col h4{font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;margin:0 0 1rem;}
 .footer-col a{display:block;font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);padding:.3rem 0;opacity:.9;transition:opacity var(--dur-fast) var(--ease);}
 .footer-col a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px;}
 .footer-built{margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid var(--ink-20);font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);line-height:1.4;max-width:72ch;}
 .footer-built b{font-weight:500;}
-.footer-bottom{margin-top:1.6rem;padding-block:1.2rem 3.4rem;display:flex;flex-wrap:wrap;gap:.8rem 1.6rem;justify-content:space-between;align-items:center;max-width:683px;font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;}
+.footer-bottom{margin-top:1.4rem;padding-block:1.1rem clamp(1.75rem,3.5vw,2.5rem);display:flex;flex-wrap:wrap;gap:.8rem 1.6rem;justify-content:space-between;align-items:center;max-width:683px;font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;}
 
 /* =====================  SUBPAGES — page hero + form  ===================== */
 .page-hero{background:var(--color-ochre);position:relative;overflow:hidden;margin-top:calc(-1 * (66px + 14px));padding-top:calc(66px + 14px);}
