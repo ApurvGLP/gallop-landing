@@ -41,44 +41,6 @@
   }, {threshold:0.2, rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 
-  /* --- core features (homepage): as you scroll, the centred feature is
-     highlighted and the pinned screenshot cross-fades to match. Clicking a
-     feature also selects it (manual override / keyboard + mobile). --- */
-  var fl = document.getElementById('featList');
-  if(fl){
-    var feats = Array.prototype.slice.call(fl.querySelectorAll('.feat'));
-    var shots = Array.prototype.slice.call(document.querySelectorAll('.cf-shot'));
-    var setActive = function(i){
-      feats.forEach(function(b){ b.classList.toggle('is-active', +b.dataset.i === i); });
-      shots.forEach(function(s){ s.classList.toggle('is-active', +s.dataset.i === i); });
-    };
-    feats.forEach(function(btn){
-      btn.addEventListener('click', function(){ setActive(+btn.dataset.i); });
-    });
-    /* Scroll driver: the #features section is a pinned "scene" taller than the
-       viewport. Map how far we've scrolled through it (0→1) onto the feature
-       index so each one gets an equal, comfortable dwell. Desktop only — on
-       mobile the scene is un-pinned (CSS) and clicking cycles instead. */
-    var scene = document.getElementById('features');
-    var steps = scene ? (parseInt(scene.dataset.steps, 10) || feats.length) : feats.length;
-    var deskMQ = window.matchMedia('(min-width:1101px)');
-    var ticking = false;
-    var onScroll = function(){
-      if(!scene || !deskMQ.matches) return;
-      var total = scene.offsetHeight - window.innerHeight;
-      if(total <= 0) return;
-      var scrolled = Math.min(Math.max(-scene.getBoundingClientRect().top, 0), total);
-      var i = Math.min(steps - 1, Math.floor(scrolled / total * steps));
-      setActive(i);
-    };
-    window.addEventListener('scroll', function(){
-      if(ticking) return; ticking = true;
-      requestAnimationFrame(function(){ onScroll(); ticking = false; });
-    }, {passive:true});
-    deskMQ.addEventListener && deskMQ.addEventListener('change', function(){ if(!deskMQ.matches) setActive(0); });
-    onScroll();
-  }
-
   /* --- protocol carousel (homepage): arrows scroll one card at a time --- */
   var car = document.querySelector('[data-carousel]');
   if(car){
@@ -91,41 +53,6 @@
     });
     document.querySelectorAll('[data-carousel-next]').forEach(function(b){
       b.addEventListener('click', function(){ car.scrollBy({left:step(), behavior:'smooth'}); });
-    });
-  }
-
-  /* --- Discover / Modernization switcher: the two tabs swap the full-bleed
-     map panel and its list. The Modernization tab pulses (glow-swipe) until
-     the switcher is first used, then the nudge stops for good. --- */
-  var discSwitch = document.querySelector('.disc-switch');
-  if(discSwitch){
-    var discTabs = Array.prototype.slice.call(discSwitch.querySelectorAll('.disc-tab'));
-    var discPanels = Array.prototype.slice.call(document.querySelectorAll('.disc-panel'));
-    var nudge = discSwitch.querySelector('.disc-tab--nudge');
-    var stopNudge = function(){ if(nudge){ nudge.classList.remove('disc-tab--nudge'); nudge = null; } };
-    var selectDisc = function(key){
-      discTabs.forEach(function(t){
-        var on = t.dataset.disc === key;
-        t.classList.toggle('is-active', on);
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
-      });
-      discPanels.forEach(function(p){
-        var on = p.dataset.disc === key;
-        p.classList.toggle('is-active', on);
-        p.setAttribute('aria-hidden', on ? 'false' : 'true');
-      });
-    };
-    discTabs.forEach(function(t){
-      t.addEventListener('click', function(){ stopNudge(); selectDisc(t.dataset.disc); });
-    });
-    /* keyboard: arrow keys move between tabs (standard tablist behaviour) */
-    discSwitch.addEventListener('keydown', function(e){
-      if(e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-      var i = discTabs.indexOf(document.activeElement);
-      if(i < 0) return;
-      e.preventDefault();
-      var n = e.key === 'ArrowRight' ? (i + 1) % discTabs.length : (i - 1 + discTabs.length) % discTabs.length;
-      discTabs[n].focus(); stopNudge(); selectDisc(discTabs[n].dataset.disc);
     });
   }
 

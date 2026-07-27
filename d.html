@@ -42,7 +42,7 @@
         <h1 class="reveal in">Gallop modernizes the world's most critical systems. Fast, and reliably.</h1>
         <p class="xhero-sub reveal in d1">Gallop reads your entire codebase, maps every business capability it holds,<br />and rebuilds it on modern foundations. <b>With zero business logic loss.</b></p>
       </div>
-      <div class="xhero-ph reveal in d2" aria-hidden="true"><span>Graphic placeholder</span></div>
+      <div class="xhero-shot reveal in d2"><img src="assets/mock-hero.png" alt="The Gallop interface: a discovery report mapping a legacy system's hierarchy alongside an AI assistant answering questions about the codebase" /></div>
     </div>
   </section>
 
@@ -70,26 +70,19 @@
         <h2 class="hx">The real work happens before the first line of code.</h2>
         <p class="mb-body">Every modernization starts the same way, someone has to figure out what the current system actually does. Most tools treat that as a quick first pass, then move on to writing code. Gallop treats it as the job. It maps every repository, every dependency, every business rule, and keeps that map current as the rebuild happens. Code only gets written against a system Gallop has already confirmed it understands.</p>
       </div>
-      <!-- Discover / Modernization switcher: two labelled tabs swap the
-           full-bleed map panel and its mechanism list below it. The
-           Modernization tab pulses (glow-swipe) until the switcher is used. -->
-      <div class="disc-switch reveal d1" role="tablist" aria-label="Gallop Discover and Modernization">
-        <button type="button" class="disc-tab is-active" id="disc-tab-discover"
-                role="tab" aria-selected="true" aria-controls="disc-panel-discover" data-disc="discover">
-          <span class="disc-name">Gallop Discover</span>
-          <span class="disc-sub">Standalone</span>
-        </button>
-        <button type="button" class="disc-tab disc-tab--nudge" id="disc-tab-modernize"
-                role="tab" aria-selected="false" aria-controls="disc-panel-modernize" data-disc="modernize">
-          <span class="disc-name">Gallop Modernization</span>
-          <span class="disc-sub">When you're ready</span>
-        </button>
-      </div>
-
-      <div class="disc-stage reveal d1">
-        <div class="disc-panel is-active" id="disc-panel-discover" role="tabpanel"
-             aria-labelledby="disc-tab-discover" aria-hidden="false" data-disc="discover">
-          <div class="disc-side">
+      <!-- Discover / Modernization: the two products shown side by side (the
+           team's preferred two-image view). Each column: label, product mock on
+           its texture field, then a caption (lead line + mechanism list). -->
+      <div class="disc-duo reveal d1">
+        <article class="disc-col">
+          <div class="disc-col-head">
+            <span class="disc-name">Gallop Discover</span>
+            <span class="disc-sub">Standalone</span>
+          </div>
+          <div class="disc-media texfield tf-disc">
+            <img src="assets/mock-discover.png" alt="Gallop Discover: a preliminary report mapping the system hierarchy — modules, data stores and decision points — beside an AI assistant answering questions about the codebase" />
+          </div>
+          <div class="disc-caption">
             <p class="disc-headline">AI-driven comprehension of the system nobody fully understands.</p>
             <ul class="disc-list">
               <li>Business and functional logic, extracted and readable</li>
@@ -98,13 +91,16 @@
               <li>Architecture options with cost attached, delivered as a decision pack</li>
             </ul>
           </div>
-          <div class="disc-media texfield tf-disc">
-            <img src="assets/mock-dependency-map.png" alt="Gallop Discover: dependency map of the system, services grouped by domain with typed edges and node health" />
+        </article>
+        <article class="disc-col">
+          <div class="disc-col-head">
+            <span class="disc-name">Gallop Modernization</span>
+            <span class="disc-sub">When you're ready</span>
           </div>
-        </div>
-        <div class="disc-panel" id="disc-panel-modernize" role="tabpanel"
-             aria-labelledby="disc-tab-modernize" aria-hidden="true" data-disc="modernize">
-          <div class="disc-side">
+          <div class="disc-media texfield tf-mod">
+            <img src="assets/mock-modernization.png" alt="Gallop Modernization: the rebuilt system mapped and verified against the original before cutover" />
+          </div>
+          <div class="disc-caption">
             <p class="disc-headline">An AI-native rebuild, steered by your own small team.</p>
             <ul class="disc-list">
               <li>Custom-built for your business logic and rules</li>
@@ -113,10 +109,7 @@
               <li>Your software, your IP. Never billed for it again</li>
             </ul>
           </div>
-          <div class="disc-media texfield tf-mod">
-            <img src="assets/mock-dependency-map.png" alt="Gallop Modernization: the rebuilt system mapped and verified before cutover" />
-          </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
@@ -136,7 +129,7 @@
       <div class="proto-track" data-carousel>
         <article class="proto-card">
           <div class="proto-media texfield tf-c1">
-            <img class="pm pm-arch" src="assets/mock-architecture.png" alt="Gallop target-architecture planning screen" />
+            <img class="pm" src="assets/mock-protocol-1.png" alt="Gallop mapping screen: the legacy system read into verified documentation and a business-logic map" />
           </div>
           <div class="proto-txt">
             <span class="pn">1</span>
@@ -149,7 +142,7 @@
         </article>
         <article class="proto-card">
           <div class="proto-media texfield tf-c2">
-            <img class="pm pm-schema" src="assets/mock-schema.png" alt="Gallop schema mapping screen — agentic planner with tables and relations" />
+            <img class="pm" src="assets/mock-protocol-2.png" alt="Gallop planning screen: the target architecture, migration path and effort estimate laid out for the team to review" />
           </div>
           <div class="proto-txt">
             <span class="pn">2</span>
@@ -162,7 +155,7 @@
         </article>
         <article class="proto-card">
           <div class="proto-media texfield tf-c3">
-            <div class="pm pm-writing"><img src="assets/mock-writing.png" alt="Gallop agent writing code in the editor" /></div>
+            <img class="pm" src="assets/mock-protocol-3.png" alt="Gallop execution screen: agents generating and refactoring code story by story, each awaiting engineer sign-off" />
           </div>
           <div class="proto-txt">
             <span class="pn">3</span>
@@ -175,7 +168,7 @@
         </article>
         <article class="proto-card">
           <div class="proto-media texfield tf-c4">
-            <img class="pm pm-tests" src="assets/mock-running-tests.png" alt="Gallop parity tests running against the legacy system" />
+            <img class="pm" src="assets/mock-protocol-4.png" alt="Gallop validation screen: automated parity tests confirming the rebuilt behavior matches the original system" />
           </div>
           <div class="proto-txt">
             <span class="pn">4</span>
@@ -221,41 +214,36 @@
     </div>
   </section>
 
-  <!-- ===================== CORE FEATURES — pinned scroll-through scene ===================== -->
-  <section class="cf-scene" id="features" data-steps="4">
-    <div class="cf-sticky">
-    <div class="wrap cf-grid" id="featSection">
-      <div class="cf-media texfield tf-cf reveal">
-        <div class="cf-gallery">
-          <img class="cf-shot is-active" data-i="0" src="assets/mock-architecture.png" alt="Gallop legacy-system audit: mapped architecture" />
-          <img class="cf-shot" data-i="1" src="assets/mock-writing.png" alt="Gallop documentation updating as the system changes" />
-          <img class="cf-shot" data-i="2" src="assets/mock-running-tests.png" alt="Gallop testing migrated behavior against the original system" />
-          <img class="cf-shot" data-i="3" src="assets/mock-dependency-map.png" alt="Gallop full-estate dependency, risk and coverage map" />
-        </div>
-      </div>
-      <div class="cf-copy">
+  <!-- ===================== CORE FEATURES — icon grid ===================== -->
+  <!-- Heading left, a 2×2 icon+text grid right. No product graphics in this
+       section yet (design decision) — small icons only. -->
+  <section class="sec" id="features">
+    <div class="wrap cf-layout">
+      <div class="cf-head">
         <h2 class="hx reveal">The core features</h2>
-        <p class="cf-sub reveal d1">Designed to help you modernize quickly.</p>
-        <div class="feat-list reveal d1" id="featList">
-          <button class="feat is-active" type="button" data-i="0">
-            <h3>Legacy system audit</h3>
-            <p>Gallop reads source repositories, databases, and documents, and generates a verified, auditable picture of your business logic before any transformation begins.</p>
-          </button>
-          <button class="feat" type="button" data-i="1">
-            <h3>Continuous knowledge updates</h3>
-            <p>Documentation updates as the system changes, so knowledge doesn't sit with two people who are about to retire.</p>
-          </button>
-          <button class="feat" type="button" data-i="2">
-            <h3>System behavior testing</h3>
-            <p>Every migrated component is tested against the original system's behavior. Discrepancies are surfaced automatically, not discovered after go-live.</p>
-          </button>
-          <button class="feat" type="button" data-i="3">
-            <h3>Full visibility transformation</h3>
-            <p>See dependencies, risk, and coverage across your entire estate before you commit to a single line of the rewrite.</p>
-          </button>
+      </div>
+      <div class="cf-grid2 reveal d1">
+        <div class="cf-feat">
+          <img class="cf-ic" src="assets/icon-search.svg" alt="" aria-hidden="true" />
+          <h3>Legacy system audit</h3>
+          <p>Gallop reads source repositories, databases, and documents, and generates a verified, auditable picture of your business logic before any transformation begins.</p>
+        </div>
+        <div class="cf-feat">
+          <img class="cf-ic" src="assets/icon-flask.svg" alt="" aria-hidden="true" />
+          <h3>System behavior testing</h3>
+          <p>Every migrated component is tested against the original system's behavior. Discrepancies are surfaced automatically, not discovered after go-live.</p>
+        </div>
+        <div class="cf-feat">
+          <img class="cf-ic" src="assets/icon-refresh.svg" alt="" aria-hidden="true" />
+          <h3>Continuous knowledge updates</h3>
+          <p>Documentation updates as the system changes, so knowledge doesn't sit with two people who are about to retire.</p>
+        </div>
+        <div class="cf-feat">
+          <img class="cf-ic" src="assets/icon-eye.svg" alt="" aria-hidden="true" />
+          <h3>Full visibility transformation</h3>
+          <p>See dependencies, risk, and coverage across your entire estate before you commit to a single line of the rewrite.</p>
         </div>
       </div>
-    </div>
     </div>
   </section>
 

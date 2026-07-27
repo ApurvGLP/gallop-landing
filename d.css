@@ -265,17 +265,14 @@ img,svg,video{display:block;max-width:100%;}
 .faq-item .a .note{margin-top:1rem;font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--ink-40);}
 
 /* =====================  CLOSING + FOOTER — the ochre field returns  ===================== */
-/* [EXT] closing block, matched to Figma FOOTER node 2307:9775. The mosaic
-   texture (texture-green-gold-stretch.jpg) is Figma's own render of the fill:
-   the near-square source is stretched ~1.75× wider than tall, giving the
-   signature horizontal-rectangle pixels — the stretch is baked into the asset,
-   so any uniform scaling (cover) preserves it. Over it, a 64.75° gold gradient
-   sweeps up from the lower-left; the texture's dark-green upper-right corner
-   carries the white headline. */
+/* [WEB] closing block. The mosaic texture (bg-closer.jpg — the designer's
+   updated, more vibrant green-gold render) fills the band via cover. Over it, a
+   64.75° gold gradient sweeps up from the lower-left; the texture's darker
+   upper-right corner carries the white headline. */
 .close-field{position:relative;background-color:var(--color-ochre);
   background-image:
     linear-gradient(64.75deg, var(--color-ochre) 15.4%, rgba(244,226,123,0) 55.71%),
-    url("assets/texture-green-gold-stretch.jpg");
+    url("assets/bg-closer.jpg");
   background-size:100% 100%, cover;
   background-repeat:no-repeat, no-repeat;
   background-position:center, center bottom;
@@ -440,7 +437,7 @@ img,svg,video{display:block;max-width:100%;}
   .close-field{background-image:
     linear-gradient(0deg, var(--color-ochre) 6%, rgba(244,226,123,.92) 20%, rgba(244,226,123,0) 50%),
     linear-gradient(180deg, rgba(20,54,31,.92) 0%, rgba(20,54,31,.5) 26%, rgba(20,54,31,0) 54%),
-    url("assets/texture-green-gold-stretch.jpg");
+    url("assets/bg-closer.jpg");
     background-size:cover, cover, cover;}
   .gates{grid-template-columns:repeat(2,1fr);}
   .stats{grid-template-columns:1fr;gap:2.8rem;}
@@ -578,7 +575,7 @@ img,svg,video{display:block;max-width:100%;}
 .texfield>*{position:relative;z-index:1;}
 
 /* --- HERO — light gold texture field, Lustria headline ------------------- */
-.xhero{position:relative;background:var(--color-ochre) url("assets/tex-hero.jpg") no-repeat center bottom / cover;
+.xhero{position:relative;background:var(--color-ochre) url("assets/bg-hero.jpg") no-repeat center bottom / cover;
   overflow:hidden;
   margin-top:calc(-1 * (66px + 14px));padding-top:calc(66px + 14px);}
 .xhero-inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(2rem,4vw,4rem);align-items:end;padding-top:clamp(4.5rem,9vw,8rem);}
@@ -586,8 +583,11 @@ img,svg,video{display:block;max-width:100%;}
 .xhero-copy h1{font-family:var(--font-display);font-weight:400;font-size:clamp(calc(1.9rem * var(--lustria-scale)),calc(2.8vw * var(--lustria-scale)),calc(2.5rem * var(--lustria-scale)));line-height:1.04;letter-spacing:-.03em;max-width:42rem;}
 .xhero-sub{margin-top:20px;font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;line-height:1.2;color:var(--color-ink);}
 .xhero-sub b{font-weight:500;}
-.xhero-ph{background:var(--color-surface);border-radius:3px;aspect-ratio:623/363;display:flex;align-items:center;justify-content:center;}
-.xhero-ph span{font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);color:var(--color-ink);}
+/* hero product shot: the designer's dashboard mock, sitting on the gold field
+   and bottom-aligned so it meets the band edge (Figma). Own light UI background,
+   so no surface panel behind it. */
+.xhero-shot{display:flex;align-items:flex-end;}
+.xhero-shot img{display:block;width:100%;height:auto;}
 
 /* --- LOGO BAND ------------------------------------------------------------ */
 .logoband{padding-top:clamp(4rem,8.5vw,8.2rem);padding-bottom:clamp(3rem,6vw,6rem);text-align:center;}
@@ -610,16 +610,15 @@ img,svg,video{display:block;max-width:100%;}
 .proto-track::-webkit-scrollbar{display:none;}
 .proto-card{flex:0 0 min(563px,86vw);display:flex;flex-direction:column;gap:clamp(2.6rem,4.5vw,4rem);}
 .proto-media{height:clamp(330px,36vw,501px);}
-.proto-media .pm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:auto;}
-.pm-arch{width:72.5%;}
-.pm-schema{width:88.7%;}
-.pm-writing{width:67%;aspect-ratio:377/282;overflow:hidden;}
-.pm-writing img{position:absolute;left:-9.4%;top:-23%;width:215.25%;max-width:none;height:auto;}
-.pm-tests{width:82.7%;}
-.tf-c1{--tex-img:url("assets/tex-c1.jpg");}
-.tf-c2{--tex-img:url("assets/tex-c2.jpg");}
-.tf-c3{--tex-img:url("assets/tex-c3.jpg");}
-.tf-c4{--tex-img:url("assets/tex-c4.jpg");}
+/* each card holds the designer's updated screen mock, centred on the green
+   texture with ~10% breathing room so the texture frames it. Uniform sizing —
+   the mocks arrive as complete screens, no per-card cropping. */
+.proto-media .pm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:auto;height:auto;max-width:86%;max-height:82%;}
+.tf-c1{--tex-img:url("assets/bg-protocol-1.jpg");}
+.tf-c2{--tex-img:url("assets/bg-protocol-2.jpg");}
+.tf-c3{--tex-img:url("assets/bg-protocol-3.jpg");}
+.tf-c4{--tex-img:url("assets/bg-protocol-4.jpg");}
 .proto-txt{display:flex;gap:40px;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--color-ink);}
 .proto-txt .pn{width:20px;flex:none;}
 .pt-body{display:flex;flex-direction:column;gap:2px;}
@@ -630,74 +629,30 @@ img,svg,video{display:block;max-width:100%;}
 .mb-head{display:flex;justify-content:space-between;gap:3rem;align-items:flex-start;}
 .mb-head .hx{max-width:28ch;flex:none;}
 .mb-body{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;max-width:670px;}
-/* Discover / Modernization switcher: two labelled tabs swap a single
-   full-bleed map panel + mechanism list. Discover is active by default;
-   the Modernization tab runs a glow-swipe nudge until the switcher is used. */
-/* two equal tabs filling the full content width, sitting directly above the
-   full-bleed map. Active = page background, inactive = surface; a hairline
-   keeps the active tab legible against the matching page colour. */
-.disc-switch{margin-top:clamp(3rem,5.5vw,4.75rem);display:grid;grid-template-columns:1fr 1fr;gap:0;
-  width:100vw;margin-left:calc(50% - 50vw);}
-.disc-tab{position:relative;overflow:hidden;isolation:isolate;
-  display:flex;justify-content:center;align-items:baseline;gap:.6ch;
-  padding:16px 32px;border:1px solid rgba(54,47,44,.06);border-bottom:none;cursor:pointer;text-align:center;
-  font-family:var(--font-body);letter-spacing:var(--gallop-tracking);line-height:1.2;
-  background:var(--color-surface);
-  transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease);}
-.disc-tab .disc-name{font-size:var(--type-body-lg);font-weight:500;color:var(--color-ink);}
-.disc-tab .disc-sub{font-size:var(--type-body-md);color:var(--gallop-text-secondary);}
-/* inactive tab: faded label to reinforce it isn't the current one */
-.disc-tab:not(.is-active) .disc-name,
-.disc-tab:not(.is-active) .disc-sub{opacity:.5;}
-.disc-tab:not(.is-active):hover{border-color:var(--hairline);}
-.disc-tab:not(.is-active):hover .disc-name,
-.disc-tab:not(.is-active):hover .disc-sub{opacity:.72;}
-/* active tab: no side/bottom stroke, but a defined top line */
-.disc-tab.is-active{background:var(--color-bg);border-color:transparent;border-top-color:var(--hairline);}
-.disc-tab:focus-visible{outline:2px solid var(--color-ink);outline-offset:2px;}
+/* Discover / Modernization: the two products shown side by side (the team's
+   preferred "two image" view — this replaces the earlier tab switcher). Each
+   panel stacks a label, the product mock on its texture field, then a caption
+   row that splits into a bold lead line beside a hairline-ruled point list. */
+.disc-duo{margin-top:clamp(3rem,5.5vw,4.75rem);display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(2rem,3.4vw,3rem);align-items:start;}
+.disc-col{display:flex;flex-direction:column;gap:clamp(1.4rem,2.4vw,2rem);}
+.disc-col-head{display:flex;align-items:baseline;gap:.6ch;flex-wrap:wrap;
+  font-family:var(--font-body);letter-spacing:var(--gallop-tracking);line-height:1.2;}
+.disc-name{font-size:var(--type-body-lg);font-weight:500;color:var(--color-ink);}
+.disc-sub{font-size:var(--type-body-md);color:var(--gallop-text-secondary);}
 
-/* glow-swipe: a soft sheen sweeps left→right across the Modernization tab on a
-   loop to invite the click. JS drops the class on first use; disabled for
-   reduced-motion and screenshot QA (.noanim). */
-.disc-tab--nudge::after{content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(105deg,transparent 32%,rgba(244,226,123,.65) 50%,transparent 68%);
-  transform:translateX(-120%);
-  animation:disc-sweep 3.4s ease-in-out infinite;}
-@keyframes disc-sweep{
-  0%,20%{transform:translateX(-120%);}
-  48%,100%{transform:translateX(120%);}
-}
-
-/* full-bleed row: a Surface content panel (~26%) on the left, the textured
-   map (reduced width) on the right. Both panels sit in one grid cell so they
-   cross-fade with no layout jump. */
-.disc-stage{margin-top:0;display:grid;width:100vw;margin-left:calc(50% - 50vw);}
-.disc-panel{grid-area:1/1;display:flex;align-items:stretch;
-  opacity:0;visibility:hidden;pointer-events:none;
-  transition:opacity var(--dur) var(--ease),visibility 0s linear var(--dur);}
-.disc-panel.is-active{opacity:1;visibility:visible;pointer-events:auto;
-  transition:opacity var(--dur) var(--ease);}
-
-/* left: Surface panel with its own inner margins — title pinned top-left,
-   list pinned bottom-left (space-between). */
-.disc-side{flex:0 0 clamp(260px,26vw,460px);background:var(--color-surface);
-  display:flex;flex-direction:column;justify-content:space-between;gap:clamp(28px,4vw,48px);
-  padding:clamp(32px,3.2vw,56px);}
-.disc-headline{font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--color-ink);}
-
-/* right: the textured map band, mock (16:9) centred on it. max-width/height
-   keep the whole mock visible with ~10% breathing room on every side, at any
-   size. Square corners (brand rule). */
-.disc-media{flex:1;min-height:clamp(400px,44vw,620px);}
+/* mock centred on its texture field, ~10% breathing room so the texture frames
+   it. Square corners (brand rule). */
+.disc-media{min-height:clamp(300px,26vw,420px);}
 .disc-media img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:auto;height:auto;max-width:84%;max-height:80%;}
-/* The tex-web-*.jpg exports carry a 1px dark row at their bottom edge. Extend
-   the texture layer past the panel's bottom (anchored top) so that baked-in
-   line is clipped by .texfield's overflow:hidden instead of reading as a
-   stroke under the comparison graphic. */
-.disc-media.texfield::before{inset:0 0 -4px 0;background-position:center top;}
-.tf-disc{--tex-img:url("assets/tex-web-yellow.jpg");}
-.tf-mod{--tex-img:url("assets/tex-web-green.jpg");}
+  width:auto;height:auto;max-width:88%;max-height:84%;}
+.tf-disc{--tex-img:url("assets/bg-discover.jpg");}
+.tf-mod{--tex-img:url("assets/bg-modernization.jpg");}
+
+/* caption under the mock: bold lead line | point list */
+.disc-caption{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
+  gap:clamp(1.4rem,2.4vw,2.2rem);align-items:start;}
+.disc-headline{font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--color-ink);}
 
 /* points separated by hairline rules — same stroke as the features list */
 .disc-list{margin:0;padding:0;list-style:none;}
@@ -714,13 +669,6 @@ img,svg,video{display:block;max-width:100%;}
 .ent-tags{margin-top:clamp(1.6rem,2.6vw,2.2rem);display:flex;flex-wrap:wrap;gap:12px;}
 .ent-tag{font-family:var(--font-mono);font-weight:500;font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--ink-70);background:var(--color-surface);padding:.6rem 1rem;white-space:nowrap;}
 
-@media (prefers-reduced-motion:reduce){
-  .disc-tab--nudge::after{animation:none;}
-  .disc-panel{transition:none;}
-}
-.noanim .disc-tab--nudge::after{animation:none;}
-.noanim .disc-panel{transition:none;}
-
 /* --- TRACK RECORD ----------------------------------------------------------- */
 .track-label{font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);}
 .track-label+.hx{margin-top:22px;max-width:34ch;}
@@ -732,25 +680,15 @@ img,svg,video{display:block;max-width:100%;}
 .tc-desc{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;opacity:.5;}
 
 /* --- CORE FEATURES ----------------------------------------------------------- */
-/* Pinned scroll-through: the scene reserves extra scroll height, its inner
-   grid locks to the viewport, and scroll progress drives the active feature
-   + cross-fades the screenshot (see d.js). --steps set on the section. */
-.cf-scene{position:relative;height:340vh;}
-.cf-sticky{position:sticky;top:0;min-height:100vh;display:flex;align-items:center;padding-block:clamp(2rem,6vh,5rem);}
-.cf-grid{display:grid;grid-template-columns:minmax(0,764fr) minmax(0,505fr);gap:clamp(3rem,6.3vw,5.6rem);align-items:center;width:100%;}
-.cf-media{position:relative;height:clamp(420px,42vw,600px);}
-.tf-cf{--tex-img:url("assets/tex-cf.jpg");}
-.cf-gallery{position:absolute;inset:8% 9.2%;}
-.cf-shot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:100%;max-height:100%;width:auto;height:auto;opacity:0;transition:opacity var(--dur) var(--ease);pointer-events:none;}
-.cf-shot.is-active{opacity:1;}
-.cf-sub{margin-top:22px;font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);color:var(--color-ink);}
-.feat-list{margin-top:clamp(2.5rem,4vw,3.4rem);display:flex;flex-direction:column;}
-.feat{appearance:none;background:none;border:none;padding:clamp(1rem,2.4vh,1.7rem) 0;text-align:left;cursor:pointer;font-family:var(--font-body);opacity:.3;transition:opacity var(--dur) var(--ease);border-top:1px solid var(--hairline);}
-.feat:first-child{border-top:none;}
-.feat.is-active,.feat:hover{opacity:1;}
-.feat h3{font-family:var(--font-body);font-weight:400;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;}
-.feat.is-active h3{font-weight:500;}
-.feat p{margin-top:2px;font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;opacity:.5;}
+/* Heading on the left, a 2×2 grid of icon + title + description on the right.
+   No product graphics in this section yet (design decision) — icons only. */
+.cf-layout{display:grid;grid-template-columns:minmax(0,305fr) minmax(0,964fr);gap:clamp(2.5rem,5vw,4rem);align-items:start;}
+.cf-head .hx{max-width:14ch;}
+.cf-grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(2.4rem,4vw,4rem) clamp(2.6rem,4.5vw,4.05rem);}
+.cf-feat{display:flex;flex-direction:column;gap:12px;}
+.cf-ic{width:24px;height:24px;color:var(--color-ink);}
+.cf-feat h3{font-family:var(--font-body);font-weight:400;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--color-ink);}
+.cf-feat p{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--gallop-text-secondary);}
 
 /* --- STATS -------------------------------------------------------------------- */
 .stats{margin-top:clamp(3.5rem,9vw,8rem);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(2rem,5vw,5.6rem);}
@@ -795,11 +733,9 @@ img,svg,video{display:block;max-width:100%;}
 @media (max-width:1100px){
   .xhero-inner{grid-template-columns:1fr;align-items:start;}
   .xhero-copy{padding-bottom:0;}
-  .xhero-ph{width:100%;margin-bottom:2.5rem;}
+  .xhero-shot{margin-bottom:2.5rem;}
   .mb-head{flex-direction:column;gap:1.6rem;}
-  .cf-scene{height:auto;}
-  .cf-sticky{position:static;min-height:0;display:block;padding-block:0;}
-  .cf-grid{grid-template-columns:1fr;}
+  .cf-layout{grid-template-columns:1fr;gap:2rem;}
   .track{grid-template-columns:1fr;}
   .track-card{min-height:300px;}
   .team-grid{flex-direction:column;}
@@ -812,11 +748,10 @@ img,svg,video{display:block;max-width:100%;}
   .proto-card{flex-basis:86vw;}
   .proto-txt{gap:1.4rem;}
   .proto-track{padding-left:var(--space-page-x);padding-right:var(--space-page-x);}
-  .disc-switch{grid-template-columns:1fr;}
-  .disc-tab{flex-direction:column;align-items:center;gap:2px;}
-  .disc-panel{flex-direction:column;}
-  .disc-side{flex-basis:auto;}
+  .disc-duo{grid-template-columns:1fr;gap:clamp(2.4rem,7vw,3.2rem);}
+  .disc-caption{grid-template-columns:1fr;gap:1rem;}
   .disc-media{min-height:clamp(300px,60vw,460px);}
+  .cf-grid2{grid-template-columns:1fr;}
   .ent-grid{grid-template-columns:1fr;}
   .team-photos{flex-wrap:wrap;}
   .team-logos{gap:1.6rem;}
