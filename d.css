@@ -581,7 +581,7 @@ img,svg,video{display:block;max-width:100%;}
 .xhero-inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(2rem,4vw,4rem);align-items:end;padding-top:clamp(4.5rem,9vw,8rem);}
 .xhero-copy{padding-bottom:clamp(2.6rem,5.5vw,5.3rem);}
 .xhero-copy h1{font-family:var(--font-display);font-weight:400;font-size:clamp(calc(1.9rem * var(--lustria-scale)),calc(2.8vw * var(--lustria-scale)),calc(2.5rem * var(--lustria-scale)));line-height:1.04;letter-spacing:-.03em;max-width:42rem;}
-.xhero-sub{margin-top:20px;font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;line-height:1.2;color:var(--color-ink);}
+.xhero-sub{margin-top:20px;font-family:var(--font-body);font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.35;color:var(--color-ink);}
 .xhero-sub b{font-weight:500;}
 /* hero product shot: the designer's dashboard mock, sitting on the gold field
    and bottom-aligned so it meets the band edge (Figma). Own light UI background,
@@ -633,9 +633,14 @@ img,svg,video{display:block;max-width:100%;}
    preferred "two image" view — this replaces the earlier tab switcher). Each
    panel stacks a label, the product mock on its texture field, then a caption
    row that splits into a bold lead line beside a hairline-ruled point list. */
-.disc-duo{margin-top:clamp(3rem,5.5vw,4.75rem);display:grid;grid-template-columns:1fr 1fr;
-  gap:clamp(2rem,3.4vw,3rem);align-items:start;}
-.disc-col{display:flex;flex-direction:column;gap:clamp(1.4rem,2.4vw,2rem);}
+/* full-bleed horizontal scroll: each panel is 75% of the viewport so the next
+   one peeks in and the row overscrolls sideways (per Figma). Snaps per panel. */
+.disc-duo{margin-top:clamp(3rem,5.5vw,4.75rem);display:flex;gap:clamp(2rem,3.4vw,3rem);align-items:start;
+  width:100vw;margin-left:calc(50% - 50vw);
+  overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+  padding-left:calc(var(--gutter) + var(--space-page-x));padding-right:var(--space-page-x);padding-bottom:.5rem;}
+.disc-duo::-webkit-scrollbar{display:none;}
+.disc-col{flex:0 0 75vw;scroll-snap-align:start;display:flex;flex-direction:column;gap:clamp(1.4rem,2.4vw,2rem);}
 .disc-col-head{display:flex;align-items:baseline;gap:.6ch;flex-wrap:wrap;
   font-family:var(--font-body);letter-spacing:var(--gallop-tracking);line-height:1.2;}
 .disc-name{font-size:var(--type-body-lg);font-weight:500;color:var(--color-ink);}
@@ -712,6 +717,8 @@ img,svg,video{display:block;max-width:100%;}
 
 /* --- TEAM TRUST ------------------------------------------------------------------ */
 .team-grid{display:flex;justify-content:space-between;gap:3rem;align-items:flex-start;}
+/* team trust block merged into #enterprise — space it off the tag row above */
+.ent-team{margin-top:clamp(4rem,8vw,7rem);}
 .team-kicker{font-family:var(--font-mono);font-weight:500;font-size:var(--type-label-md);letter-spacing:var(--gallop-tracking);text-transform:uppercase;}
 .team-badges{margin-top:47px;display:flex;flex-direction:column;gap:12px;}
 .badge{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-weight:500;font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;}
@@ -748,7 +755,7 @@ img,svg,video{display:block;max-width:100%;}
   .proto-card{flex-basis:86vw;}
   .proto-txt{gap:1.4rem;}
   .proto-track{padding-left:var(--space-page-x);padding-right:var(--space-page-x);}
-  .disc-duo{grid-template-columns:1fr;gap:clamp(2.4rem,7vw,3.2rem);}
+  .disc-col{flex-basis:85vw;}
   .disc-caption{grid-template-columns:1fr;gap:1rem;}
   .disc-media{min-height:clamp(300px,60vw,460px);}
   .cf-grid2{grid-template-columns:1fr;}

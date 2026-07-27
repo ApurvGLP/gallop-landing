@@ -70,10 +70,12 @@
         <h2 class="hx">The real work happens before the first line of code.</h2>
         <p class="mb-body">Every modernization starts the same way, someone has to figure out what the current system actually does. Most tools treat that as a quick first pass, then move on to writing code. Gallop treats it as the job. It maps every repository, every dependency, every business rule, and keeps that map current as the rebuild happens. Code only gets written against a system Gallop has already confirmed it understands.</p>
       </div>
-      <!-- Discover / Modernization: the two products shown side by side (the
-           team's preferred two-image view). Each column: label, product mock on
-           its texture field, then a caption (lead line + mechanism list). -->
-      <div class="disc-duo reveal d1">
+    </div>
+    <!-- Discover / Modernization: the two products shown side by side, in a
+         full-bleed horizontal-scroll row (each panel ~75vw, snaps per panel —
+         the team's preferred two-image view). Each column: label, product mock
+         on its texture field, then a caption (lead line + mechanism list). -->
+    <div class="disc-duo reveal d1">
         <article class="disc-col">
           <div class="disc-col-head">
             <span class="disc-name">Gallop Discover</span>
@@ -110,7 +112,6 @@
             </ul>
           </div>
         </article>
-      </div>
     </div>
   </section>
 
@@ -315,33 +316,33 @@
           <p class="ent-card-desc">Fits your CI/CD and review gates, and holds to your architecture standards.</p>
         </div>
       </div>
+      <!-- SOC 2 is represented once, as a badge in the team block below, so it
+           is dropped from this tag row to avoid repeating it. -->
       <div class="ent-tags reveal d1">
-        <span class="ent-tag">SOC 2 &middot; Type II</span>
         <span class="ent-tag">GDPR</span>
         <span class="ent-tag">SSO / RBAC</span>
         <span class="ent-tag">Audit logging</span>
         <span class="ent-tag">GCP Partner</span>
       </div>
-    </div>
-  </section>
 
-  <!-- ===================== TEAM TRUST ===================== -->
-  <section class="sec" id="team">
-    <div class="wrap team-grid">
-      <div class="team-left">
-        <p class="team-kicker reveal">Built by a team you can trust</p>
-        <div class="team-badges reveal d1">
-          <span class="badge"><img src="assets/badge-soc2.png" alt="" />SOC2 Type II</span>
-          <span class="badge"><img src="assets/badge-iso.png" alt="" />ISO 27001</span>
+      <!-- Team trust, merged into the Enterprise section (previously a separate
+           section). SOC2 shown here once as a badge, not repeated as a tag. -->
+      <div class="ent-team team-grid">
+        <div class="team-left">
+          <p class="team-kicker reveal">Built by a team you can trust</p>
+          <div class="team-badges reveal d1">
+            <span class="badge"><img src="assets/badge-soc2.png" alt="" />SOC2 Type II</span>
+            <span class="badge"><img src="assets/badge-iso.png" alt="" />ISO 27001</span>
+          </div>
         </div>
-      </div>
-      <div class="team-right">
-        <div class="team-photos reveal" aria-hidden="true"><span></span><span></span><span></span></div>
-        <p class="team-body reveal d1">Gallop's engineering team spent years building and migrating production systems at Amazon and Google. They've seen what it actually takes to move a critical system without breaking it: staged rollouts, exhaustive testing before a single customer sees a change, and engineers who stay accountable after ship, not just at launch. That's the standard Gallop holds itself to.</p>
-        <div class="team-logos reveal d1">
-          <img src="assets/logo-aws.png" alt="Amazon Web Services" style="--lh:63px" />
-          <img src="assets/logo-amazon.png" alt="Amazon" style="--lh:53px" />
-          <img src="assets/logo-google.png" alt="Google" style="--lh:44px" />
+        <div class="team-right">
+          <div class="team-photos reveal" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p class="team-body reveal d1">Gallop's engineering team spent years building and migrating production systems at Amazon and Google. They've seen what it actually takes to move a critical system without breaking it: staged rollouts, exhaustive testing before a single customer sees a change, and engineers who stay accountable after ship, not just at launch. That's the standard Gallop holds itself to.</p>
+          <div class="team-logos reveal d1">
+            <img src="assets/logo-aws.png" alt="Amazon Web Services" style="--lh:63px" />
+            <img src="assets/logo-amazon.png" alt="Amazon" style="--lh:53px" />
+            <img src="assets/logo-google.png" alt="Google" style="--lh:44px" />
+          </div>
         </div>
       </div>
     </div>
