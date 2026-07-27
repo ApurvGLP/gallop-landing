@@ -671,8 +671,8 @@ img,svg,video{display:block;max-width:100%;}
 /* --- ENTERPRISE / TRUST ---------------------------------- */
 /* header split reuses .mb-head: .ent-lead (title + standfirst) sits left, the
    team paragraph (.mb-body) sits right */
-.ent-lead{flex:none;max-width:30ch;}
-#enterprise .hx{max-width:24ch;}
+.ent-lead{flex:none;max-width:40ch;}
+#enterprise .hx{max-width:none;}
 .ent-sub{margin-top:12px;font-family:var(--font-body);font-weight:300;font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--gallop-text-secondary);}
 .ent-grid{margin-top:clamp(3rem,5vw,4.5rem);display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gallop-space-card-gap);}
 /* no surface panel behind each item — plain text columns on the page canvas */
@@ -681,7 +681,8 @@ img,svg,video{display:block;max-width:100%;}
 .ent-card-desc{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--gallop-text-secondary);}
 /* compliance marks only — SOC 2 + ISO badges, no written-out tags */
 .ent-badges{margin-top:clamp(3.4rem,6vw,5.5rem);display:flex;align-items:center;gap:28px;}
-.ent-badges img{width:56px;height:56px;object-fit:contain;}
+/* clip the square badge PNGs to a circle so the white corners disappear */
+.ent-badges img{width:56px;height:56px;object-fit:cover;border-radius:50%;}
 
 /* --- TRACK RECORD ----------------------------------------------------------- */
 .track-label{font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);}
