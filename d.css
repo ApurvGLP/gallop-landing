@@ -668,15 +668,20 @@ img,svg,video{display:block;max-width:100%;}
 .disc-list li{padding:clamp(.5rem,.9vw,.7rem) 0;border-top:1px solid var(--hairline);font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);line-height:1.28;color:var(--gallop-text-secondary);}
 .disc-list li:first-child{border-top:none;padding-top:0;}
 
-/* --- ENTERPRISE / TRUST (client-supplied) ---------------------------------- */
+/* --- ENTERPRISE / TRUST ---------------------------------- */
+/* header split reuses .mb-head: .ent-lead (title + standfirst) sits left, the
+   team paragraph (.mb-body) sits right */
+.ent-lead{flex:none;max-width:30ch;}
 #enterprise .hx{max-width:24ch;}
 .ent-sub{margin-top:12px;font-family:var(--font-body);font-weight:300;font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--gallop-text-secondary);}
 .ent-grid{margin-top:clamp(2.6rem,4.5vw,3.8rem);display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gallop-space-card-gap);}
-.ent-card{background:var(--color-surface);padding:25px;display:flex;flex-direction:column;gap:14px;}
+/* no surface panel behind each item — plain text columns on the page canvas */
+.ent-card{display:flex;flex-direction:column;gap:14px;}
 .ent-card-title{font-family:var(--font-body);font-weight:400;font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.2;color:var(--color-ink);}
 .ent-card-desc{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--gallop-text-secondary);}
-.ent-tags{margin-top:clamp(1.6rem,2.6vw,2.2rem);display:flex;flex-wrap:wrap;gap:12px;}
-.ent-tag{font-family:var(--font-mono);font-weight:500;font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--ink-70);background:var(--color-surface);padding:.6rem 1rem;white-space:nowrap;}
+/* compliance marks only — SOC 2 + ISO badges, no written-out tags */
+.ent-badges{margin-top:clamp(2.6rem,4.5vw,3.8rem);display:flex;align-items:center;gap:28px;}
+.ent-badges img{width:56px;height:56px;object-fit:contain;}
 
 /* --- TRACK RECORD ----------------------------------------------------------- */
 .track-label{font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);}
@@ -719,20 +724,6 @@ img,svg,video{display:block;max-width:100%;}
 .pb-copy p{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;}
 .pb-inner .panel{flex:0 1 560px;border-radius:0;}
 
-/* --- TEAM TRUST ------------------------------------------------------------------ */
-.team-grid{display:flex;justify-content:space-between;gap:3rem;align-items:flex-start;}
-/* team trust block merged into #enterprise — space it off the tag row above */
-.ent-team{margin-top:clamp(4rem,8vw,7rem);}
-.team-kicker{font-family:var(--font-mono);font-weight:500;font-size:var(--type-label-md);letter-spacing:var(--gallop-tracking);text-transform:uppercase;}
-.team-badges{margin-top:47px;display:flex;flex-direction:column;gap:12px;}
-.badge{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-weight:500;font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;}
-.badge img{width:44px;height:44px;border-radius:50%;object-fit:cover;}
-.team-right{width:min(784px,100%);display:flex;flex-direction:column;gap:50px;}
-.team-photos{display:flex;gap:24px;opacity:.8;}
-.team-photos span{flex:1;height:clamp(150px,15.7vw,227px);background:var(--color-surface);}
-.team-body{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;max-width:657px;}
-.team-logos{display:flex;gap:38px;align-items:center;opacity:.8;}
-.team-logos img{height:var(--lh,44px);width:auto;}
 
 /* --- FAQ — surface band ------------------------------------------------------------ */
 .faq-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:clamp(2.5rem,8vw,9rem);align-items:start;padding-block:clamp(3.5rem,6.6vw,6rem);}
@@ -749,7 +740,6 @@ img,svg,video{display:block;max-width:100%;}
   .cf-layout{grid-template-columns:1fr;gap:2rem;}
   .track{grid-template-columns:1fr;}
   .track-card{min-height:300px;}
-  .team-grid{flex-direction:column;}
   .pb-inner{flex-direction:column;align-items:flex-start;}
   .pb-inner .panel{flex:none;width:100%;max-width:560px;}
   .faq-grid{grid-template-columns:1fr;gap:2.2rem;}
@@ -763,9 +753,6 @@ img,svg,video{display:block;max-width:100%;}
   .disc-caption{grid-template-columns:1fr;gap:1rem;}
   .cf-grid2{grid-template-columns:1fr;}
   .ent-grid{grid-template-columns:1fr;}
-  .team-photos{flex-wrap:wrap;}
-  .team-logos{gap:1.6rem;}
-  .team-logos img{height:calc(var(--lh,44px)*.7);}
 }
 
 /* =========================================================================

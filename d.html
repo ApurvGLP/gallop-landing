@@ -293,11 +293,18 @@
     </div>
   </section>
 
-  <!-- ===================== ENTERPRISE / TRUST (client-supplied) ===================== -->
+  <!-- ===================== ENTERPRISE / TRUST ===================== -->
   <section class="sec" id="enterprise">
     <div class="wrap">
-      <h2 class="hx reveal">Enterprise-grade by default</h2>
-      <p class="ent-sub reveal">Your code. Your network. Your rules.</p>
+      <!-- header split: title + standfirst on the left, the team paragraph on
+           the right — same layout as the "real work happens" section. -->
+      <div class="mb-head reveal">
+        <div class="ent-lead">
+          <h2 class="hx">Enterprise-grade by default</h2>
+          <p class="ent-sub">Your code. Your network. Your rules.</p>
+        </div>
+        <p class="mb-body">Gallop's engineering team spent years building and migrating production systems at Amazon and Google. They've seen what it actually takes to move a critical system without breaking it: staged rollouts, exhaustive testing before a single customer sees a change, and engineers who stay accountable after ship, not just at launch. That's the standard Gallop holds itself to.</p>
+      </div>
       <div class="ent-grid reveal d1">
         <div class="ent-card">
           <h3 class="ent-card-title">Deploy anywhere</h3>
@@ -316,34 +323,11 @@
           <p class="ent-card-desc">Fits your CI/CD and review gates, and holds to your architecture standards.</p>
         </div>
       </div>
-      <!-- SOC 2 is represented once, as a badge in the team block below, so it
-           is dropped from this tag row to avoid repeating it. -->
-      <div class="ent-tags reveal d1">
-        <span class="ent-tag">GDPR</span>
-        <span class="ent-tag">SSO / RBAC</span>
-        <span class="ent-tag">Audit logging</span>
-        <span class="ent-tag">GCP Partner</span>
-      </div>
-
-      <!-- Team trust, merged into the Enterprise section (previously a separate
-           section). SOC2 shown here once as a badge, not repeated as a tag. -->
-      <div class="ent-team team-grid">
-        <div class="team-left">
-          <p class="team-kicker reveal">Built by a team you can trust</p>
-          <div class="team-badges reveal d1">
-            <span class="badge"><img src="assets/badge-soc2.png" alt="" />SOC2 Type II</span>
-            <span class="badge"><img src="assets/badge-iso.png" alt="" />ISO 27001</span>
-          </div>
-        </div>
-        <div class="team-right">
-          <div class="team-photos reveal" aria-hidden="true"><span></span><span></span><span></span></div>
-          <p class="team-body reveal d1">Gallop's engineering team spent years building and migrating production systems at Amazon and Google. They've seen what it actually takes to move a critical system without breaking it: staged rollouts, exhaustive testing before a single customer sees a change, and engineers who stay accountable after ship, not just at launch. That's the standard Gallop holds itself to.</p>
-          <div class="team-logos reveal d1">
-            <img src="assets/logo-aws.png" alt="Amazon Web Services" style="--lh:63px" />
-            <img src="assets/logo-amazon.png" alt="Amazon" style="--lh:53px" />
-            <img src="assets/logo-google.png" alt="Google" style="--lh:44px" />
-          </div>
-        </div>
+      <!-- compliance marks: the SOC 2 and ISO badges only (certifications are
+           shown as their marks, not written out). -->
+      <div class="ent-badges reveal d1">
+        <img src="assets/badge-soc2.png" alt="SOC 2 Type II certified" />
+        <img src="assets/badge-iso.png" alt="ISO 27001 certified" />
       </div>
     </div>
   </section>
