@@ -688,11 +688,12 @@ img,svg,video{display:block;max-width:100%;}
 .track-label{font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);}
 .track-label+.hx{margin-top:22px;max-width:34ch;}
 .track{margin-top:54px;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gallop-space-card-gap);}
-.track-card{min-height:clamp(360px,33.5vw,483px);padding:var(--gallop-space-card-pad);display:flex;flex-direction:column;justify-content:space-between;gap:2rem;}
-.tc-meta{font-family:var(--font-mono);font-size:var(--type-label-md);letter-spacing:var(--gallop-tracking);text-transform:uppercase;opacity:.8;}
-.tc-main{display:flex;flex-direction:column;gap:2px;}
-.tc-title{font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.24;}
-.tc-desc{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;opacity:.5;}
+/* cards scaled ~2x — these are headline stats (Alice) */
+.track-card{min-height:clamp(620px,60vw,880px);padding:clamp(30px,3vw,48px);display:flex;flex-direction:column;justify-content:space-between;gap:2.5rem;}
+.tc-meta{font-family:var(--font-mono);font-size:clamp(1.5rem,2.2vw,2rem);letter-spacing:var(--gallop-tracking);text-transform:uppercase;opacity:.8;line-height:1.2;}
+.tc-main{display:flex;flex-direction:column;gap:6px;}
+.tc-title{font-size:var(--type-h-xs);letter-spacing:var(--gallop-tracking);line-height:1.2;}
+.tc-desc{font-weight:300;font-size:clamp(1.1rem,1.4vw,1.375rem);letter-spacing:var(--gallop-tracking);line-height:1.28;opacity:.5;}
 
 /* --- CORE FEATURES ----------------------------------------------------------- */
 /* Heading on the left, a 2×2 grid of icon + title + description on the right.
@@ -740,7 +741,7 @@ img,svg,video{display:block;max-width:100%;}
   .mb-head{flex-direction:column;gap:1.6rem;}
   .cf-layout{grid-template-columns:1fr;gap:2rem;}
   .track{grid-template-columns:1fr;}
-  .track-card{min-height:300px;}
+  .track-card{min-height:460px;}
   .pb-inner{flex-direction:column;align-items:flex-start;}
   .pb-inner .panel{flex:none;width:100%;max-width:560px;}
   .faq-grid{grid-template-columns:1fr;gap:2.2rem;}
