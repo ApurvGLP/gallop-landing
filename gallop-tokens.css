@@ -27,7 +27,7 @@
 .gallop,
 .gallop-skin {
   /* ----- Brand roles ----- */
-  --gallop-background:     #F9F9F2;  /* Brand/Background */
+  --gallop-background:     #FDFDF6;  /* Brand/Background */
   --gallop-surface:        #F2F2EB;  /* Brand/Surface */
   --gallop-text-primary:   #362F2C;  /* Brand/Text Primary — "ink" */
   --gallop-text-secondary: #7A7471;  /* Brand/Text Secondary */
