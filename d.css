@@ -688,12 +688,12 @@ img,svg,video{display:block;max-width:100%;}
 .track-label{font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);}
 .track-label+.hx{margin-top:22px;max-width:34ch;}
 .track{margin-top:54px;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gallop-space-card-gap);}
-/* card size original; text scaled 1.5x — headline stats (Alice) */
+/* card size original; only the top stat line (.tc-meta) scaled 1.5x — headline stats (Alice) */
 .track-card{min-height:clamp(360px,33.5vw,483px);padding:var(--gallop-space-card-pad);display:flex;flex-direction:column;justify-content:space-between;gap:2rem;}
 .tc-meta{font-family:var(--font-mono);font-size:1.5rem;letter-spacing:var(--gallop-tracking);text-transform:uppercase;opacity:.8;line-height:1.25;}
 .tc-main{display:flex;flex-direction:column;gap:2px;}
-.tc-title{font-size:1.875rem;letter-spacing:var(--gallop-tracking);line-height:1.2;}
-.tc-desc{font-weight:300;font-size:1.6875rem;letter-spacing:var(--gallop-tracking);line-height:1.24;opacity:.5;}
+.tc-title{font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.24;}
+.tc-desc{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;opacity:.5;}
 
 /* --- CORE FEATURES ----------------------------------------------------------- */
 /* Heading on the left, a 2×2 grid of icon + title + description on the right.
