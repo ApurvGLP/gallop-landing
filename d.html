@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Lustria&family=Funnel+Sans:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="gallop-tokens.css" />
 <link rel="stylesheet" href="d.css" />
+<link rel="stylesheet" href="assets/hero-anim.css" />
 </head>
 <body>
 
@@ -40,9 +41,16 @@
     <div class="wrap xhero-inner">
       <div class="xhero-copy">
         <h1 class="reveal in">Gallop modernizes the world's most critical systems. Fast, and reliably.</h1>
-        <p class="xhero-sub reveal in d1">Gallop reads your entire codebase, maps every business capability it holds,<br />and rebuilds it on modern foundations. <b>With zero business logic loss.</b></p>
+        <p class="xhero-sub reveal in d1">Gallop reads your entire codebase, maps every business capability it holds, and rebuilds it on modern foundations. <b>With zero business logic loss.</b></p>
       </div>
-      <div class="xhero-shot reveal in d2"><img src="assets/mock-hero.png" alt="The Gallop interface: a discovery report mapping a legacy system's hierarchy alongside an AI assistant answering questions about the codebase" /></div>
+      <div class="xhero-shot reveal in d2">
+        <section class="gallop-hero" id="gallopHero" aria-label="Gallop: a legacy system modernized into agent-ready services">
+          <div class="gh-stage">
+            <div class="gh-world"></div>
+            <div class="gh-veil"></div>
+          </div>
+        </section>
+      </div>
     </div>
   </section>
 
@@ -444,5 +452,6 @@
 </main>
 
 <script src="d.js"></script>
+<script src="assets/hero-anim.js"></script>
 </body>
 </html>

@@ -67,7 +67,7 @@
 }
 
 *{box-sizing:border-box;}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-x:clip;}
 body{
   margin:0;
   background:var(--color-bg);
@@ -431,16 +431,25 @@ img,svg,video{display:block;max-width:100%;}
 
 /* =====================  RESPONSIVE  ===================== */
 @media (max-width:1100px){
-  /* [EXT] closing block stacks left below desktop; wash the top green (white
-     headline stays legible) and keep the bottom gold (dark footer legible).
-     Same stretch-baked texture as desktop — cover keeps the wide pixels. */
+  /* [EXT] closing block stacks left below desktop. Keep the dark-green wash to
+     just the top (behind the white CTA text) and let the gold fill the whole
+     footer zone so the dark Gallop lockup + columns read cleanly on yellow. */
   .close-field{background-image:
-    linear-gradient(0deg, var(--color-ochre) 6%, rgba(244,226,123,.92) 20%, rgba(244,226,123,0) 50%),
-    linear-gradient(180deg, rgba(20,54,31,.92) 0%, rgba(20,54,31,.5) 26%, rgba(20,54,31,0) 54%),
+    /* translucent gold veil — keeps the grainy plaid texture showing through
+       while tinting the footer zone yellow enough for the dark lockup to read */
+    linear-gradient(0deg, rgba(244,226,123,.82) 0%, rgba(244,226,123,.82) 58%, rgba(244,226,123,.45) 72%, rgba(244,226,123,0) 88%),
+    /* dark-green wash kept to the top only, behind the white CTA text */
+    linear-gradient(180deg, rgba(20,54,31,.9) 0%, rgba(20,54,31,.5) 15%, rgba(20,54,31,0) 33%),
     url("assets/bg-closer.jpg");
-    background-size:cover, cover, cover;}
+    background-size:cover, cover, cover;
+    background-position:center bottom, center top, center bottom;}
+  /* generous space between the CTA and the logo/footer block */
+  .close-field .footer{padding-top:clamp(4.5rem,17vw,7rem);}
+  /* extra yellow below the footer columns (taller footer, more gold) */
+  .footer-bottom{padding-bottom:clamp(4rem,13vw,6rem);}
   .gates{grid-template-columns:repeat(2,1fr);}
-  .stats{grid-template-columns:1fr;gap:2.8rem;}
+  /* NOTE: .stats stacking now lives in the max-width:1100px block further down
+     (after the base .stats rule) so it isn't overridden by source order. */
   .close-inner{justify-content:flex-start;}
   .close-block{align-items:flex-start;text-align:left;}
   .close-actions{justify-content:flex-start;}
@@ -588,6 +597,31 @@ img,svg,video{display:block;max-width:100%;}
    so no surface panel behind it. */
 .xhero-shot{display:flex;align-items:flex-end;}
 .xhero-shot img{display:block;width:100%;height:auto;}
+/* the client's animated hero replaces the placeholder mock. It fills the shot
+   slot at its native 16:9; the animation scales to cover this box. Tweak the
+   aspect ratio here to change its footprint. */
+.xhero-shot .gallop-hero{width:100%;aspect-ratio:5/4;}  /* matches the animation's content crop window so nothing letterboxes or clips */
+
+/* DESKTOP hero: the gold field ends at the animation's DATA (3rd) box mid-line,
+   so that box straddles the divide into the paper below; the copy stays on the
+   gold. Values tuned at ~1440; --band-d = gold height, the negative margin pulls
+   the animation's lower third onto the paper. */
+@media (min-width:1101px){
+  .xhero{
+    overflow:visible;
+    --band-d:617px;
+    background-color:transparent;
+    background-image:
+      linear-gradient(rgba(244,226,123,.42),rgba(244,226,123,.42)),  /* mute the green plaid */
+      url("assets/bg-hero.jpg"),
+      linear-gradient(var(--color-ochre),var(--color-ochre));
+    background-repeat:no-repeat,no-repeat,no-repeat;
+    background-position:top center,top center,top center;
+    background-size:100% var(--band-d),auto var(--band-d),100% var(--band-d);
+  }
+  .xhero-shot{margin-bottom:-87px;}   /* DATA box straddles the gold edge; lower part on the paper */
+  .logoband{padding-top:clamp(6rem,9vw,9rem);}  /* clear the animation's overhang */
+}
 
 /* --- LOGO BAND ------------------------------------------------------------ */
 .logoband{padding-top:clamp(4rem,8.5vw,8.2rem);padding-bottom:clamp(3rem,6vw,6rem);text-align:center;}
@@ -740,6 +774,7 @@ img,svg,video{display:block;max-width:100%;}
   .xhero-shot{margin-bottom:2.5rem;}
   .mb-head{flex-direction:column;gap:1.6rem;}
   .cf-layout{grid-template-columns:1fr;gap:2rem;}
+  .stats{grid-template-columns:1fr;gap:clamp(2.5rem,7vw,3.2rem);}
   .track{grid-template-columns:1fr;}
   .track-card{min-height:300px;}
   .pb-inner{flex-direction:column;align-items:flex-start;}
@@ -748,10 +783,41 @@ img,svg,video{display:block;max-width:100%;}
   .ent-grid{grid-template-columns:repeat(2,1fr);}
 }
 @media (max-width:760px){
+  /* HERO (mobile) redesign: the copy pins to the LOWER edge of the gold field
+     (bottom padding = page side margin). The gold texture paints down past the
+     copy so it sits behind the TOP HALF of the product mock, which then finishes
+     on the paper below. Two heights: --copy-band = how far the copy fills (fixes
+     the text position); --band = how far the gold PAINTS (reaches the mock's
+     mid-point). Everything below --band shows the paper. */
+  .xhero{
+    overflow:visible;
+    --copy-band:34rem;   /* taller copy region → the headline/standfirst sit lower, on the cleaner gold */
+    --band:34.3rem;      /* gold ends at the INTERFACE (top) box mid-line, so only the top box straddles; the rest of the animation sits on the paper */
+    background-color:transparent;
+    background-image:
+      /* gold veil mutes the green plaid patches so the hero reads as a clean, professional yellow */
+      linear-gradient(rgba(244,226,123,.42),rgba(244,226,123,.42)),
+      url("assets/bg-hero.jpg"),
+      linear-gradient(var(--color-ochre),var(--color-ochre));
+    background-repeat:no-repeat,no-repeat,no-repeat;
+    background-position:top center,top center,top center;
+    background-size:100% var(--band),auto var(--band),100% var(--band);
+  }
+  .xhero-inner{display:block;padding-top:0;}
+  .xhero-copy{
+    min-height:calc(var(--copy-band) - (66px + 14px));  /* fill the copy band below the nav underlap */
+    display:flex;flex-direction:column;justify-content:flex-end;  /* pin copy to the bottom edge */
+    padding-top:0;padding-bottom:var(--space-page-x);  /* lower padding = the side margin */
+  }
+  .xhero-shot{margin:clamp(1.4rem,5vw,2.25rem) 0 0;position:relative;}  /* Interface box straddles the gold edge; rest on paper */
+  .logoband{padding-top:clamp(3rem,7vw,4.5rem);}
   .proto-card{flex-basis:86vw;}
   .proto-txt{gap:1.4rem;}
   .proto-track{padding-left:var(--space-page-x);padding-right:var(--space-page-x);}
   .disc-col{flex-basis:85vw;}
+  /* match the Discover graphic height to the Protocol cards on mobile
+     (drop the 5/3 aspect ratio so height is fixed, not width-derived) */
+  .disc-media{aspect-ratio:auto;height:clamp(330px,36vw,501px);}
   .disc-caption{grid-template-columns:1fr;gap:1rem;}
   .cf-grid2{grid-template-columns:1fr;}
   .ent-grid{grid-template-columns:1fr;}
