@@ -368,7 +368,7 @@
   // no dead space. Tune CV to reframe. Box aspect (d.css) should ~match CV.
   const hero = document.getElementById('gallopHero');
   const stage = hero.querySelector('.gh-stage');
-  const CV = { x: 240, y: 8, w: 880, h: 704 };   // content viewport in stage coords — same centre (680,360), enlarged so the tiers keep a margin and never clip at the box edges (5:4)
+  const CV = { x: 280, y: 40, w: 800, h: 640 };   // content viewport in stage coords — wide enough to contain the camera pan so nothing clips (≈5:4)
   const fit = () => {
     const bw = hero.clientWidth, bh = hero.clientHeight;
     const s = Math.max(bw / CV.w, bh / CV.h);       // cover the box with the content viewport
