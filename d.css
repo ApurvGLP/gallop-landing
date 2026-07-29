@@ -77,7 +77,10 @@ body{
   line-height:var(--gallop-leading-body);
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
-  overflow-x:hidden;
+  /* clip (not hidden) so full-bleed sections don't cause h-scroll WITHOUT
+     turning <body> into a scroll container — `hidden` forces overflow-y to
+     `auto`, which silently breaks `position:sticky` (the .mseq pin). */
+  overflow-x:clip;
 }
 h1,h2,h3{font-family:var(--font-serif);font-weight:400;line-height:var(--gallop-leading-heading-lg);letter-spacing:var(--gallop-tracking);margin:0;}
 p{margin:0;}
@@ -707,7 +710,11 @@ img,svg,video{display:block;max-width:100%;}
    with its image stacked in reading order. This is what renders with no JS, with
    reduced-motion, and on small screens. JS adds `.mseq--live` (desktop + motion
    OK) to switch on the pinned scroll-scrub + draggable timeline further down. */
-.mseq{margin-top:clamp(3rem,5.5vw,4.75rem);}
+/* full-bleed section child of .sec (which has no inline padding); the base pads
+   both sides so the static/mobile view sits in the page margins. Live mode below
+   overrides to pad only the left (rail aligns to the content column, window
+   bleeds to the right edge — per Figma). */
+.mseq{margin-top:clamp(3rem,5.5vw,4.75rem);padding-inline:var(--space-page-x);}
 .mseq-legend{display:flex;flex-wrap:wrap;gap:.7rem 2rem;margin-bottom:clamp(1.6rem,2.8vw,2.4rem);}
 .mseq-key{display:inline-flex;align-items:center;gap:.55ch;font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);color:var(--gallop-text-secondary);}
 .mseq-key b{font-weight:500;color:var(--color-ink);}
@@ -732,12 +739,18 @@ img,svg,video{display:block;max-width:100%;}
 
 /* ---- LIVE mode: pinned scroll-scrub + draggable timeline (desktop only) ---- */
 @media (min-width:900px){
-  .mseq--live{--mseq-scroll:210vh;--mseq-c:var(--color-ochre);height:var(--mseq-scroll);}
+  .mseq--live{--mseq-scroll:230vh;--mseq-c:var(--color-ochre);height:var(--mseq-scroll);
+    padding-inline:0;}   /* padding moves onto the stage so the window can bleed right */
   .mseq--live.is-mod{--mseq-c:var(--gallop-accent-green);}
+  /* the stage pins to the viewport for the whole scroll of .mseq. Left pad aligns
+     the rail + legend to the page content column; no right pad → window bleeds. */
   .mseq--live .mseq-stage{position:sticky;top:0;min-height:100vh;display:flex;flex-direction:column;
-    justify-content:center;padding-top:clamp(5rem,7vw,6.5rem);padding-bottom:clamp(2rem,4vw,3.5rem);}
-  .mseq--live .mseq-grid{display:grid;grid-template-columns:minmax(270px,1fr) minmax(0,1.55fr);
-    gap:clamp(2rem,4vw,3.5rem);align-items:center;}
+    justify-content:center;gap:clamp(1.4rem,2.4vw,2rem);
+    padding-top:clamp(5.5rem,8vh,7rem);padding-bottom:clamp(2rem,4vh,3.5rem);
+    padding-left:calc(var(--gutter) + var(--space-page-x));}
+  .mseq--live .mseq-legend{margin-bottom:0;}
+  .mseq--live .mseq-grid{display:grid;grid-template-columns:minmax(240px,0.92fr) minmax(0,2fr);
+    gap:clamp(1.8rem,3.5vw,3.25rem);align-items:center;}
 
   /* rail: both states overlaid in one grid cell (cell sizes to the taller one,
      so the cross-fade never shifts layout). Points/headline light up on cue. */
@@ -747,35 +760,39 @@ img,svg,video{display:block;max-width:100%;}
     transition:opacity .45s var(--ease),visibility 0s linear .45s;}
   .mseq--live .mseq-state.is-current{opacity:1;visibility:visible;transition:opacity .45s var(--ease);}
   .mseq--live .mseq-headline,
-  .mseq--live .mseq-points li{color:var(--gallop-text-secondary);opacity:.38;
+  .mseq--live .mseq-points li{color:var(--gallop-text-secondary);opacity:.34;
     transition:opacity .4s var(--ease),color .4s var(--ease);}
   .mseq--live .mseq-headline.lit,
   .mseq--live .mseq-points li.lit{opacity:1;color:var(--color-ink);}
 
-  /* viewer: timeline above, then the image window */
+  /* viewer: timeline above, then the image window (both bleed to the right edge) */
   .mseq--live .mseq-viewer{display:block;}
   .mseq--live .mseq-track{position:relative;height:6px;border-radius:999px;background:var(--hairline);
-    margin-bottom:clamp(1.1rem,1.8vw,1.6rem);cursor:grab;touch-action:none;
-    outline:none;--p:0;}
+    margin-bottom:clamp(1.2rem,2vw,1.8rem);margin-right:clamp(1.15rem,4.5vw,80px);
+    cursor:grab;touch-action:none;outline:none;--p:0;}
   .mseq--live .mseq-track:active{cursor:grabbing;}
   .mseq--live .mseq-track:focus-visible{box-shadow:0 0 0 3px rgba(54,47,44,.18);}
   .mseq--live .mseq-track-fill{position:absolute;inset:0;border-radius:999px;
     background:linear-gradient(90deg,var(--color-ochre) 0%,var(--color-ochre) 50%,var(--gallop-accent-green) 50%,var(--gallop-accent-green) 100%);
     clip-path:inset(0 calc((1 - var(--p)) * 100%) 0 0);}
+  /* the draggable circle handle: white disc, phase-coloured ring + dot, always a
+     soft outer ring so it clearly reads as a grabbable control on the thin bar */
   .mseq--live .mseq-knob{position:absolute;top:50%;left:calc(var(--p) * 100%);
     width:26px;height:26px;transform:translate(-50%,-50%);border-radius:50%;
-    background:var(--color-bg,#FDFDFC);border:2px solid var(--mseq-c);
-    box-shadow:0 1px 5px rgba(54,47,44,.28);display:grid;place-items:center;
-    transition:border-color .3s var(--ease);}
+    background:#FDFDFC;border:2px solid var(--mseq-c);
+    box-shadow:0 0 0 5px color-mix(in srgb, var(--mseq-c) 22%, transparent),0 1px 5px rgba(54,47,44,.28);
+    display:grid;place-items:center;transition:border-color .3s var(--ease),box-shadow .2s var(--ease);}
   .mseq--live .mseq-knob::before{content:"";width:9px;height:9px;border-radius:50%;
     background:var(--mseq-c);transition:background .3s var(--ease);}
-  .mseq--live .mseq-track:hover .mseq-knob{box-shadow:0 0 0 6px rgba(54,47,44,.06),0 1px 5px rgba(54,47,44,.28);}
+  .mseq--live .mseq-track:hover .mseq-knob,
+  .mseq--live .mseq-track:active .mseq-knob{box-shadow:0 0 0 8px color-mix(in srgb, var(--mseq-c) 26%, transparent),0 1px 6px rgba(54,47,44,.3);}
 
+  /* image window: bleeds to the viewport's right edge, square corners (brand) */
   .mseq--live .mseq-window{position:relative;display:grid;width:100%;aspect-ratio:16/10;
-    max-height:min(62vh,600px);overflow:hidden;}
+    max-height:min(66vh,640px);overflow:hidden;}
   .mseq--live .mseq-shot{grid-area:1/1;}
   .mseq--live .mseq-shot img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-    width:auto;height:auto;max-width:88%;max-height:84%;}
+    width:auto;height:auto;max-width:90%;max-height:86%;}
   /* Modernize screen (with its green field) wipes in over Discover, left→right */
   .mseq--live .mseq-shot--mod{clip-path:inset(0 calc((1 - var(--wipe,0)) * 100%) 0 0);}
 }
