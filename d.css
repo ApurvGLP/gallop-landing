@@ -620,7 +620,10 @@ img,svg,video{display:block;max-width:100%;}
       linear-gradient(var(--color-ochre),var(--color-ochre));
     background-repeat:no-repeat,no-repeat,no-repeat;
     background-position:top center,top center,top center;
-    background-size:100% var(--band-d),auto var(--band-d),100% var(--band-d);
+    /* texture layer = cover so it always fills the full viewport width (was
+       `auto`, which left flat ochre at the sides on wide screens); the flanking
+       gradient layers stay pinned to the band height */
+    background-size:100% var(--band-d),cover,100% var(--band-d);
   }
   .xhero-shot{margin-bottom:-87px;}   /* DATA box straddles the gold edge; lower part on the paper */
   .logoband{padding-top:clamp(6rem,9vw,9rem);}  /* clear the animation's overhang */
