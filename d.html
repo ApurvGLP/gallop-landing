@@ -79,47 +79,74 @@
         <p class="mb-body">Every modernization starts the same way, someone has to figure out what the current system actually does. Most tools treat that as a quick first pass, then move on to writing code. Gallop treats it as the job. It maps every repository, every dependency, every business rule, and keeps that map current as the rebuild happens. Code only gets written against a system Gallop has already confirmed it understands.</p>
       </div>
     </div>
-    <!-- Discover / Modernization: the two products shown side by side, in a
-         full-bleed horizontal-scroll row (each panel ~75vw, snaps per panel —
-         the team's preferred two-image view). Each column: label, product mock
-         on its texture field, then a caption (lead line + mechanism list). -->
-    <div class="disc-duo reveal d1">
-        <article class="disc-col">
-          <div class="disc-col-head">
-            <span class="disc-name">Gallop Discover</span>
-            <span class="disc-sub">Standalone</span>
+    <!-- Discover → Modernize: one windowed sequence. A progress timeline sits
+         above the image; scrolling pins the stage and scrubs it — the caption
+         points light up in turn, then the image swipes Discover→Modernize at the
+         midpoint and the second half lights up. The timeline knob is always
+         draggable to replay at your own pace. Under .noanim / reduced-motion /
+         small screens it renders as a static stacked view (both states shown). -->
+    <div class="mseq" id="mseq" data-mseq>
+      <div class="mseq-stage">
+
+        <!-- legend / key: which product each half of the timeline represents -->
+        <div class="mseq-legend" aria-hidden="true">
+          <span class="mseq-key mseq-key--disc"><i></i><b>Gallop Discover</b> Standalone</span>
+          <span class="mseq-key mseq-key--mod"><i></i><b>Gallop Modernize</b> When you're ready</span>
+        </div>
+
+        <div class="mseq-grid">
+          <!-- LEFT: caption rail. Two states cross-fade at the midpoint; the
+               points inside the active state light up as the timeline advances. -->
+          <div class="mseq-rail">
+            <div class="mseq-state is-current" data-state="disc">
+              <p class="mseq-name"><b>Gallop Discover</b> <span>Standalone</span></p>
+              <p class="mseq-headline">AI-driven comprehension of the system nobody fully understands.</p>
+              <ul class="mseq-points">
+                <li>Business and functional logic, extracted and readable</li>
+                <li>Dependency graphs: what touches what, what's safe to change</li>
+                <li>Risks and vulnerabilities, surfaced and prioritized</li>
+                <li>Architecture options with cost attached, delivered as a decision pack</li>
+              </ul>
+              <div class="mseq-inlineshot texfield tf-disc">
+                <img src="assets/mock-discover.png" alt="Gallop Discover: a preliminary report mapping the system hierarchy — modules, data stores and decision points — beside an AI assistant answering questions about the codebase" />
+              </div>
+            </div>
+            <div class="mseq-state" data-state="mod">
+              <p class="mseq-name"><b>Gallop Modernize</b> <span>When you're ready</span></p>
+              <p class="mseq-headline">An AI-native rebuild, steered by your own small team.</p>
+              <ul class="mseq-points">
+                <li>Custom-built for your business logic and rules</li>
+                <li>Evidence-based validation against real behavior</li>
+                <li>GCP, AWS, or Azure, matched to the architecture that fits you</li>
+                <li>Your software, your IP. Never billed for it again</li>
+              </ul>
+              <div class="mseq-inlineshot texfield tf-mod">
+                <img src="assets/mock-modernization.png" alt="Gallop Modernization: the rebuilt system mapped and verified against the original before cutover" />
+              </div>
+            </div>
           </div>
-          <div class="disc-media texfield tf-disc">
-            <img src="assets/mock-discover.png" alt="Gallop Discover: a preliminary report mapping the system hierarchy — modules, data stores and decision points — beside an AI assistant answering questions about the codebase" />
+
+          <!-- RIGHT: the timeline sits above the image window -->
+          <div class="mseq-viewer">
+            <div class="mseq-track" data-mseq-track role="slider" tabindex="0"
+                 aria-label="Scrub between Gallop Discover and Gallop Modernize"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                 aria-valuetext="Gallop Discover">
+              <div class="mseq-track-fill"></div>
+              <span class="mseq-knob" aria-hidden="true"></span>
+            </div>
+            <div class="mseq-window">
+              <div class="mseq-shot mseq-shot--disc texfield tf-disc">
+                <img src="assets/mock-discover.png" alt="Gallop Discover: a preliminary report mapping the system hierarchy — modules, data stores and decision points — beside an AI assistant answering questions about the codebase" />
+              </div>
+              <div class="mseq-shot mseq-shot--mod texfield tf-mod">
+                <img src="assets/mock-modernization.png" alt="Gallop Modernization: the rebuilt system mapped and verified against the original before cutover" />
+              </div>
+            </div>
           </div>
-          <div class="disc-caption">
-            <p class="disc-headline">AI-driven comprehension of the system nobody fully understands.</p>
-            <ul class="disc-list">
-              <li>Business and functional logic, extracted and readable</li>
-              <li>Dependency graphs: what touches what, what's safe to change</li>
-              <li>Risks and vulnerabilities, surfaced and prioritized</li>
-              <li>Architecture options with cost attached, delivered as a decision pack</li>
-            </ul>
-          </div>
-        </article>
-        <article class="disc-col">
-          <div class="disc-col-head">
-            <span class="disc-name">Gallop Modernization</span>
-            <span class="disc-sub">When you're ready</span>
-          </div>
-          <div class="disc-media texfield tf-mod">
-            <img src="assets/mock-modernization.png" alt="Gallop Modernization: the rebuilt system mapped and verified against the original before cutover" />
-          </div>
-          <div class="disc-caption">
-            <p class="disc-headline">An AI-native rebuild, steered by your own small team.</p>
-            <ul class="disc-list">
-              <li>Custom-built for your business logic and rules</li>
-              <li>Evidence-based validation against real behavior</li>
-              <li>GCP, AWS, or Azure, matched to the architecture that fits you</li>
-              <li>Your software, your IP. Never billed for it again</li>
-            </ul>
-          </div>
-        </article>
+        </div>
+
+      </div>
     </div>
   </section>
 

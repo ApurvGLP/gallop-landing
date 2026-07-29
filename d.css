@@ -702,6 +702,84 @@ img,svg,video{display:block;max-width:100%;}
 .disc-list li{padding:clamp(.5rem,.9vw,.7rem) 0;border-top:1px solid var(--hairline);font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);line-height:1.28;color:var(--gallop-text-secondary);}
 .disc-list li:first-child{border-top:none;padding-top:0;}
 
+/* --- DISCOVER → MODERNIZE — windowed scroll sequence ----------------------
+   Base rules below are the STATIC fallback: legend, then each product's caption
+   with its image stacked in reading order. This is what renders with no JS, with
+   reduced-motion, and on small screens. JS adds `.mseq--live` (desktop + motion
+   OK) to switch on the pinned scroll-scrub + draggable timeline further down. */
+.mseq{margin-top:clamp(3rem,5.5vw,4.75rem);}
+.mseq-legend{display:flex;flex-wrap:wrap;gap:.7rem 2rem;margin-bottom:clamp(1.6rem,2.8vw,2.4rem);}
+.mseq-key{display:inline-flex;align-items:center;gap:.55ch;font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);color:var(--gallop-text-secondary);}
+.mseq-key b{font-weight:500;color:var(--color-ink);}
+.mseq-key i{width:10px;height:10px;border-radius:50%;flex:none;margin-right:.15ch;}
+.mseq-key--disc i{background:var(--color-ochre);}
+.mseq-key--mod i{background:var(--gallop-accent-green);}
+
+.mseq-grid{display:flex;flex-direction:column;gap:clamp(2.4rem,4.5vw,3.5rem);}
+.mseq-rail{display:flex;flex-direction:column;gap:clamp(2.4rem,4.5vw,3.5rem);}
+.mseq-state{display:flex;flex-direction:column;}
+.mseq-name{font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.2;color:var(--gallop-text-secondary);}
+.mseq-name b{font-weight:500;color:var(--color-ink);}
+.mseq-headline{margin-top:.75rem;font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);line-height:1.28;color:var(--color-ink);max-width:32ch;}
+.mseq-points{margin:1.1rem 0 0;padding:0;list-style:none;max-width:38ch;}
+.mseq-points li{padding:clamp(.5rem,.9vw,.7rem) 0;border-top:1px solid var(--hairline);font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);line-height:1.28;color:var(--gallop-text-secondary);}
+.mseq-points li:first-child{border-top:none;padding-top:0;}
+/* inline product image shown in the static fallback */
+.mseq-inlineshot{margin-top:clamp(1.4rem,2.4vw,2rem);width:100%;aspect-ratio:5/3;}
+.mseq-inlineshot img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:auto;height:auto;max-width:88%;max-height:84%;}
+/* the shared window + timeline only exist in live mode */
+.mseq-viewer{display:none;}
+
+/* ---- LIVE mode: pinned scroll-scrub + draggable timeline (desktop only) ---- */
+@media (min-width:900px){
+  .mseq--live{--mseq-scroll:210vh;--mseq-c:var(--color-ochre);height:var(--mseq-scroll);}
+  .mseq--live.is-mod{--mseq-c:var(--gallop-accent-green);}
+  .mseq--live .mseq-stage{position:sticky;top:0;min-height:100vh;display:flex;flex-direction:column;
+    justify-content:center;padding-top:clamp(5rem,7vw,6.5rem);padding-bottom:clamp(2rem,4vw,3.5rem);}
+  .mseq--live .mseq-grid{display:grid;grid-template-columns:minmax(270px,1fr) minmax(0,1.55fr);
+    gap:clamp(2rem,4vw,3.5rem);align-items:center;}
+
+  /* rail: both states overlaid in one grid cell (cell sizes to the taller one,
+     so the cross-fade never shifts layout). Points/headline light up on cue. */
+  .mseq--live .mseq-inlineshot{display:none;}
+  .mseq--live .mseq-rail{display:grid;gap:0;}
+  .mseq--live .mseq-state{grid-area:1/1;opacity:0;visibility:hidden;
+    transition:opacity .45s var(--ease),visibility 0s linear .45s;}
+  .mseq--live .mseq-state.is-current{opacity:1;visibility:visible;transition:opacity .45s var(--ease);}
+  .mseq--live .mseq-headline,
+  .mseq--live .mseq-points li{color:var(--gallop-text-secondary);opacity:.38;
+    transition:opacity .4s var(--ease),color .4s var(--ease);}
+  .mseq--live .mseq-headline.lit,
+  .mseq--live .mseq-points li.lit{opacity:1;color:var(--color-ink);}
+
+  /* viewer: timeline above, then the image window */
+  .mseq--live .mseq-viewer{display:block;}
+  .mseq--live .mseq-track{position:relative;height:6px;border-radius:999px;background:var(--hairline);
+    margin-bottom:clamp(1.1rem,1.8vw,1.6rem);cursor:grab;touch-action:none;
+    outline:none;--p:0;}
+  .mseq--live .mseq-track:active{cursor:grabbing;}
+  .mseq--live .mseq-track:focus-visible{box-shadow:0 0 0 3px rgba(54,47,44,.18);}
+  .mseq--live .mseq-track-fill{position:absolute;inset:0;border-radius:999px;
+    background:linear-gradient(90deg,var(--color-ochre) 0%,var(--color-ochre) 50%,var(--gallop-accent-green) 50%,var(--gallop-accent-green) 100%);
+    clip-path:inset(0 calc((1 - var(--p)) * 100%) 0 0);}
+  .mseq--live .mseq-knob{position:absolute;top:50%;left:calc(var(--p) * 100%);
+    width:26px;height:26px;transform:translate(-50%,-50%);border-radius:50%;
+    background:var(--color-bg,#FDFDFC);border:2px solid var(--mseq-c);
+    box-shadow:0 1px 5px rgba(54,47,44,.28);display:grid;place-items:center;
+    transition:border-color .3s var(--ease);}
+  .mseq--live .mseq-knob::before{content:"";width:9px;height:9px;border-radius:50%;
+    background:var(--mseq-c);transition:background .3s var(--ease);}
+  .mseq--live .mseq-track:hover .mseq-knob{box-shadow:0 0 0 6px rgba(54,47,44,.06),0 1px 5px rgba(54,47,44,.28);}
+
+  .mseq--live .mseq-window{position:relative;display:grid;width:100%;aspect-ratio:16/10;
+    max-height:min(62vh,600px);overflow:hidden;}
+  .mseq--live .mseq-shot{grid-area:1/1;}
+  .mseq--live .mseq-shot img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:auto;height:auto;max-width:88%;max-height:84%;}
+  /* Modernize screen (with its green field) wipes in over Discover, left→right */
+  .mseq--live .mseq-shot--mod{clip-path:inset(0 calc((1 - var(--wipe,0)) * 100%) 0 0);}
+}
+
 /* --- ENTERPRISE / TRUST ---------------------------------- */
 /* header split reuses .mb-head: .ent-lead (title + standfirst) sits left, the
    team paragraph (.mb-body) sits right */
