@@ -87,10 +87,10 @@
       </div>
     </div>
     <!-- Discover → Modernize: one windowed sequence. A progress timeline sits
-         above the image; scrolling pins the stage and scrubs it — the caption
-         points light up in turn, then the image swipes Discover→Modernize at the
-         midpoint and the second half lights up. The timeline knob is always
-         draggable to replay at your own pace. Under .noanim / reduced-motion /
+         flush with the top of the copy box; scrolling pins the stage and scrubs
+         it (fully reversible, no drag) — the caption points light up in turn,
+         then at the midpoint the whole Modernize screen (mock + green field)
+         fades in and the rail cross-fades. Under .noanim / reduced-motion /
          small screens it renders as a static stacked view (both states shown). -->
     <div class="mseq" id="mseq" data-mseq>
       <div class="mseq-stage">
@@ -126,15 +126,12 @@
             </div>
           </div>
 
-          <!-- RIGHT: the timeline (row 1, above the window) then the window
-               (row 2). Both live in the right column; the surface box sits in
-               row 2 of the left column so its top aligns with the window. -->
-          <div class="mseq-track" data-mseq-track role="slider" tabindex="0"
-               aria-label="Scrub between Gallop Discover and Gallop Modernize"
-               aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
-               aria-valuetext="Gallop Discover">
+          <!-- RIGHT: the timeline (row 1) then the window (row 2). The surface
+               box on the left spans both rows, so its top is flush with the
+               timeline; the window sits a small gap below it. -->
+          <div class="mseq-track" data-mseq-track aria-hidden="true">
             <div class="mseq-track-fill"></div>
-            <span class="mseq-knob" aria-hidden="true"></span>
+            <span class="mseq-knob"></span>
           </div>
           <div class="mseq-window">
             <div class="mseq-shot mseq-shot--disc texfield tf-disc">

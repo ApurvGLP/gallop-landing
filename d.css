@@ -741,7 +741,7 @@ img,svg,video{display:block;max-width:100%;}
 /* the shared window + timeline only exist in live mode */
 .mseq-track,.mseq-window{display:none;}
 
-/* ---- LIVE mode: pinned scroll-scrub + draggable timeline (desktop only) ---- */
+/* ---- LIVE mode: pinned scroll-scrub (desktop only) ---- */
 @media (min-width:900px){
   .mseq--live{--mseq-scroll:230vh;--mseq-c:var(--color-ochre);height:var(--mseq-scroll);
     padding-inline:0;}   /* padding moves onto the stage so the window can bleed right */
@@ -750,20 +750,20 @@ img,svg,video{display:block;max-width:100%;}
      the surface box runs to the left viewport edge, the window to the right. */
   .mseq--live .mseq-stage{position:sticky;top:0;min-height:100vh;display:flex;flex-direction:column;
     justify-content:center;padding-top:clamp(5.5rem,8vh,7rem);padding-bottom:clamp(2rem,4vh,3.5rem);}
-  /* two columns (box | window) × two rows (timeline / body). The timeline sits
-     in row 1 above the window; the surface box sits in row 2 of the left column
-     so its top aligns with the window's top, not the timeline. */
+  /* two columns (box | window) × two rows (timeline / body). The surface box
+     SPANS both rows so its top edge is flush with the timeline; the window sits
+     in row 2, a small gap below the timeline. */
   .mseq--live .mseq-grid{display:grid;grid-template-columns:minmax(300px,0.86fr) minmax(0,2.1fr);
-    grid-template-rows:auto auto;gap:0;align-items:stretch;}
+    grid-template-rows:auto auto;column-gap:0;row-gap:clamp(1rem,1.6vw,1.4rem);align-items:stretch;}
 
   /* LEFT: the copy sits in a warm Surface-colour box that bleeds to the left
-     edge; its inner left padding aligns the text to the page content column.
-     Both states overlay one grid cell so the cross-fade never shifts layout;
-     name + headline sit at the top, the points sink to the bottom of the box. */
+     edge. Its inner left padding is a small margin from the VIEWPORT (not the
+     centred page content column). Both states overlay one grid cell so the
+     cross-fade never shifts layout; name + headline at top, points at bottom. */
   .mseq--live .mseq-inlineshot{display:none;}
-  .mseq--live .mseq-rail{grid-column:1;grid-row:2;display:grid;gap:0;background:var(--color-surface);
+  .mseq--live .mseq-rail{grid-column:1;grid-row:1 / span 2;display:grid;gap:0;background:var(--color-surface);
     padding:clamp(2rem,4.5vh,3.4rem) clamp(1.6rem,2.8vw,2.6rem);
-    padding-left:calc(var(--gutter) + var(--space-page-x));}
+    padding-left:var(--space-page-x);}
   .mseq--live .mseq-state{grid-area:1/1;min-height:100%;opacity:0;visibility:hidden;
     transition:opacity .45s var(--ease),visibility 0s linear .45s;}
   .mseq--live .mseq-state.is-current{opacity:1;visibility:visible;transition:opacity .45s var(--ease);}
@@ -774,29 +774,24 @@ img,svg,video{display:block;max-width:100%;}
   .mseq--live .mseq-headline.lit,
   .mseq--live .mseq-points li.lit{opacity:1;color:var(--color-ink);}
 
-  /* timeline: row 1, right column, above the window */
-  .mseq--live .mseq-track{display:block;grid-column:2;grid-row:1;
+  /* timeline: row 1, right column, top edge flush with the box. Progress-only
+     (scroll drives it) — not interactive. */
+  .mseq--live .mseq-track{display:block;grid-column:2;grid-row:1;align-self:start;
     position:relative;height:6px;border-radius:999px;background:var(--hairline);
-    align-self:end;margin-bottom:clamp(1.2rem,2vw,1.8rem);margin-right:clamp(1.15rem,4.5vw,80px);
-    cursor:grab;touch-action:none;outline:none;--p:0;}
-  .mseq--live .mseq-track:active{cursor:grabbing;}
-  .mseq--live .mseq-track:focus-visible{box-shadow:0 0 0 3px rgba(54,47,44,.18);}
+    margin-right:clamp(1.15rem,4.5vw,80px);--p:0;}
   /* one smooth yellow→green gradient across the whole track (Discover→Modernize,
      per the key), revealed left-to-right as progress advances */
   .mseq--live .mseq-track-fill{position:absolute;inset:0;border-radius:999px;
     background:linear-gradient(90deg,var(--color-ochre) 0%,var(--gallop-accent-green) 100%);
     clip-path:inset(0 calc((1 - var(--p)) * 100%) 0 0);}
-  /* the draggable circle handle: white disc, phase-coloured ring + dot, always a
-     soft outer ring so it clearly reads as a grabbable control on the thin bar */
+  /* progress marker: a small phase-coloured circle riding the fill (not draggable) */
   .mseq--live .mseq-knob{position:absolute;top:50%;left:calc(var(--p) * 100%);
-    width:26px;height:26px;transform:translate(-50%,-50%);border-radius:50%;
+    width:22px;height:22px;transform:translate(-50%,-50%);border-radius:50%;
     background:#FDFDFC;border:2px solid var(--mseq-c);
-    box-shadow:0 0 0 5px color-mix(in srgb, var(--mseq-c) 22%, transparent),0 1px 5px rgba(54,47,44,.28);
-    display:grid;place-items:center;transition:border-color .3s var(--ease),box-shadow .2s var(--ease);}
-  .mseq--live .mseq-knob::before{content:"";width:9px;height:9px;border-radius:50%;
+    box-shadow:0 1px 4px rgba(54,47,44,.22);display:grid;place-items:center;
+    transition:border-color .3s var(--ease);}
+  .mseq--live .mseq-knob::before{content:"";width:8px;height:8px;border-radius:50%;
     background:var(--mseq-c);transition:background .3s var(--ease);}
-  .mseq--live .mseq-track:hover .mseq-knob,
-  .mseq--live .mseq-track:active .mseq-knob{box-shadow:0 0 0 8px color-mix(in srgb, var(--mseq-c) 26%, transparent),0 1px 6px rgba(54,47,44,.3);}
 
   /* image window: row 2, right column; bleeds to the viewport's right edge,
      square corners (brand). Its height drives the row, so the box matches it. */
@@ -806,8 +801,10 @@ img,svg,video{display:block;max-width:100%;}
   .mseq--live .mseq-shot{grid-area:1/1;}
   .mseq--live .mseq-shot img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
     width:auto;height:auto;max-width:90%;max-height:86%;}
-  /* Modernize screen (with its green field) wipes in over Discover, left→right */
-  .mseq--live .mseq-shot--mod{clip-path:inset(0 calc((1 - var(--wipe,0)) * 100%) 0 0);}
+  /* Modernize screen — the whole new screen (mock + green field) fades in over
+     Discover at the midpoint, instead of swiping */
+  .mseq--live .mseq-shot--disc{opacity:1;}
+  .mseq--live .mseq-shot--mod{opacity:var(--fade,0);}
 }
 
 /* --- ENTERPRISE / TRUST ---------------------------------- */
