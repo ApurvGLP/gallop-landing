@@ -76,7 +76,14 @@
     <div class="wrap">
       <div class="mb-head reveal">
         <h2 class="hx">The real work happens before the first line of code</h2>
-        <p class="mb-body">Every modernization starts the same way, someone has to figure out what the current system actually does. Most tools treat that as a quick first pass, then move on to writing code. Gallop treats it as the job. It maps every repository, every dependency, every business rule, and keeps that map current as the rebuild happens. Code only gets written against a system Gallop has already confirmed it understands.</p>
+        <div class="mb-right">
+          <p class="mb-body">Every modernization starts the same way, someone has to figure out what the current system actually does. Most tools treat that as a quick first pass, then move on to writing code. Gallop treats it as the job. It maps every repository, every dependency, every business rule, and keeps that map current as the rebuild happens. Code only gets written against a system Gallop has already confirmed it understands.</p>
+          <!-- legend / key: the two products the timeline moves between -->
+          <div class="mseq-legend">
+            <span class="mseq-key mseq-key--disc"><i></i><b>Gallop Discover</b> Standalone</span>
+            <span class="mseq-key mseq-key--mod"><i></i><b>Gallop Modernize</b> When you're ready</span>
+          </div>
+        </div>
       </div>
     </div>
     <!-- Discover → Modernize: one windowed sequence. A progress timeline sits
@@ -87,13 +94,6 @@
          small screens it renders as a static stacked view (both states shown). -->
     <div class="mseq" id="mseq" data-mseq>
       <div class="mseq-stage">
-
-        <!-- legend / key: which product each half of the timeline represents -->
-        <div class="mseq-legend" aria-hidden="true">
-          <span class="mseq-key mseq-key--disc"><i></i><b>Gallop Discover</b> Standalone</span>
-          <span class="mseq-key mseq-key--mod"><i></i><b>Gallop Modernize</b> When you're ready</span>
-        </div>
-
         <div class="mseq-grid">
           <!-- LEFT: caption rail. Two states cross-fade at the midpoint; the
                points inside the active state light up as the timeline advances. -->
@@ -126,22 +126,22 @@
             </div>
           </div>
 
-          <!-- RIGHT: the timeline sits above the image window -->
-          <div class="mseq-viewer">
-            <div class="mseq-track" data-mseq-track role="slider" tabindex="0"
-                 aria-label="Scrub between Gallop Discover and Gallop Modernize"
-                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
-                 aria-valuetext="Gallop Discover">
-              <div class="mseq-track-fill"></div>
-              <span class="mseq-knob" aria-hidden="true"></span>
+          <!-- RIGHT: the timeline (row 1, above the window) then the window
+               (row 2). Both live in the right column; the surface box sits in
+               row 2 of the left column so its top aligns with the window. -->
+          <div class="mseq-track" data-mseq-track role="slider" tabindex="0"
+               aria-label="Scrub between Gallop Discover and Gallop Modernize"
+               aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+               aria-valuetext="Gallop Discover">
+            <div class="mseq-track-fill"></div>
+            <span class="mseq-knob" aria-hidden="true"></span>
+          </div>
+          <div class="mseq-window">
+            <div class="mseq-shot mseq-shot--disc texfield tf-disc">
+              <img src="assets/mock-discover.png" alt="Gallop Discover: a preliminary report mapping the system hierarchy — modules, data stores and decision points — beside an AI assistant answering questions about the codebase" />
             </div>
-            <div class="mseq-window">
-              <div class="mseq-shot mseq-shot--disc texfield tf-disc">
-                <img src="assets/mock-discover.png" alt="Gallop Discover: a preliminary report mapping the system hierarchy — modules, data stores and decision points — beside an AI assistant answering questions about the codebase" />
-              </div>
-              <div class="mseq-shot mseq-shot--mod texfield tf-mod">
-                <img src="assets/mock-modernization.png" alt="Gallop Modernization: the rebuilt system mapped and verified against the original before cutover" />
-              </div>
+            <div class="mseq-shot mseq-shot--mod texfield tf-mod">
+              <img src="assets/mock-modernization.png" alt="Gallop Modernization: the rebuilt system mapped and verified against the original before cutover" />
             </div>
           </div>
         </div>

@@ -715,8 +715,12 @@ img,svg,video{display:block;max-width:100%;}
    overrides to pad only the left (rail aligns to the content column, window
    bleeds to the right edge — per Figma). */
 .mseq{margin-top:clamp(3rem,5.5vw,4.75rem);padding-inline:var(--space-page-x);}
-.mseq-legend{display:flex;flex-wrap:wrap;gap:.7rem 2rem;margin-bottom:clamp(1.6rem,2.8vw,2.4rem);}
-.mseq-key{display:inline-flex;align-items:center;gap:.55ch;font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);color:var(--gallop-text-secondary);}
+/* legend / key sits under the intro paragraph (right column of the header),
+   the two products stacked one above the other */
+.mb-right{display:flex;flex-direction:column;gap:clamp(1.6rem,2.8vw,2.3rem);max-width:670px;}
+.mb-right .mb-body{max-width:none;}
+.mseq-legend{display:flex;flex-direction:column;gap:.7rem;}
+.mseq-key{display:inline-flex;align-items:center;gap:.6ch;font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);color:var(--gallop-text-secondary);}
 .mseq-key b{font-weight:500;color:var(--color-ink);}
 .mseq-key i{width:10px;height:10px;border-radius:50%;flex:none;margin-right:.15ch;}
 .mseq-key--disc i{background:var(--color-ochre);}
@@ -735,45 +739,52 @@ img,svg,video{display:block;max-width:100%;}
 .mseq-inlineshot{margin-top:clamp(1.4rem,2.4vw,2rem);width:100%;aspect-ratio:5/3;}
 .mseq-inlineshot img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:auto;height:auto;max-width:88%;max-height:84%;}
 /* the shared window + timeline only exist in live mode */
-.mseq-viewer{display:none;}
+.mseq-track,.mseq-window{display:none;}
 
 /* ---- LIVE mode: pinned scroll-scrub + draggable timeline (desktop only) ---- */
 @media (min-width:900px){
   .mseq--live{--mseq-scroll:230vh;--mseq-c:var(--color-ochre);height:var(--mseq-scroll);
     padding-inline:0;}   /* padding moves onto the stage so the window can bleed right */
   .mseq--live.is-mod{--mseq-c:var(--gallop-accent-green);}
-  /* the stage pins to the viewport for the whole scroll of .mseq. Left pad aligns
-     the rail + legend to the page content column; no right pad → window bleeds. */
+  /* the stage pins to the viewport for the whole scroll of .mseq. Full-bleed:
+     the surface box runs to the left viewport edge, the window to the right. */
   .mseq--live .mseq-stage{position:sticky;top:0;min-height:100vh;display:flex;flex-direction:column;
-    justify-content:center;gap:clamp(1.4rem,2.4vw,2rem);
-    padding-top:clamp(5.5rem,8vh,7rem);padding-bottom:clamp(2rem,4vh,3.5rem);
-    padding-left:calc(var(--gutter) + var(--space-page-x));}
-  .mseq--live .mseq-legend{margin-bottom:0;}
-  .mseq--live .mseq-grid{display:grid;grid-template-columns:minmax(240px,0.92fr) minmax(0,2fr);
-    gap:clamp(1.8rem,3.5vw,3.25rem);align-items:center;}
+    justify-content:center;padding-top:clamp(5.5rem,8vh,7rem);padding-bottom:clamp(2rem,4vh,3.5rem);}
+  /* two columns (box | window) × two rows (timeline / body). The timeline sits
+     in row 1 above the window; the surface box sits in row 2 of the left column
+     so its top aligns with the window's top, not the timeline. */
+  .mseq--live .mseq-grid{display:grid;grid-template-columns:minmax(300px,0.86fr) minmax(0,2.1fr);
+    grid-template-rows:auto auto;gap:0;align-items:stretch;}
 
-  /* rail: both states overlaid in one grid cell (cell sizes to the taller one,
-     so the cross-fade never shifts layout). Points/headline light up on cue. */
+  /* LEFT: the copy sits in a warm Surface-colour box that bleeds to the left
+     edge; its inner left padding aligns the text to the page content column.
+     Both states overlay one grid cell so the cross-fade never shifts layout;
+     name + headline sit at the top, the points sink to the bottom of the box. */
   .mseq--live .mseq-inlineshot{display:none;}
-  .mseq--live .mseq-rail{display:grid;gap:0;}
-  .mseq--live .mseq-state{grid-area:1/1;opacity:0;visibility:hidden;
+  .mseq--live .mseq-rail{grid-column:1;grid-row:2;display:grid;gap:0;background:var(--color-surface);
+    padding:clamp(2rem,4.5vh,3.4rem) clamp(1.6rem,2.8vw,2.6rem);
+    padding-left:calc(var(--gutter) + var(--space-page-x));}
+  .mseq--live .mseq-state{grid-area:1/1;min-height:100%;opacity:0;visibility:hidden;
     transition:opacity .45s var(--ease),visibility 0s linear .45s;}
   .mseq--live .mseq-state.is-current{opacity:1;visibility:visible;transition:opacity .45s var(--ease);}
+  .mseq--live .mseq-points{margin-top:auto;}
   .mseq--live .mseq-headline,
   .mseq--live .mseq-points li{color:var(--gallop-text-secondary);opacity:.34;
     transition:opacity .4s var(--ease),color .4s var(--ease);}
   .mseq--live .mseq-headline.lit,
   .mseq--live .mseq-points li.lit{opacity:1;color:var(--color-ink);}
 
-  /* viewer: timeline above, then the image window (both bleed to the right edge) */
-  .mseq--live .mseq-viewer{display:block;}
-  .mseq--live .mseq-track{position:relative;height:6px;border-radius:999px;background:var(--hairline);
-    margin-bottom:clamp(1.2rem,2vw,1.8rem);margin-right:clamp(1.15rem,4.5vw,80px);
+  /* timeline: row 1, right column, above the window */
+  .mseq--live .mseq-track{display:block;grid-column:2;grid-row:1;
+    position:relative;height:6px;border-radius:999px;background:var(--hairline);
+    align-self:end;margin-bottom:clamp(1.2rem,2vw,1.8rem);margin-right:clamp(1.15rem,4.5vw,80px);
     cursor:grab;touch-action:none;outline:none;--p:0;}
   .mseq--live .mseq-track:active{cursor:grabbing;}
   .mseq--live .mseq-track:focus-visible{box-shadow:0 0 0 3px rgba(54,47,44,.18);}
+  /* one smooth yellow→green gradient across the whole track (Discover→Modernize,
+     per the key), revealed left-to-right as progress advances */
   .mseq--live .mseq-track-fill{position:absolute;inset:0;border-radius:999px;
-    background:linear-gradient(90deg,var(--color-ochre) 0%,var(--color-ochre) 50%,var(--gallop-accent-green) 50%,var(--gallop-accent-green) 100%);
+    background:linear-gradient(90deg,var(--color-ochre) 0%,var(--gallop-accent-green) 100%);
     clip-path:inset(0 calc((1 - var(--p)) * 100%) 0 0);}
   /* the draggable circle handle: white disc, phase-coloured ring + dot, always a
      soft outer ring so it clearly reads as a grabbable control on the thin bar */
@@ -787,9 +798,11 @@ img,svg,video{display:block;max-width:100%;}
   .mseq--live .mseq-track:hover .mseq-knob,
   .mseq--live .mseq-track:active .mseq-knob{box-shadow:0 0 0 8px color-mix(in srgb, var(--mseq-c) 26%, transparent),0 1px 6px rgba(54,47,44,.3);}
 
-  /* image window: bleeds to the viewport's right edge, square corners (brand) */
-  .mseq--live .mseq-window{position:relative;display:grid;width:100%;aspect-ratio:16/10;
-    max-height:min(66vh,640px);overflow:hidden;}
+  /* image window: row 2, right column; bleeds to the viewport's right edge,
+     square corners (brand). Its height drives the row, so the box matches it. */
+  .mseq--live .mseq-window{grid-column:2;grid-row:2;
+    position:relative;display:grid;width:100%;aspect-ratio:16/10;
+    max-height:min(72vh,660px);overflow:hidden;}
   .mseq--live .mseq-shot{grid-area:1/1;}
   .mseq--live .mseq-shot img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
     width:auto;height:auto;max-width:90%;max-height:86%;}
