@@ -12,7 +12,7 @@
   'use strict';
   const W = 1280, H = 720;
   // ── Gallop palette (from tokens.css) ──────────────────────────────────
-  const INK = '#362F2C', INK2 = '#7A7471', BG = '#F9F9F2', SURF = '#F2F2EB',
+  const INK = '#362F2C', INK2 = '#7A7471', BG = '#FAFAF8', SURF = '#FDFDFC',
         CREAM = '#FCFAEB', OCHRE = '#F4E27B', OCHRE6 = '#D2C164',
         GREEN = '#97DFA7', GREEND = '#4F9E6A';
   const ACCENT = GREEND; // strokes/labels: deep green reads on the light canvas
@@ -40,9 +40,9 @@
   // cxShift so the agents on the right fit in frame.
   const CAM = { cxCenter: 550, cxShift: 622, cy: 361, z: 1.12 };
   const LAYERS = [
-    { legacy: 'PRESENTATION', modern: 'INTERFACE' },
-    { legacy: 'BUSINESS LOGIC', modern: 'SERVICES · API' },
-    { legacy: 'DATA', modern: 'SCHEMA' },
+    { legacy: 'Presentation', modern: 'Interface' },
+    { legacy: 'Business Logic', modern: 'Services · API' },
+    { legacy: 'Data', modern: 'Schema' },
   ];
   const UI_NAMES = ['orders-ui', 'billing-ui', 'admin-ui'];
   const SVC_NAMES = ['orders-svc', 'billing-svc', 'auth-svc'];
@@ -158,7 +158,13 @@
     const rows = LEGACY_ROWS[k].map(row => {
       const rd = el('gh-code-row', { top: row.y+'%' });
       row.segs.forEach(sg => {
-        const bar = el('gh-bar', { left:sg.x+'%', top:'0', width:sg.w+'%', background:`rgba(252,250,235,${0.24+sg.tone*0.28})` });
+        // some segments read as green "code" tokens (syntax) on the dark card,
+        // the rest as neutral cream — so the legacy monolith reads as code.
+        const isToken = sg.tone > 0.5;
+        const bg = isToken
+          ? `rgba(151,223,167,${0.34 + sg.tone*0.30})`   // sage-green code token
+          : `rgba(252,250,235,${0.20 + sg.tone*0.24})`;  // neutral cream
+        const bar = el('gh-bar', { left:sg.x+'%', top:'0', width:sg.w+'%', background:bg });
         rd.appendChild(bar);
       });
       let flagEl = null;
@@ -170,7 +176,7 @@
     const analyzed = el('', { position:'absolute', inset:'0', opacity:'0.9' });
     LEGACY_ROWS[k].forEach(row => {
       const rd = el('', { position:'absolute', left:'0', right:'0', top:row.y+'%' });
-      row.segs.forEach(sg => rd.appendChild(el('', { position:'absolute', left:sg.x+'%', top:'-1px', width:sg.w+'%', height:'6px', borderRadius:'0', border:`1px solid ${GREEND}`, background:`${GREEN}55` })));
+      row.segs.forEach(sg => rd.appendChild(el('', { position:'absolute', left:sg.x+'%', top:'-1px', width:sg.w+'%', height:'6px', borderRadius:'2px', border:'none', background:`${GREEN}40` })));
       analyzed.appendChild(rd);
     });
     inner.appendChild(analyzed);
@@ -199,9 +205,9 @@
       const box = el('', { display:'flex', flexDirection:'column', gap:'5px' });
       box.appendChild(ln('86%','0.18')); box.appendChild(ln('66%','0.15')); box.appendChild(ln('74%','0.12'));
       c.appendChild(box);
-      const foot = el('', { marginTop:'auto', display:'flex', gap:'5px', alignItems:'center', paddingTop:'6px', borderTop:'1px solid rgba(255,255,255,0.07)' });
+      const foot = el('', { marginTop:'auto', display:'flex', gap:'5px', alignItems:'center', paddingTop:'6px' });
       ['GET','POST'].forEach(v => { const chip = el('gh-chip'); chip.textContent = v; foot.appendChild(chip); });
-      const pd = el('', { marginLeft:'auto', width:'5px', height:'5px', borderRadius:'0', background:GREEND }); foot.appendChild(pd); pulses.push(pd);
+      const pd = el('', { marginLeft:'auto', width:'5px', height:'5px', borderRadius:'50%', background:GREEND }); foot.appendChild(pd); pulses.push(pd);
       c.appendChild(foot); wrap.appendChild(c);
     }
     wrap._pulses = pulses; return wrap;
@@ -210,9 +216,9 @@
     const wrap = el('gh-modern', { display:'flex', gap:'12px' });
     const c = cleanCard({ gap:'8px' });
     const hdr = el('', { display:'flex', gap:'8px' });
-    COL_NAMES.forEach(n => { const cell = el('', { flex:'1', borderRadius:'0', background:`${GREEN}66`, borderBottom:`1.5px solid ${GREEND}`, font:`500 10px 'Geist Mono', monospace`, letterSpacing:'-0.02em', color:INK, padding:'2px 4px' }); cell.textContent = n; hdr.appendChild(cell); });
+    COL_NAMES.forEach(n => { const cell = el('', { flex:'1', borderRadius:'4px', background:'rgba(54,47,44,0.05)', font:`500 10px 'Geist Mono', monospace`, letterSpacing:'-0.02em', color:INK2, padding:'2px 4px' }); cell.textContent = n; hdr.appendChild(cell); });
     c.appendChild(hdr);
-    for (let r = 0; r < 3; r++) { const row = el('', { display:'flex', gap:'8px' }); for (let cc = 0; cc < 4; cc++) row.appendChild(el('', { flex:'1', height:'5px', borderRadius:'0', background:`rgba(54,47,44,${0.18 - r*0.03})` })); c.appendChild(row); }
+    for (let r = 0; r < 3; r++) { const row = el('', { display:'flex', gap:'8px' }); for (let cc = 0; cc < 4; cc++) row.appendChild(el('', { flex:'1', height:'5px', borderRadius:'999px', background:`rgba(54,47,44,${0.18 - r*0.03})` })); c.appendChild(row); }
     wrap.appendChild(c); return wrap;
   }
   const TIER_BUILD = [buildTierUI, buildTierServices, buildTierData];
@@ -224,7 +230,7 @@
     // labels
     const labels = el('gh-labels');
     const legSpan = document.createElement('span'); legSpan.textContent = LAYERS[k].legacy; legSpan.style.color = 'rgba(252,250,235,0.55)';
-    const modSpan = document.createElement('span'); modSpan.textContent = LAYERS[k].modern; modSpan.style.color = GREEND;
+    const modSpan = document.createElement('span'); modSpan.textContent = LAYERS[k].modern; modSpan.style.color = INK;
     labels.appendChild(legSpan); labels.appendChild(modSpan); band.appendChild(labels);
     // modern content
     const modWrap = el('', { position:'absolute', inset:'44px 14px 14px' }); // equal padding: 14px sides/bottom + 14px gap below the label
@@ -278,8 +284,8 @@
         transformOrigin: 'center',
         // subtle in-place "pop" as the clean layer forms on top of the old
         transform:`translateY(${-5*lift + P.breathe*0.8*(1-p)}px) scale(${1 + 0.02*lift})`,
-        borderRadius: '0',                                   // brand: square
-        background: hexLerp(INK, SURF, p),                   // dark old → light clean
+        borderRadius: '8px',                                 // tier panel — --ui-radius-md
+        background: hexLerp(INK, BG, p),                     // dark old → light panel (canvas tone; inner cards sit lighter)
         border:`1px solid rgba(54,47,44,${lerp(0.14,0.10,p)})`,
         // SANCTIONED GLOSS: softened WARM lift shadow for product depth (not black)
         boxShadow: lift > 0.02 ? `0 ${9*lift}px ${26*lift}px rgba(54,47,44,${0.16*lift})` : 'none',
