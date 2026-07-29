@@ -86,12 +86,13 @@
         </div>
       </div>
     </div>
-    <!-- Discover → Modernize: one windowed sequence. A progress timeline sits
-         flush with the top of the copy box; scrolling pins the stage and scrubs
-         it (fully reversible, no drag) — the caption points light up in turn,
-         then at the midpoint the whole Modernize screen (mock + green field)
-         fades in and the rail cross-fades. Under .noanim / reduced-motion /
-         small screens it renders as a static stacked view (both states shown). -->
+    <!-- Discover → Modernize: one windowed sequence. A full-width progress
+         timeline sits above the whole section; scrolling pins the stage and
+         scrubs it (fully reversible, no drag) — the caption points light up
+         within the first quarter, then at the midpoint the whole Modernize
+         screen (mock + green field) fades in and the rail cross-fades. Under
+         .noanim / reduced-motion / small screens it renders as a static
+         stacked view (both states shown). -->
     <div class="mseq" id="mseq" data-mseq>
       <div class="mseq-stage">
         <div class="mseq-grid">
@@ -126,12 +127,11 @@
             </div>
           </div>
 
-          <!-- RIGHT: the timeline (row 1) then the window (row 2). The surface
-               box on the left spans both rows, so its top is flush with the
-               timeline; the window sits a small gap below it. -->
+          <!-- timeline: row 1, spanning the full viewport width above the whole
+               section. Then row 2 holds the box (left) and window (right),
+               tops aligned. -->
           <div class="mseq-track" data-mseq-track aria-hidden="true">
             <div class="mseq-track-fill"></div>
-            <span class="mseq-knob"></span>
           </div>
           <div class="mseq-window">
             <div class="mseq-shot mseq-shot--disc texfield tf-disc">

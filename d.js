@@ -79,8 +79,10 @@
       if(h <= 0) return 0;
       return clamp((-mseq.getBoundingClientRect().top) / h);
     }
+    /* light the copy quickly: within each half (local 0..1), all items are lit
+       by local≈0.5 — i.e. by the first quarter of the whole timeline */
     function litSet(nodes, local){
-      nodes.forEach(function(n, i){ n.classList.toggle('lit', local >= i * 0.18); });
+      nodes.forEach(function(n, i){ n.classList.toggle('lit', local >= i * 0.12); });
     }
     function render(v){
       track.style.setProperty('--p', v.toFixed(4));

@@ -750,18 +750,17 @@ img,svg,video{display:block;max-width:100%;}
      the surface box runs to the left viewport edge, the window to the right. */
   .mseq--live .mseq-stage{position:sticky;top:0;min-height:100vh;display:flex;flex-direction:column;
     justify-content:center;padding-top:clamp(5.5rem,8vh,7rem);padding-bottom:clamp(2rem,4vh,3.5rem);}
-  /* two columns (box | window) × two rows (timeline / body). The surface box
-     SPANS both rows so its top edge is flush with the timeline; the window sits
-     in row 2, a small gap below the timeline. */
+  /* row 1 = the full-width timeline (spans both columns); row 2 = box | window
+     with their tops aligned. */
   .mseq--live .mseq-grid{display:grid;grid-template-columns:minmax(300px,0.86fr) minmax(0,2.1fr);
-    grid-template-rows:auto auto;column-gap:0;row-gap:clamp(1rem,1.6vw,1.4rem);align-items:stretch;}
+    grid-template-rows:auto auto;column-gap:0;row-gap:clamp(1.4rem,2.4vw,2.2rem);align-items:stretch;}
 
   /* LEFT: the copy sits in a warm Surface-colour box that bleeds to the left
      edge. Its inner left padding is a small margin from the VIEWPORT (not the
      centred page content column). Both states overlay one grid cell so the
      cross-fade never shifts layout; name + headline at top, points at bottom. */
   .mseq--live .mseq-inlineshot{display:none;}
-  .mseq--live .mseq-rail{grid-column:1;grid-row:1 / span 2;display:grid;gap:0;background:var(--color-surface);
+  .mseq--live .mseq-rail{grid-column:1;grid-row:2;display:grid;gap:0;background:var(--color-surface);
     padding:clamp(2rem,4.5vh,3.4rem) clamp(1.6rem,2.8vw,2.6rem);
     padding-left:var(--space-page-x);}
   .mseq--live .mseq-state{grid-area:1/1;min-height:100%;opacity:0;visibility:hidden;
@@ -774,24 +773,15 @@ img,svg,video{display:block;max-width:100%;}
   .mseq--live .mseq-headline.lit,
   .mseq--live .mseq-points li.lit{opacity:1;color:var(--color-ink);}
 
-  /* timeline: row 1, right column, top edge flush with the box. Progress-only
-     (scroll drives it) — not interactive. */
-  .mseq--live .mseq-track{display:block;grid-column:2;grid-row:1;align-self:start;
-    position:relative;height:6px;border-radius:999px;background:var(--hairline);
-    margin-right:clamp(1.15rem,4.5vw,80px);--p:0;}
+  /* timeline: row 1, spanning the full viewport width above the whole section.
+     Progress-only (scroll drives it) — not interactive, no marker. */
+  .mseq--live .mseq-track{display:block;grid-column:1 / -1;grid-row:1;align-self:start;
+    position:relative;height:6px;background:var(--hairline);--p:0;}
   /* one smooth yellow→green gradient across the whole track (Discover→Modernize,
      per the key), revealed left-to-right as progress advances */
-  .mseq--live .mseq-track-fill{position:absolute;inset:0;border-radius:999px;
+  .mseq--live .mseq-track-fill{position:absolute;inset:0;
     background:linear-gradient(90deg,var(--color-ochre) 0%,var(--gallop-accent-green) 100%);
     clip-path:inset(0 calc((1 - var(--p)) * 100%) 0 0);}
-  /* progress marker: a small phase-coloured circle riding the fill (not draggable) */
-  .mseq--live .mseq-knob{position:absolute;top:50%;left:calc(var(--p) * 100%);
-    width:22px;height:22px;transform:translate(-50%,-50%);border-radius:50%;
-    background:#FDFDFC;border:2px solid var(--mseq-c);
-    box-shadow:0 1px 4px rgba(54,47,44,.22);display:grid;place-items:center;
-    transition:border-color .3s var(--ease);}
-  .mseq--live .mseq-knob::before{content:"";width:8px;height:8px;border-radius:50%;
-    background:var(--mseq-c);transition:background .3s var(--ease);}
 
   /* image window: row 2, right column; bleeds to the viewport's right edge,
      square corners (brand). Its height drives the row, so the box matches it. */
