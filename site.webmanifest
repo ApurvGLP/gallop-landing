@@ -1,0 +1,26 @@
+{
+  "name": "Gallop",
+  "short_name": "Gallop",
+  "description": "Modernizing the world's most critical systems with speed and precision.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#D8F18F",
+  "theme_color": "#D8F18F",
+  "icons": [
+    {
+      "src": "/assets/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
