@@ -22,6 +22,12 @@
   --color-ochre:     var(--color-accent);
   --color-ochre-2:   var(--color-accent-2);
 
+  /* Hero/section texture. WebP first with a JPEG fallback — image-set() picks
+     per-browser support, so old engines still get a texture. Both are the same
+     1920w export; the band never renders wider than that at 1x. */
+  --tex-hero: image-set(url("assets/bg-hero.webp") type("image/webp"),
+                        url("assets/bg-hero.jpg")  type("image/jpeg"));
+
   /* Alpha washes derived from Brand/Text Primary #362F2C */
   --ink-70: rgba(54,47,44,.7);
   --ink-50: rgba(54,47,44,.5);
@@ -272,6 +278,24 @@ img,svg,video{display:block;max-width:100%;}
 .faq-item .a p+p{margin-top:.8rem;}
 .faq-item .a .note{margin-top:1rem;font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--ink-40);}
 
+/* =====================  CTA BAND — centered invite under the questions  ===================== */
+/* [WEB] Figma bakes this band's field from three stacked mosaic renders under an
+   8.75° gold sweep, rotated 180° and cropped to the band; bg-cta-band.* is that
+   composite flattened onto the #cee9d6 base fill. Copy and button are centered,
+   with the dark ink button on the pale field. */
+.cta-band{position:relative;background-color:var(--gallop-secondary-100);
+  background-image:image-set(url("assets/bg-cta-band.webp") type("image/webp"),
+                             url("assets/bg-cta-band.jpg")  type("image/jpeg"));
+  background-size:cover;background-repeat:no-repeat;background-position:center;
+  overflow:hidden;margin:50px clamp(1.15rem,4.5vw,50px);}
+.cta-band-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;
+  gap:clamp(2rem,4.4vw,3.75rem);padding-block:clamp(3.25rem,7.3vw,6.25rem);text-align:center;}
+.cta-band-title{font-family:var(--font-body);font-weight:400;font-size:var(--type-h-xs);
+  letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-heading-xs);
+  color:var(--color-ink);max-width:min(583px,100%);}
+/* 50px of breathing room on both sides of the band comes from its own
+   margin-block, so the footer below keeps its own padding. */
+
 /* =====================  CLOSING + FOOTER — the ochre field returns  ===================== */
 /* [WEB] closing block. The mosaic texture (bg-closer.jpg — the designer's
    updated, more vibrant green-gold render) fills the band via cover. Over it, a
@@ -293,22 +317,39 @@ img,svg,video{display:block;max-width:100%;}
 .close-block .close-body{font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-body);max-width:44ch;color:var(--color-white);opacity:.92;}
 .close-actions{display:flex;gap:.9rem;flex-wrap:wrap;justify-content:flex-end;}
 
-.footer{position:relative;z-index:1;padding-block:clamp(1.15rem,2.3vw,1.9rem) 0;}
-/* Figma constrains all footer content (lockup, columns, legal row) to a 683px
-   column on the gold side of the texture — nothing drifts onto the green. */
-.footer-top{display:flex;flex-wrap:wrap;gap:clamp(3rem,7vw,7rem);justify-content:space-between;align-items:flex-start;max-width:683px;}
+.footer{position:relative;z-index:1;padding-block:clamp(2.5rem,5.6vw,80px);}
+/* Figma node 4295:810 — brand block and nav stack sit side by side with a 44px
+   gutter; the brand column is 768px and holds the lockup at top / tagline at
+   the bottom of a 260px box, so the two columns' baselines line up. */
+.footer-top{display:flex;flex-wrap:wrap;gap:44px;align-items:flex-start;}
+.footer-brand{display:flex;flex-direction:column;justify-content:space-between;min-height:clamp(11rem,18vw,16.25rem);width:768px;max-width:100%;flex:0 1 auto;}
 .footer-brand .mark-row{display:flex;align-items:center;}
 /* [EXT] lockup (bars glyph + wordmark) exported from Figma node 2309:9776;
    354×104 at the 1441 frame → scale proportionally with the viewport. */
-.footer-brand .mark-row img.lockup{height:clamp(3.2rem,7vw,6.2rem);width:auto;}
-.footer-tag{margin-top:1.4rem;font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-body);max-width:300px;}
-.footer-cols{display:flex;gap:clamp(2.5rem,5vw,5rem);flex-wrap:wrap;margin-top:clamp(1.1rem,2.4vw,1.9rem);}
-.footer-col h4{font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;margin:0 0 1rem;}
-.footer-col a{display:block;font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);padding:.3rem 0;opacity:.9;transition:opacity var(--dur-fast) var(--ease);}
+.footer-brand .mark-row img.lockup{height:clamp(4.2rem,9.4vw,8.44rem);width:auto;}
+.footer-tag{margin-top:1.4rem;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-body);max-width:300px;}
+/* Nav stack: link columns, then the legal row 44px below them. The 70px top
+   pad drops the column heads clear of the wordmark's cap height. */
+.footer-nav{display:flex;flex-direction:column;gap:28px;padding-top:clamp(1.5rem,4.9vw,70px);}
+.footer-nav .footer-bottom{margin-top:16px;}
+.footer-cols{display:flex;gap:clamp(2.5rem,5.5vw,80px);flex-wrap:wrap;}
+.footer-col{display:flex;flex-direction:column;gap:9px;}
+.footer-col h4{font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;margin:0;}
+.footer-col a{display:block;font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-body);opacity:.9;transition:opacity var(--dur-fast) var(--ease);}
 .footer-col a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px;}
 .footer-built{margin-top:1.8rem;padding-top:1.1rem;border-top:1px solid var(--ink-20);font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);line-height:1.4;max-width:72ch;}
 .footer-built b{font-weight:500;}
-.footer-bottom{margin-top:1.1rem;padding-block:.8rem clamp(1.15rem,2.3vw,1.8rem);display:flex;flex-wrap:wrap;gap:.8rem 1.6rem;justify-content:space-between;align-items:center;max-width:683px;font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;}
+/* Legal row: PRIVACY / TERMS lead, copyright follows 61px later — both flush
+   left under the link columns rather than pushed to opposite edges. */
+.footer-bottom{display:flex;flex-wrap:wrap;gap:.8rem 61px;align-items:flex-start;font-family:var(--font-mono);font-weight:400;font-size:var(--type-label-sm);line-height:1.2;letter-spacing:var(--gallop-tracking);text-transform:uppercase;}
+/* Social row sits between the link columns and the legal line, in the same
+   mono/uppercase key as the legal links. */
+.footer-social{display:flex;gap:24px;font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;}
+.footer-social a{opacity:.9;transition:opacity var(--dur-fast) var(--ease);}
+.footer-social a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px;}
+.footer-legal-links{display:flex;gap:24px;}
+.footer-legal-links a{opacity:.9;transition:opacity var(--dur-fast) var(--ease);}
+.footer-legal-links a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px;}
 
 /* =====================  SUBPAGES — page hero + form  ===================== */
 .page-hero{background:var(--color-ochre);position:relative;overflow:hidden;margin-top:calc(-1 * (66px + 14px));padding-top:calc(66px + 14px);}
@@ -454,7 +495,7 @@ img,svg,video{display:block;max-width:100%;}
   /* generous space between the CTA and the logo/footer block */
   .close-field .footer{padding-top:clamp(4.5rem,17vw,7rem);}
   /* extra yellow below the footer columns (taller footer, more gold) */
-  .footer-bottom{padding-bottom:clamp(4rem,13vw,6rem);}
+  .footer{padding-bottom:clamp(4rem,13vw,6rem);}
   .gates{grid-template-columns:repeat(2,1fr);}
   /* NOTE: .stats stacking now lives in the max-width:1100px block further down
      (after the base .stats rule) so it isn't overridden by source order. */
@@ -484,8 +525,10 @@ img,svg,video{display:block;max-width:100%;}
   .panel{padding:1.1rem;}
   .panel-row{gap:.8rem;flex-wrap:wrap;}
   .faq-item summary{padding-block:1.5rem;}
-  .footer-top{flex-direction:column;}
-  .footer-bottom{flex-direction:column;align-items:flex-start;}
+  .footer-top{flex-direction:column;gap:2.5rem;}
+  .footer-brand{min-height:0;width:100%;}
+  .footer-nav{gap:2.5rem;padding-top:0;}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:.8rem;}
   .post-grid{grid-template-columns:1fr;}
   .glance-row{grid-template-columns:1fr;gap:.2rem;}
   .role-row{grid-template-columns:minmax(0,1fr) 24px;gap:.5rem 1rem;}
@@ -580,6 +623,12 @@ img,svg,video{display:block;max-width:100%;}
      instead of the one-off #C9D29D / #EEEDB5 pair. */
   --color-sage:var(--gallop-core-300);
   --color-lemon:var(--gallop-core-200);
+
+  /* Track-record card ramp (Figma 4295:663) — lemon → sage → mint, warmer and
+     more saturated than the Core ramp steps, so they stay literal values. */
+  --tc-tint-lemon:#F6F09D;
+  --tc-tint-sage: #D8E599;
+  --tc-tint-mint: #CDEFD0;
 }
 
 /* 30px section heading (replaces the serif sec-kicker on the homepage) */
@@ -593,54 +642,46 @@ img,svg,video{display:block;max-width:100%;}
 .texfield::after{content:"";position:absolute;inset:0;background:var(--tex-grad,none);}
 .texfield>*{position:relative;z-index:1;}
 
-/* --- HERO — light gold texture field, Lustria headline ------------------- */
-.xhero{position:relative;background:var(--color-ochre) url("assets/bg-hero.jpg") no-repeat center bottom / cover;
-  overflow:hidden;
+/* --- HERO — copy on paper, full-bleed texture band below (Figma 4295:248 +
+   4295:260). The headline sits left with the sub-copy + CTA in a right column;
+   the animation rides a full-width horizontal texture band underneath. ------ */
+.xhero{position:relative;background:var(--color-bg);
   margin-top:calc(-1 * (66px + 14px));padding-top:calc(66px + 14px);}
-.xhero-inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(2rem,4vw,4rem);align-items:end;padding-top:clamp(4.5rem,9vw,8rem);}
-.xhero-copy{padding-bottom:clamp(2.6rem,5.5vw,5.3rem);}
-.xhero-copy h1{font-family:var(--font-display);font-weight:400;font-size:clamp(calc(1.9rem * var(--lustria-scale)),calc(2.8vw * var(--lustria-scale)),calc(2.5rem * var(--lustria-scale)));line-height:1.04;letter-spacing:-.03em;max-width:42rem;}
-.xhero-sub{margin-top:20px;font-family:var(--font-body);font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.35;color:var(--color-ink);}
+.xhero-inner{position:relative;z-index:1;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(2rem,4vw,4rem);align-items:start;
+  padding-top:clamp(3.4rem,7vw,6.5rem);padding-bottom:clamp(2.6rem,5vw,4.4rem);}
+.xhero-copy h1{font-family:var(--font-display);font-weight:400;font-size:clamp(calc(1.9rem * var(--lustria-scale)),calc(2.8vw * var(--lustria-scale)),calc(2.5rem * var(--lustria-scale)));line-height:1.08;letter-spacing:-.02em;max-width:36rem;}
+/* right column: sub-copy over the CTA (Figma stacks them with a 22px gap) */
+.xhero-aside{display:flex;flex-direction:column;align-items:flex-start;gap:22px;padding-top:7px;}
+.xhero-sub{font-family:var(--font-body);font-weight:400;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--color-ink);max-width:34rem;}
 .xhero-sub b{font-weight:500;}
-/* hero product shot: the designer's dashboard mock, sitting on the gold field
-   and bottom-aligned so it meets the band edge (Figma). Own light UI background,
-   so no surface panel behind it. */
-.xhero-shot{display:flex;align-items:flex-end;}
-.xhero-shot img{display:block;width:100%;height:auto;}
-/* the client's animated hero replaces the placeholder mock. It fills the shot
-   slot at its native 16:9; the animation scales to cover this box. Tweak the
-   aspect ratio here to change its footprint. */
-.xhero-shot .gallop-hero{width:100%;aspect-ratio:5/4;}  /* matches the animation's content crop window so nothing letterboxes or clips */
+.xhero-cta{align-self:flex-start;}
 
-/* DESKTOP hero: the gold field ends at the animation's DATA (3rd) box mid-line,
-   so that box straddles the divide into the paper below; the copy stays on the
-   gold. Values tuned at ~1440; --band-d = gold height, the negative margin pulls
-   the animation's lower third onto the paper. */
+/* the texture band — full-bleed, breaks out of .wrap's centred column */
+.xhero-band{position:relative;
+  background:var(--color-accent) var(--tex-hero) no-repeat center center / cover;
+  overflow:hidden;}
+/* the animation sits on the band; the fixed 1280x720 stage is cropped to a
+   wide content viewport by hero-anim.js (CV), so the box is set wide+short
+   here to match. Height drives how much of the band the artwork fills. */
+.xhero-shot{position:relative;z-index:1;}
+.xhero-shot img{display:block;width:100%;height:auto;}
+/* Figma 4295:260 is 1440x409; the cap is a touch above that so the scene
+   (≈2.4:1 after the side-by-side relayout) fills more of the band width on
+   wide screens instead of floating with texture margins. */
+.xhero-shot .gallop-hero{width:100%;height:clamp(280px,29vw,410px);}
+
 @media (min-width:1101px){
-  .xhero{
-    overflow:visible;
-    --band-d:617px;
-    background-color:transparent;
-    background-image:
-      linear-gradient(rgba(216,241,143,.42),rgba(216,241,143,.42)),  /* mute the green plaid */
-      url("assets/bg-hero.jpg"),
-      linear-gradient(var(--color-ochre),var(--color-ochre));
-    background-repeat:no-repeat,no-repeat,no-repeat;
-    background-position:top center,top center,top center;
-    /* texture layer = cover so it always fills the full viewport width (was
-       `auto`, which left flat ochre at the sides on wide screens); the flanking
-       gradient layers stay pinned to the band height */
-    background-size:100% var(--band-d),cover,100% var(--band-d);
-  }
-  .xhero-shot{margin-bottom:-87px;}   /* DATA box straddles the gold edge; lower part on the paper */
-  .logoband{padding-top:clamp(6rem,9vw,9rem);}  /* clear the animation's overhang */
+  .logoband{padding-top:clamp(3rem,5vw,4.5rem);}
 }
 
 /* --- LOGO BAND ------------------------------------------------------------ */
 .logoband{padding-top:clamp(4rem,8.5vw,8.2rem);padding-bottom:clamp(3rem,6vw,6rem);text-align:center;}
-.logoband-lead{font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);}
-.logoband-row{margin-top:clamp(2.5rem,4.5vw,3.75rem);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2rem clamp(2.5rem,5.2vw,4.75rem);opacity:.8;}
-.logoband-row img{height:var(--lh,24px);width:auto;}
+.logoband-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2rem clamp(2.5rem,5.2vw,4.75rem);}
+/* brand marks sit at 80% per Figma. Set on the img, not the row: the row also
+   carries .reveal, whose .in state sets opacity:1 and would override it. */
+.logoband-row img{height:var(--lh,24px);width:auto;opacity:.8;}
 .logoband-row img.blend{mix-blend-mode:multiply;}
 
 /* --- PROTOCOL — texture-card carousel -------------------------------------- */
@@ -662,10 +703,14 @@ img,svg,video{display:block;max-width:100%;}
    the mocks arrive as complete screens, no per-card cropping. */
 .proto-media .pm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
   width:auto;height:auto;max-width:86%;max-height:82%;}
-.tf-c1{--tex-img:url("assets/bg-protocol-1.jpg");}
-.tf-c2{--tex-img:url("assets/bg-protocol-2.jpg");}
-.tf-c3{--tex-img:url("assets/bg-protocol-3.jpg");}
-.tf-c4{--tex-img:url("assets/bg-protocol-4.jpg");}
+.tf-c1{--tex-img:image-set(url("assets/bg-protocol-1.webp") type("image/webp"),
+                          url("assets/bg-protocol-1.jpg")  type("image/jpeg"));}
+.tf-c2{--tex-img:image-set(url("assets/bg-protocol-2.webp") type("image/webp"),
+                          url("assets/bg-protocol-2.jpg")  type("image/jpeg"));}
+.tf-c3{--tex-img:image-set(url("assets/bg-protocol-3.webp") type("image/webp"),
+                          url("assets/bg-protocol-3.jpg")  type("image/jpeg"));}
+.tf-c4{--tex-img:image-set(url("assets/bg-protocol-4.webp") type("image/webp"),
+                          url("assets/bg-protocol-4.jpg")  type("image/jpeg"));}
 .proto-txt{display:flex;gap:40px;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--color-ink);}
 .proto-txt .pn{width:20px;flex:none;}
 .pt-body{display:flex;flex-direction:column;gap:2px;}
@@ -702,8 +747,10 @@ img,svg,video{display:block;max-width:100%;}
 .disc-media{width:100%;aspect-ratio:5/3;}
 .disc-media img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
   width:auto;height:auto;max-width:88%;max-height:84%;}
-.tf-disc{--tex-img:url("assets/bg-discover.jpg");}
-.tf-mod{--tex-img:url("assets/bg-modernization.jpg");}
+.tf-disc{--tex-img:image-set(url("assets/bg-discover.webp") type("image/webp"),
+                            url("assets/bg-discover.jpg")  type("image/jpeg"));}
+.tf-mod{--tex-img:image-set(url("assets/bg-modernization.webp") type("image/webp"),
+                           url("assets/bg-modernization.jpg")  type("image/jpeg"));}
 
 /* caption under the mock: bold lead line | point list */
 .disc-caption{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
@@ -824,11 +871,58 @@ img,svg,video{display:block;max-width:100%;}
 .ent-badges img{width:56px;height:56px;object-fit:cover;border-radius:50%;}
 
 /* --- TRACK RECORD ----------------------------------------------------------- */
+/* head row: label + headline on the left, demo CTA pinned bottom-right so its
+   baseline lines up with the last headline line (Figma 4295:660). */
+.track-head{display:flex;align-items:flex-end;gap:22px;}
+.track-head-copy{flex:1 1 auto;min-width:0;}
 .track-label{font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);}
 .track-label+.hx{margin-top:22px;max-width:34ch;}
-.track{margin-top:54px;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gallop-space-card-gap);}
+.track-cta{flex:none;
+  font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;line-height:1.1;
+  color:var(--color-ink);background:var(--color-ochre);padding:14px 23px 12px 26px;border-radius:2px;white-space:nowrap;
+  transition:background var(--dur-fast) var(--ease);}
+.track-cta:hover{background:var(--color-ochre-2);}
+.track{position:relative;margin-top:54px;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gallop-space-card-gap);}
 /* card size original; only the top stat line (.tc-meta) scaled 1.5x — headline stats (Alice) */
-.track-card{min-height:clamp(360px,33.5vw,483px);padding:var(--gallop-space-card-pad);display:flex;flex-direction:column;justify-content:space-between;gap:2rem;}
+.track-card{min-height:clamp(360px,33.5vw,483px);padding:var(--gallop-space-card-pad);display:flex;flex-direction:column;justify-content:space-between;gap:2rem;
+  position:relative;isolation:isolate;overflow:hidden;}
+.tc-lemon{background:var(--tc-tint-lemon);}
+.tc-sage{background:var(--tc-tint-sage);}
+.tc-mint{background:var(--tc-tint-mint);}
+/* the striped horse composites over the card row at soft-light (Figma
+   4295:679). Each card paints its own third of the artwork on a ::after rather
+   than one overlay spanning the row: .track carries .reveal, and its opacity:0
+   start frame makes it a stacking context, which isolated a row-spanning blend
+   and composited the horse against the cream page background — rendering it
+   near-black for the length of the fade. Blending inside each card guarantees a
+   tint underneath at every opacity, and keeps the gaps out of it entirely.
+   Positioning: each slice is sized to the whole row (3 cards + 2 gaps) and
+   shifted left by one card+gap per column, so the thirds reassemble into one
+   continuous horse. Offsets are calc()'d in length units, not percentages —
+   percentage background-position resolves against (container - image), which
+   inverts once the image is wider than its box. The art is 2.46:1 against a
+   ~2.9:1 row, so it stretches to 100% height: along the grain of a
+   horizontal-streak motif, which reads as more speed, not distortion.
+   Also a background rather than an <img>: a blend-moded image element paints
+   opaque for a frame before the blend resolves, which flashed it black too.
+   WebP first with a PNG fallback, as with --tex-hero. */
+.track-card::after{content:"";position:absolute;top:0;bottom:0;pointer-events:none;
+  mix-blend-mode:soft-light;
+  /* stretched to the whole row and clipped to this card by the parent's
+     overflow:hidden — sizing the box (not background-size) keeps the geometry
+     in lengths, avoiding percentage background-position, which resolves
+     against (box - image) and inverts once the image is wider than its box. */
+  width:calc(300% + 2 * var(--gallop-space-card-gap));
+  background-image:image-set(url("assets/horse-graphic.webp") type("image/webp"),
+                             url("assets/horse-graphic.png")  type("image/png"));
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+  background-position:bottom center;}
+/* pull the row-wide box left by one card + gap per column */
+.tc-lemon::after{left:0;}
+.tc-sage::after {left:calc(-100% - var(--gallop-space-card-gap));}
+.tc-mint::after {left:calc(-200% - 2 * var(--gallop-space-card-gap));}
+.track-card>*{position:relative;z-index:1;}
 .tc-meta{font-family:var(--font-mono);font-size:1.5rem;letter-spacing:var(--gallop-tracking);text-transform:uppercase;opacity:.8;line-height:1.25;}
 .tc-main{display:flex;flex-direction:column;gap:2px;}
 .tc-title{font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.24;}
@@ -855,10 +949,13 @@ img,svg,video{display:block;max-width:100%;}
 /* --- PARITY — texture band ------------------------------------------------------ */
 .parity-band{min-height:clamp(420px,35vw,501px);display:flex;align-items:center;
   width:100vw;margin-left:calc(50% - 50vw);}
-/* FAQ surface band butts straight into the textured footer field (no gap). */
+/* The CTA band carries its own 50px margin above and below, so nothing here
+   cancels it. */
 #faq{padding-bottom:clamp(3.5rem,6.6vw,6rem);}
-#faq + .close-field{margin-top:0;}
-.tf-parity{--tex-img:url("assets/bg-hero.jpg");--tex-grad:linear-gradient(74.1deg,var(--color-ochre) 1.8%,rgba(216,241,143,0) 53.67%);}
+/* own texture render (was the hero texture + an ochre gradient for legibility;
+   this export is evenly light across the band, so the copy reads without it). */
+.tf-parity{--tex-img:image-set(url("assets/bg-parity.webp") type("image/webp"),
+                              url("assets/bg-parity.jpg")  type("image/jpeg"));}
 .pb-inner{width:100%;display:flex;justify-content:space-between;gap:3rem;align-items:center;padding:clamp(2rem,4vw,3.2rem) calc(var(--gutter) + var(--space-page-x));}
 .pb-copy{max-width:500px;display:flex;flex-direction:column;gap:32px;}
 .pb-copy .hx{max-width:26ch;}
@@ -875,46 +972,28 @@ img,svg,video{display:block;max-width:100%;}
 /* --- responsive for the [EXT] homepage ----------------------------------------------- */
 @media (max-width:1100px){
   .xhero-inner{grid-template-columns:1fr;align-items:start;}
-  .xhero-copy{padding-bottom:0;}
-  .xhero-shot{margin-bottom:2.5rem;}
+  .xhero-aside{margin-top:1.6rem;}
   .mb-head{flex-direction:column;gap:1.6rem;}
   .cf-layout{grid-template-columns:1fr;gap:2rem;}
   .stats{grid-template-columns:1fr;gap:clamp(2.5rem,7vw,3.2rem);}
+  .track-head{flex-direction:column;align-items:flex-start;gap:1.6rem;}
   .track{grid-template-columns:1fr;}
   .track-card{min-height:300px;}
+  /* one tall stacked column — each card would show a stretched vertical sliver
+     of the horse, so it only rides the 3-up row. */
+  .track-card::after{display:none;}
   .pb-inner{flex-direction:column;align-items:flex-start;}
   .pb-inner .panel{flex:none;width:100%;max-width:560px;}
   .faq-grid{grid-template-columns:1fr;gap:2.2rem;}
   .ent-grid{grid-template-columns:repeat(2,1fr);}
 }
 @media (max-width:760px){
-  /* HERO (mobile) redesign: the copy pins to the LOWER edge of the gold field
-     (bottom padding = page side margin). The gold texture paints down past the
-     copy so it sits behind the TOP HALF of the product mock, which then finishes
-     on the paper below. Two heights: --copy-band = how far the copy fills (fixes
-     the text position); --band = how far the gold PAINTS (reaches the mock's
-     mid-point). Everything below --band shows the paper. */
-  .xhero{
-    overflow:visible;
-    --copy-band:34rem;   /* taller copy region → the headline/standfirst sit lower, on the cleaner gold */
-    --band:34.3rem;      /* gold ends at the INTERFACE (top) box mid-line, so only the top box straddles; the rest of the animation sits on the paper */
-    background-color:transparent;
-    background-image:
-      /* gold veil mutes the green plaid patches so the hero reads as a clean, professional yellow */
-      linear-gradient(rgba(216,241,143,.42),rgba(216,241,143,.42)),
-      url("assets/bg-hero.jpg"),
-      linear-gradient(var(--color-ochre),var(--color-ochre));
-    background-repeat:no-repeat,no-repeat,no-repeat;
-    background-position:top center,top center,top center;
-    background-size:100% var(--band),auto var(--band),100% var(--band);
-  }
-  .xhero-inner{display:block;padding-top:0;}
-  .xhero-copy{
-    min-height:calc(var(--copy-band) - (66px + 14px));  /* fill the copy band below the nav underlap */
-    display:flex;flex-direction:column;justify-content:flex-end;  /* pin copy to the bottom edge */
-    padding-top:0;padding-bottom:var(--space-page-x);  /* lower padding = the side margin */
-  }
-  .xhero-shot{margin:clamp(1.4rem,5vw,2.25rem) 0 0;position:relative;}  /* Interface box straddles the gold edge; rest on paper */
+  /* HERO (mobile): the copy stacks on the paper and the texture band sits
+     below it, same structure as desktop — only the columns collapse. The
+     band keeps its own background (see .xhero-band), so .xhero itself stays
+     plain paper here. */
+  .xhero-inner{display:block;padding-top:clamp(2rem,7vw,3rem);padding-bottom:clamp(1.8rem,6vw,2.6rem);}
+  .xhero-aside{margin-top:1.5rem;}
   .logoband{padding-top:clamp(3rem,7vw,4.5rem);}
   .proto-card{flex-basis:86vw;}
   .proto-txt{gap:1.4rem;}

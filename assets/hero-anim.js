@@ -28,19 +28,30 @@
   const ease = easeInOutCubic;
   const seg = (s, a, b) => clamp((s - a) / (b - a), 0, 1);
   const eseg = (s, a, b) => ease(seg(s, a, b));
-  // ── geometry — IN-PLACE stacked layout ────────────────────────────────
+  // ── geometry — IN-PLACE side-by-side layout ───────────────────────────
   // Modern tiers occupy the SAME rects as the legacy bands, so the
   // transformation happens layered on top — no off-to-the-side stack,
   // no camera move.
-  const TIERS = [
-    { x: 320, y: 100, w: 460, h: 150 },
-    { x: 320, y: 266, w: 460, h: 190 },
-    { x: 320, y: 472, w: 460, h: 150 },
-  ];
-  const STACK = { x: 320, y: 100, w: 460, h: 522 }; // bounding box of the stack
-  // camera: centered on the stack (cxCenter) until agents dock, then pans to
-  // cxShift so the agents on the right fit in frame.
-  const CAM = { cxCenter: 550, cxShift: 622, cy: 361, z: 1.12 };
+  // The hero sits in a wide, short band (Figma 4295:260, 1440x409), so the
+  // three tiers run as COLUMNS across the frame rather than a vertical
+  // stack. Everything below derives from these rects, so the whole scene
+  // (wires, scan beam, agent docking) follows from this one change.
+  // Wider than tall: the tier holds three cards side by side whose mono
+  // headers (orders-ui, billing-ui…) must not truncate, and the band is short.
+  // Sized to sit inside the 1280-wide stage with even margins.
+  const TIER_W = 372, TIER_H = 196, TIER_GAP = 30, TIER_Y = 168;
+  const TIER_X0 = (1280 - (TIER_W*3 + TIER_GAP*2)) / 2;   // centred in the stage
+  const TIERS = [0,1,2].map(i => ({
+    x: TIER_X0 + i * (TIER_W + TIER_GAP), y: TIER_Y, w: TIER_W, h: TIER_H,
+  }));
+  // bounding box of the row of tiers
+  const STACK = {
+    x: TIERS[0].x, y: TIER_Y,
+    w: (TIERS[2].x + TIER_W) - TIERS[0].x, h: TIER_H,
+  };
+  // camera: centered on the row (cxCenter) until agents dock, then pans a
+  // little so the agents below-right stay in frame.
+  const CAM = { cxCenter: STACK.x + STACK.w/2, cxShift: STACK.x + STACK.w/2 + 34, cy: TIER_Y + TIER_H/2 + 46, z: 1.0 };
   const LAYERS = [
     { legacy: 'Presentation', modern: 'Interface' },
     { legacy: 'Business Logic', modern: 'Services · API' },
@@ -124,11 +135,16 @@
   world.appendChild(husk);
 
   // tangle overlay
+  // spaghetti spans the full row of tiers; coordinates derive from STACK so
+  // the tangle re-flows with the side-by-side layout instead of the old
+  // hardcoded 460x522 portrait box.
   const TANGLE = (() => {
     const r = rng(90210); const d = [];
+    const W_ = STACK.w, H_ = STACK.h, bow = W_ * 0.2;
     for (let i = 0; i < 26; i++) {
-      const y0 = 8+r()*506, y1 = 8+r()*506, x0 = 8+r()*150, x1 = 300+r()*152;
-      d.push(`M${x0},${y0} C${x0+190},${y0+(r()-0.5)*340} ${x1-190},${y1-(r()-0.5)*340} ${x1},${y1}`);
+      const y0 = 8+r()*(H_-16), y1 = 8+r()*(H_-16);
+      const x0 = 8+r()*(W_*0.3), x1 = W_*0.62+r()*(W_*0.33);
+      d.push(`M${x0},${y0} C${x0+bow},${y0+(r()-0.5)*H_*0.65} ${x1-bow},${y1-(r()-0.5)*H_*0.65} ${x1},${y1}`);
     }
     return d;
   })();
@@ -137,17 +153,18 @@
   // NOTE: appended AFTER the bands (below) so the spaghetti sits ON TOP of the
   // opaque dark monolith — otherwise it hides behind it.
 
-  // wires between tiers
-  const wiresSvg = svg(TIERS[0].w, TIERS[2].y - (TIERS[0].y+TIERS[0].h), { left: TIERS[0].x+'px', top:(TIERS[0].y+TIERS[0].h)+'px' });
+  // wires between tiers — horizontal now, bridging the gaps BETWEEN the
+  // columns (was vertical, between stacked bands).
+  const wiresSvg = svg(STACK.w, TIER_H, { left: STACK.x+'px', top: TIER_Y+'px' });
   const wireGroups = [
-    { y0: TIERS[0].y+TIERS[0].h, y1: TIERS[1].y },
-    { y0: TIERS[1].y+TIERS[1].h, y1: TIERS[2].y },
+    { x0: TIERS[0].x+TIERS[0].w, x1: TIERS[1].x },
+    { x0: TIERS[1].x+TIERS[1].w, x1: TIERS[2].x },
   ].map(sm => {
     const g = document.createElementNS('http://www.w3.org/2000/svg','g');
-    const off = TIERS[0].y+TIERS[0].h;
+    const off = STACK.x;
     for (let c = 0; c < 3; c++) {
-      const cw = (TIERS[0].w - 24)/3; const x = 12 + c*(cw+12) + cw/2;
-      g.appendChild(lineEl({ x1:x, y1:sm.y0-off, x2:x, y2:sm.y1-off, stroke:ACCENT, 'stroke-width':1.4, 'stroke-dasharray':'5 7', opacity:0.75 }));
+      const ch = (TIER_H - 24)/3; const y = 12 + c*(ch+12) + ch/2;
+      g.appendChild(lineEl({ x1:sm.x0-off, y1:y, x2:sm.x1-off, y2:y, stroke:ACCENT, 'stroke-width':1.4, 'stroke-dasharray':'5 7', opacity:0.75 }));
     }
     wiresSvg.appendChild(g); return { g, ...sm };
   });
@@ -243,22 +260,25 @@
 
   world.appendChild(tangleSvg); // spaghetti on top of the dark monolith
 
-  // agents
-  const AGENT_X = 860;
+  // agents — one below each column, connected by a vertical dashed lead
+  // (was a row of three to the right of the middle tier).
+  const AGENT_Y = TIER_Y + TIER_H + 54;
+  const AGENT_CHIP_W = 78;   // approx rendered chip width, to centre it under the tier
   const agents = [0,1,2].map(i => {
-    const t1 = TIERS[1]; const y = t1.y + 15 + i * 58;
+    const t = TIERS[i];
+    const cx = t.x + t.w/2;
     const wrap = el('', { position:'absolute', inset:'0' });
     const s = svg(1280, 720, { left:'0', top:'0' });
-    const p = path({ d:`M${t1.x+t1.w},${y+22} H${AGENT_X}`, stroke:ACCENT, 'stroke-width':1.4, 'stroke-dasharray':'4 6', opacity:0.7 });
+    const p = path({ d:`M${cx},${t.y+t.h} V${AGENT_Y}`, stroke:ACCENT, 'stroke-width':1.4, 'stroke-dasharray':'4 6', opacity:0.7 });
     s.appendChild(p); wrap.appendChild(s);
-    const chip = el('gh-agent', { left:AGENT_X+'px', top:y+'px' });
+    const chip = el('gh-agent', { left:(cx - AGENT_CHIP_W/2)+'px', top:AGENT_Y+'px' });
     chip.appendChild(el('diamond')); const sp = document.createElement('span'); sp.textContent = 'AGENT'; chip.appendChild(sp);
     wrap.appendChild(chip); world.appendChild(wrap);
-    return { wrap, chip, path: p, y };
+    return { wrap, chip, path: p, x: cx - AGENT_CHIP_W/2, y: AGENT_Y };
   });
 
   // scan beam
-  const scan = el('gh-scan', { left:(STACK.x-30)+'px', width:(STACK.w+60)+'px' }); world.appendChild(scan);
+  const scan = el('gh-scan', { top:(STACK.y-30)+'px', height:(STACK.h+60)+'px' }); world.appendChild(scan);
 
   // veil ref
   const veil = document.querySelector('.gh-veil');
@@ -300,7 +320,9 @@
       // code-row jitter + green analyzed clip
       const analyzedAmt = clamp((P.scanPos - k/3)*3, 0, 1) * (P.analyzed > 0.02 ? 1 : 0);
       B.legacy.rows.forEach((r,i) => { r.rd.style.transform = `translateX(${Math.sin(P.s*5.5 + i*1.7 + k)*3.4*P.chaos}px)`; });
-      B.legacy.analyzed.style.clipPath = `inset(0 0 ${100 - analyzedAmt*100}% 0)`;
+      // beam sweeps left→right now, so the green "analyzed" wash follows it
+      // across each card (was bottom-up, tracking the old downward scan)
+      B.legacy.analyzed.style.clipPath = `inset(0 ${100 - analyzedAmt*100}% 0 0)`;
       B.legacy.analyzed.style.display = analyzedAmt > 0.002 ? '' : 'none';
       if (B.tier._pulses) B.tier._pulses.forEach((pd,i) => pd.style.opacity = 0.5 + 0.5*Math.abs(Math.sin(P.flow*2 + i)));
     });
@@ -318,7 +340,8 @@
       const a = clamp((P.dock - i*0.13)/0.6, 0, 1), e = ease(a);
       const pulse = 0.55 + 0.45*Math.abs(Math.sin(P.flow*2.4 - i*0.7));
       A.wrap.style.opacity = e;
-      A.chip.style.left = (AGENT_X + (1-e)*46) + 'px';
+      // chips now dock DOWNWARD out of their tier, so the travel is vertical
+      A.chip.style.top = (A.y - (1-e)*46) + 'px';
       A.chip.style.boxShadow = `0 0 ${14*pulse}px ${GREEN}`; // sanctioned faint gloss
       A.chip.firstChild.style.opacity = pulse;
       A.path.setAttribute('opacity', 0.7*e);
@@ -327,7 +350,7 @@
 
     // scan beam
     scan.style.opacity = P.scanGlow < 0.01 ? 0 : P.scanGlow;
-    scan.style.top = (STACK.y - 8 + P.scanPos*(STACK.h+16)) + 'px';
+    scan.style.left = (STACK.x - 8 + P.scanPos*(STACK.w+16)) + 'px';
 
     // reset: fade the whole animation out/in (to the page, not a white veil) so
     // the loop restart doesn't flash white now that the background is removed
@@ -370,10 +393,17 @@
   // no dead space. Tune CV to reframe. Box aspect (d.css) should ~match CV.
   const hero = document.getElementById('gallopHero');
   const stage = hero.querySelector('.gh-stage');
-  const CV = { x: 280, y: 40, w: 800, h: 640 };   // content viewport in stage coords — wide enough to contain the camera pan so nothing clips (≈5:4)
+  // The hero sits in a wide, short band (Figma 4295:260, ≈1440x409) and the
+  // tiers now run side by side, so the scene is landscape (≈2.4:1). In stage
+  // coords it spans x 108-1138, y 150-562 across BOTH camera states (the pan
+  // between CAM.cxCenter and CAM.cxShift slides it 34px). The viewport is that
+  // union plus a small margin, so nothing clips at either end of the pan.
+  const CV = { x: -6, y: 192, w: 1258, h: 328 };
   const fit = () => {
     const bw = hero.clientWidth, bh = hero.clientHeight;
-    const s = Math.max(bw / CV.w, bh / CV.h);       // cover the box with the content viewport
+    // CONTAIN (not cover): in a short band, `cover` would scale to the width
+    // and crop the top/bottom tiers off. `min` keeps the whole scene visible.
+    const s = Math.min(bw / CV.w, bh / CV.h);
     const tx = bw / 2 - (CV.x + CV.w / 2) * s;
     const ty = bh / 2 - (CV.y + CV.h / 2) * s;
     stage.style.transform = `translate(${tx}px, ${ty}px) scale(${s})`;

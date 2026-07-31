@@ -79,10 +79,12 @@
   letter-spacing:-0.02em;text-transform:uppercase;
 }
 
-/* SANCTIONED GLOSS: scan beam keeps a soft green glow */
+/* SANCTIONED GLOSS: scan beam keeps a soft green glow.
+   The tiers now run left-to-right, so the beam is a VERTICAL line that
+   sweeps across the row (was a horizontal bar travelling down the stack). */
 .gh-scan{
-  position:absolute;height:2px;
-  background:linear-gradient(90deg,transparent,var(--green-deep),transparent);
+  position:absolute;width:2px;
+  background:linear-gradient(180deg,transparent,var(--green-deep),transparent);
   box-shadow:0 0 22px 6px color-mix(in srgb,var(--green) 45%,transparent);
 }
 /* agent — flat green block, square */

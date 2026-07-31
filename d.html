@@ -36,13 +36,18 @@
 
 <main id="top">
 
-  <!-- ===================== HERO — stretched-texture gold field ===================== -->
+  <!-- ===================== HERO — copy on paper, full-width texture band ===================== -->
   <section class="xhero">
     <div class="wrap xhero-inner">
-      <div class="xhero-copy">
-        <h1 class="reveal in">Gallop modernizes the world's most critical systems. Fast, and reliably.</h1>
-        <p class="xhero-sub reveal in d1">Gallop reads your entire codebase, maps every business capability it holds, and rebuilds it on modern foundations. <b>With zero business logic loss.</b></p>
+      <div class="xhero-copy reveal in">
+        <h1>Modernizing the world's most critical systems for the age of agents - with speed and reliability.</h1>
       </div>
+      <div class="xhero-aside reveal in d1">
+        <p class="xhero-sub">Gallop is the AI-native platform that understands your entire estate, surfaces every business capability it holds, and rebuilds it on agent-ready foundations -with zero business logic lost.</p>
+        <a class="btn btn-ochre xhero-cta" href="d-contact.html">Request a demo</a>
+      </div>
+    </div>
+    <div class="xhero-band">
       <div class="xhero-shot reveal in d2">
         <section class="gallop-hero" id="gallopHero" aria-label="Gallop: a legacy system modernized into agent-ready services">
           <div class="gh-stage">
@@ -57,16 +62,14 @@
   <!-- ===================== LOGOS — built by, trusted, partnered ===================== -->
   <section class="logoband">
     <div class="wrap">
-      <p class="logoband-lead reveal">Built by, trusted and partnered with:</p>
-      <div class="logoband-row reveal d1">
+      <div class="logoband-row reveal">
         <img src="assets/logo-ext-googlecloud.png" alt="Google Cloud" style="--lh:32px" />
         <img src="assets/logo-haier.png" alt="Haier" style="--lh:22px" />
         <img src="assets/logo-aws.png" alt="Amazon Web Services" style="--lh:29px" />
-        <img src="assets/logo-pepkor.svg" alt="Pepkor" style="--lh:17px" />
         <img src="assets/logo-azure.png" alt="Microsoft Azure" style="--lh:24px" />
-        <img src="assets/logo-eoh-clear.png" alt="EOH" style="--lh:34px" />
+        <img src="assets/logo-dcg.png" alt="DCG" style="--lh:23px" />
         <img src="assets/logo-hpe.png" alt="Hewlett Packard Enterprise" style="--lh:19px" />
-        <img src="assets/logo-lovable.svg" alt="Lovable" style="--lh:21px" />
+        <img src="assets/logo-lovable.svg" alt="Lovable" style="--lh:25px" />
       </div>
     </div>
   </section>
@@ -80,8 +83,8 @@
           <p class="mb-body">Every modernization starts the same way, someone has to figure out what the current system actually does. Most tools treat that as a quick first pass, then move on to writing code. Gallop treats it as the job. It maps every repository, every dependency, every business rule, and keeps that map current as the rebuild happens. Code only gets written against a system Gallop has already confirmed it understands.</p>
           <!-- legend / key: the two products the timeline moves between -->
           <div class="mseq-legend">
-            <span class="mseq-key mseq-key--disc"><i></i><b>Gallop Discover</b> Standalone</span>
-            <span class="mseq-key mseq-key--mod"><i></i><b>Gallop Modernize</b> When you're ready</span>
+            <span class="mseq-key mseq-key--disc"><i></i><b>Gallop Discover</b> Start here. Comprehension you can act on, with or without the rebuild.</span>
+            <span class="mseq-key mseq-key--mod"><i></i><b>Gallop Modernize</b> Rebuild on agent-ready foundations, guided by everything Discover mapped.</span>
           </div>
         </div>
       </div>
@@ -219,24 +222,32 @@
   <!-- ===================== TRACK RECORD ===================== -->
   <section class="sec" id="records">
     <div class="wrap">
-      <p class="track-label reveal">A proven track record.</p>
-      <h2 class="hx reveal">Modernization in days, not years<br />With zero business logic loss</h2>
+      <div class="track-head reveal">
+        <div class="track-head-copy">
+          <p class="track-label">A proven track record.</p>
+          <h2 class="hx">Modernization in weeks, not years.<br />With zero business logic loss.</h2>
+        </div>
+        <a href="d-contact.html" class="track-cta">Request a demo</a>
+      </div>
+      <!-- The striped horse (Figma 4295:679) is drawn in CSS: each card paints
+           its own third of the artwork at soft-light, reassembling one
+           continuous horse across the row. See .track-card::after. -->
       <div class="track reveal d1">
-        <article class="track-card" style="background:var(--color-ochre);">
+        <article class="track-card tc-lemon">
           <span class="tc-meta">7M-line monolith · 3 weeks</span>
           <div class="tc-main">
             <p class="tc-title">Cloud &amp; retail</p>
             <p class="tc-desc">A global clothing retailer migrated their core inventory monolith to Google Cloud with zero downtime.</p>
           </div>
         </article>
-        <article class="track-card" style="background:var(--color-sage);">
+        <article class="track-card tc-sage">
           <span class="tc-meta">core platform · 72 hours</span>
           <div class="tc-main">
             <p class="tc-title">Enterprise retail</p>
             <p class="tc-desc">A Fortune 500 retailer ported their promotion engine logic to a modern AI-ready API stack.</p>
           </div>
         </article>
-        <article class="track-card" style="background:var(--color-lemon);">
+        <article class="track-card tc-mint">
           <span class="tc-meta">billing stack · ROI+</span>
           <div class="tc-main">
             <p class="tc-title">Telecom</p>
@@ -426,17 +437,15 @@
     </div>
   </section>
 
-  <!-- ===================== CLOSING + FOOTER — the textured field returns ===================== -->
-  <section class="close-field" id="cta">
-    <div class="wrap close-inner">
-      <div class="close-block">
-        <h2 class="reveal">See Gallop read a real system, map it, and plan its modern future, live, on your own architecture.</h2>
-        <div class="close-actions reveal d1">
-          <a href="d-contact.html" class="btn btn-ochre">Start a 2-week discovery sprint</a>
-        </div>
-      </div>
+  <!-- ===================== CTA BAND — centered invite on the pale mosaic field ===================== -->
+  <section class="cta-band" id="cta">
+    <div class="wrap cta-band-inner">
+      <h2 class="cta-band-title reveal">See Gallop read a real system, map it, and plan its modern future, live, on your own architecture.</h2>
+      <a href="d-contact.html" class="btn btn-ink reveal d1">Start a 2-week discovery sprint</a>
     </div>
+  </section>
 
+  <!-- ===================== FOOTER ===================== -->
     <!-- site-footer:start · generated from partials/ — edit there, then run `node build.js` -->
 <footer class="footer">
   <div class="wrap">
@@ -447,31 +456,37 @@
         </div>
         <p class="footer-tag">Modernizing the world's most critical systems with speed and precision.</p>
       </div>
-      <div class="footer-cols">
-        <div class="footer-col">
-          <h4>Platform</h4>
-          <a href="d.html#what">Discovery</a>
-          <a href="d.html#protocol">Modernization</a>
-          <a href="d.html#validation">Validation</a>
-          <a href="d.html#records">Cloud Migration</a>
+      <div class="footer-nav">
+        <div class="footer-cols">
+          <div class="footer-col">
+            <h4>Platform</h4>
+            <a href="d.html#what">Discovery</a>
+            <a href="d.html#protocol">Modernization</a>
+            <a href="d.html#validation">Validation</a>
+            <a href="d.html#records">Cloud Migration</a>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="d-about.html">About</a>
+            <a href="d-careers.html">Careers</a>
+            <a href="d-blog.html">News</a>
+            <a href="d-contact.html">Contact</a>
+            <a href="https://trust.gallopintelligence.ai/" target="_blank" rel="noopener">Trust Center</a>
+          </div>
         </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <a href="d-about.html">About</a>
-          <a href="d-careers.html">Careers</a>
-          <a href="d-blog.html">News</a>
-          <a href="d-contact.html">Contact</a>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/gallop-intelligence/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="#" target="_blank" rel="noopener">X</a>
+        </div>
+        <div class="footer-bottom">
+          <span class="footer-legal-links"><a href="d-privacy.html">Privacy</a><a href="d-terms.html">Terms</a></span>
+          <span class="footer-copy">© 2026 Gallop Inc. All rights reserved.</span>
         </div>
       </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 Gallop Inc. All rights reserved.</span>
-      <span><a href="d-privacy.html">Privacy</a> &nbsp;&nbsp; <a href="d-terms.html">Terms</a></span>
     </div>
   </div>
 </footer>
 <!-- site-footer:end -->
-  </section>
 
 </main>
 
