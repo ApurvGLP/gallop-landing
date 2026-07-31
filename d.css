@@ -436,7 +436,16 @@ img,svg,video{display:block;max-width:100%;}
 .article-hero h1{font-size:var(--type-h-md);max-width:32ch;margin-top:1.2rem;}
 .article-back{display:inline-block;font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--color-ink);margin-bottom:1.6rem;}
 .article{max-width:720px;}
+/* Case-study layout: prose column on the left, at-a-glance box parked in a
+   sticky right rail. Collapses to a single stacked column below 1000px. */
+.article-layout{display:grid;grid-template-columns:minmax(0,720px) minmax(280px,380px);gap:clamp(2rem,4vw,4rem);align-items:start;}
+.article-layout .article{max-width:none;}
+/* The prose column now starts with an h2 — drop its large stacking margin. */
+.article-layout .article>h2:first-child{margin-top:0;}
+.article-aside{position:sticky;top:calc(58px + 2.5rem);}
 .glance{background:var(--color-surface);border-radius:4px;padding:clamp(1.3rem,2.4vw,1.8rem);}
+/* In the right rail the box is narrow, so labels stack above their values. */
+.article-aside .glance-row{grid-template-columns:1fr;gap:.25rem;}
 .glance-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:1.2rem;padding-block:.55rem;border-bottom:1px solid var(--hairline);align-items:baseline;}
 .glance-row:last-child{border-bottom:none;}
 .glance-row dt{font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--ink-50);margin:0;}
@@ -455,6 +464,13 @@ img,svg,video{display:block;max-width:100%;}
 .testimonial{margin:clamp(2.4rem,4vw,3.2rem) 0 0;background:var(--color-ochre);border-radius:2px;padding:clamp(1.6rem,3vw,2.4rem);}
 .testimonial p{margin:0;font-family:var(--font-serif);font-weight:400;font-size:var(--type-h-xs);letter-spacing:var(--gallop-tracking);line-height:1.25;color:var(--color-ink);}
 .testimonial cite{display:block;margin-top:1.2rem;font-style:normal;font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--ink-70);}
+/* Below the two-column threshold the glance box moves back above the prose and
+   returns to its wide label/value rows. */
+@media (max-width:1000px){
+  .article-layout{grid-template-columns:minmax(0,1fr);gap:clamp(1.8rem,4vw,2.6rem);}
+  .article-aside{position:static;order:-1;max-width:720px;}
+  .article-aside .glance-row{grid-template-columns:150px minmax(0,1fr);gap:1.2rem;}
+}
 
 /* =====================  LEGAL (terms / privacy)  ===================== */
 .legal h2:first-child{margin-top:0;}
@@ -532,7 +548,7 @@ img,svg,video{display:block;max-width:100%;}
   .footer-nav{gap:2.5rem;padding-top:0;}
   .footer-bottom{flex-direction:column;align-items:flex-start;gap:.8rem;}
   .post-grid{grid-template-columns:1fr;}
-  .glance-row{grid-template-columns:1fr;gap:.2rem;}
+  .glance-row,.article-aside .glance-row{grid-template-columns:1fr;gap:.2rem;}
   .role-row{grid-template-columns:minmax(0,1fr) 24px;gap:.5rem 1rem;}
   .role-meta{grid-column:1 / -1;}
   .gates--3{grid-template-columns:1fr;}
