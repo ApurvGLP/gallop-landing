@@ -16,10 +16,12 @@
 
 .gallop-hero{
   /* brand tokens (scoped to the component so they don't leak onto the page) */
-  --bg:#FAFAF8; --ink:#362F2C; --ink2:#7A7471; --surface:#FDFDFC; --cream:#FCFAEB;
-  --ochre:#F4E27B; --ochre-600:#D2C164; --green:#97DFA7;
-  /* deep green for strokes/labels on the light canvas (not a Figma token yet) */
-  --green-deep:#4F9E6A;
+  /* July 2026 palette: Core lime + Secondary mint. The --ochre/--green
+     names are kept so the rules below are unchanged. */
+  --bg:#FAFAF8; --ink:#362F2C; --ink2:#7A7471; --surface:#FDFDFC; --cream:#F0F3E7;
+  --ochre:#D8F18F; --ochre-600:#9FCC1A; --green:#76DDAB;
+  /* deep mint for strokes/labels on the light canvas — Secondary/700 */
+  --green-deep:#298A5B;
   --sans:'Funnel Sans',system-ui,sans-serif;
   --mono:'Geist Mono',ui-monospace,monospace;
 

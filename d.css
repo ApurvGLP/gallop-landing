@@ -12,10 +12,15 @@
   --color-bg:        var(--gallop-background);
   --color-surface:   var(--gallop-surface);
   --color-ink:       var(--gallop-text-primary);
-  --color-ochre:     var(--gallop-accent-ochre);
-  --color-ochre-2:   var(--gallop-ochre-300);   /* lighter ochre tint (case cards) */
+  --color-accent:    var(--gallop-core);        /* brand accent bands, CTAs */
+  --color-accent-2:  var(--gallop-core-300);    /* lighter accent tint (case cards) */
   --color-white:     var(--gallop-white);
-  --color-panel-key: var(--gallop-accent-blue); /* pale blue label inside the dark panel */
+  --color-panel-key: var(--gallop-secondary);   /* mint label inside the dark panel */
+
+  /* Former names for the two accent slots, kept so any stray rule or
+     inline style still resolves. Prefer --color-accent{,-2}. */
+  --color-ochre:     var(--color-accent);
+  --color-ochre-2:   var(--color-accent-2);
 
   /* Alpha washes derived from Brand/Text Primary #362F2C */
   --ink-70: rgba(54,47,44,.7);
@@ -274,7 +279,7 @@ img,svg,video{display:block;max-width:100%;}
    upper-right corner carries the white headline. */
 .close-field{position:relative;background-color:var(--color-ochre);
   background-image:
-    linear-gradient(64.75deg, var(--color-ochre) 15.4%, rgba(244,226,123,0) 55.71%),
+    linear-gradient(64.75deg, var(--color-ochre) 15.4%, rgba(216,241,143,0) 55.71%),
     url("assets/bg-closer.jpg");
   background-size:100% 100%, cover;
   background-repeat:no-repeat, no-repeat;
@@ -440,7 +445,7 @@ img,svg,video{display:block;max-width:100%;}
   .close-field{background-image:
     /* translucent gold veil — keeps the grainy plaid texture showing through
        while tinting the footer zone yellow enough for the dark lockup to read */
-    linear-gradient(0deg, rgba(244,226,123,.82) 0%, rgba(244,226,123,.82) 58%, rgba(244,226,123,.45) 72%, rgba(244,226,123,0) 88%),
+    linear-gradient(0deg, rgba(216,241,143,.82) 0%, rgba(216,241,143,.82) 58%, rgba(216,241,143,.45) 72%, rgba(216,241,143,0) 88%),
     /* dark-green wash kept to the top only, behind the white CTA text */
     linear-gradient(180deg, rgba(20,54,31,.9) 0%, rgba(20,54,31,.5) 15%, rgba(20,54,31,0) 33%),
     url("assets/bg-closer.jpg");
@@ -534,9 +539,9 @@ img,svg,video{display:block;max-width:100%;}
   white-space:nowrap;
 }
 .ddepth-sep{color:var(--ink-40);font-family:var(--font-mono);font-size:.78rem;}
-.ddepth-layer.is-verify{background:var(--gallop-blue-100);}
-.ddepth-layer.is-verify .ddepth-step{background:var(--gallop-blue-50);}
-.ddepth-step.is-safe{background:var(--gallop-green-500);font-weight:500;}
+.ddepth-layer.is-verify{background:var(--gallop-secondary-100);}
+.ddepth-layer.is-verify .ddepth-step{background:var(--gallop-secondary-50);}
+.ddepth-step.is-safe{background:var(--gallop-secondary-300);font-weight:500;}
 .ddepth-cap{
   margin-top:1rem;font-family:var(--font-mono);font-size:var(--type-label-sm);
   letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--ink-40);
@@ -556,7 +561,7 @@ img,svg,video{display:block;max-width:100%;}
 
 /* -- Principle 05 · Reference table · LOC-shrink cue ---------------------- */
 .loc-cell{display:flex;flex-direction:column;gap:.55rem;align-items:flex-start;}
-.loc-shrink{position:relative;height:5px;width:120px;max-width:100%;background:var(--gallop-ochre-200);}
+.loc-shrink{position:relative;height:5px;width:120px;max-width:100%;background:var(--gallop-core-200);}
 .loc-shrink i{display:block;height:100%;background:var(--color-ink);width:var(--keep,10%);}
 
 @media (max-width:720px){
@@ -571,8 +576,10 @@ img,svg,video{display:block;max-width:100%;}
    ========================================================================= */
 :root{
   --font-display:"Lustria", Georgia, serif;  /* [EXT] hero display serif */
-  --color-sage:#C9D29D;   /* [EXT] case-card tints from Figma 2295:8808/8813 — */
-  --color-lemon:#EEEDB5;  /* not yet in gallop-tokens.css; flag for token adoption */
+  /* [EXT] case-card tints — now drawn from the July 2026 Core ramp
+     instead of the one-off #C9D29D / #EEEDB5 pair. */
+  --color-sage:var(--gallop-core-300);
+  --color-lemon:var(--gallop-core-200);
 }
 
 /* 30px section heading (replaces the serif sec-kicker on the homepage) */
@@ -615,7 +622,7 @@ img,svg,video{display:block;max-width:100%;}
     --band-d:617px;
     background-color:transparent;
     background-image:
-      linear-gradient(rgba(244,226,123,.42),rgba(244,226,123,.42)),  /* mute the green plaid */
+      linear-gradient(rgba(216,241,143,.42),rgba(216,241,143,.42)),  /* mute the green plaid */
       url("assets/bg-hero.jpg"),
       linear-gradient(var(--color-ochre),var(--color-ochre));
     background-repeat:no-repeat,no-repeat,no-repeat;
@@ -727,7 +734,7 @@ img,svg,video{display:block;max-width:100%;}
 .mseq-key b{font-weight:500;color:var(--color-ink);}
 .mseq-key i{width:10px;height:10px;border-radius:50%;flex:none;margin-right:.15ch;}
 .mseq-key--disc i{background:var(--color-ochre);}
-.mseq-key--mod i{background:var(--gallop-accent-green);}
+.mseq-key--mod i{background:var(--gallop-secondary);}
 
 .mseq-grid{display:flex;flex-direction:column;gap:clamp(2.4rem,4.5vw,3.5rem);}
 .mseq-rail{display:flex;flex-direction:column;gap:clamp(2.4rem,4.5vw,3.5rem);}
@@ -748,7 +755,7 @@ img,svg,video{display:block;max-width:100%;}
 @media (min-width:900px){
   .mseq--live{--mseq-scroll:230vh;--mseq-c:var(--color-ochre);height:var(--mseq-scroll);
     padding-inline:0;}   /* padding moves onto the stage so the window can bleed right */
-  .mseq--live.is-mod{--mseq-c:var(--gallop-accent-green);}
+  .mseq--live.is-mod{--mseq-c:var(--gallop-secondary);}
   /* the stage pins to the viewport for the whole scroll of .mseq. Full-bleed:
      the surface box runs to the left viewport edge, the window to the right. */
   .mseq--live .mseq-stage{position:sticky;top:0;min-height:100vh;display:flex;flex-direction:column;
@@ -783,7 +790,7 @@ img,svg,video{display:block;max-width:100%;}
   /* one smooth yellow→green gradient across the whole track (Discover→Modernize,
      per the key), revealed left-to-right as progress advances */
   .mseq--live .mseq-track-fill{position:absolute;inset:0;
-    background:linear-gradient(90deg,var(--color-ochre) 0%,var(--gallop-accent-green) 100%);
+    background:linear-gradient(90deg,var(--color-ochre) 0%,var(--gallop-secondary) 100%);
     clip-path:inset(0 calc((1 - var(--p)) * 100%) 0 0);}
 
   /* image window: row 2, right column; bleeds to the viewport's right edge,
@@ -851,7 +858,7 @@ img,svg,video{display:block;max-width:100%;}
 /* FAQ surface band butts straight into the textured footer field (no gap). */
 #faq{padding-bottom:clamp(3.5rem,6.6vw,6rem);}
 #faq + .close-field{margin-top:0;}
-.tf-parity{--tex-img:url("assets/bg-hero.jpg");--tex-grad:linear-gradient(74.1deg,var(--color-ochre) 1.8%,rgba(244,226,123,0) 53.67%);}
+.tf-parity{--tex-img:url("assets/bg-hero.jpg");--tex-grad:linear-gradient(74.1deg,var(--color-ochre) 1.8%,rgba(216,241,143,0) 53.67%);}
 .pb-inner{width:100%;display:flex;justify-content:space-between;gap:3rem;align-items:center;padding:clamp(2rem,4vw,3.2rem) calc(var(--gutter) + var(--space-page-x));}
 .pb-copy{max-width:500px;display:flex;flex-direction:column;gap:32px;}
 .pb-copy .hx{max-width:26ch;}
@@ -894,7 +901,7 @@ img,svg,video{display:block;max-width:100%;}
     background-color:transparent;
     background-image:
       /* gold veil mutes the green plaid patches so the hero reads as a clean, professional yellow */
-      linear-gradient(rgba(244,226,123,.42),rgba(244,226,123,.42)),
+      linear-gradient(rgba(216,241,143,.42),rgba(216,241,143,.42)),
       url("assets/bg-hero.jpg"),
       linear-gradient(var(--color-ochre),var(--color-ochre));
     background-repeat:no-repeat,no-repeat,no-repeat;

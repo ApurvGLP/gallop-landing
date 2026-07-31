@@ -12,10 +12,12 @@
   'use strict';
   const W = 1280, H = 720;
   // ── Gallop palette (from tokens.css) ──────────────────────────────────
+  // July 2026 palette: Core lime + Secondary mint. OCHRE/GREEN keep their
+  // historical names here so the drawing code below is unchanged.
   const INK = '#362F2C', INK2 = '#7A7471', BG = '#FAFAF8', SURF = '#FDFDFC',
-        CREAM = '#FCFAEB', OCHRE = '#F4E27B', OCHRE6 = '#D2C164',
-        GREEN = '#97DFA7', GREEND = '#4F9E6A';
-  const ACCENT = GREEND; // strokes/labels: deep green reads on the light canvas
+        CREAM = '#F0F3E7', OCHRE = '#D8F18F', OCHRE6 = '#9FCC1A',
+        GREEN = '#76DDAB', GREEND = '#298A5B';
+  const ACCENT = GREEND; // strokes/labels: deep mint reads on the light canvas
 
   // ── math (ported from animations engine) ──────────────────────────────
   const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
