@@ -413,6 +413,8 @@ img,svg,video{display:block;max-width:100%;}
 .form-foot{display:flex;flex-wrap:wrap;gap:1rem 1.6rem;align-items:center;margin-top:1.6rem;}
 .form-note{font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--ink-40);line-height:1.5;max-width:40ch;}
 .form-sent{display:none;font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--color-ink);background:var(--color-ochre);padding:.6rem .8rem;border-radius:2px;margin-top:1rem;}
+.form-error{display:none;font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:#8c1d18;background:#fdecea;border:1px solid #f3c7c2;padding:.6rem .8rem;border-radius:2px;margin-top:1rem;line-height:1.5;}
+.demo-form button[type="submit"][disabled]{opacity:.6;cursor:not-allowed;}
 
 /* =====================  JOURNAL (blog)  ===================== */
 .post-meta{font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--ink-50);display:flex;flex-wrap:wrap;gap:.3rem .75rem;}

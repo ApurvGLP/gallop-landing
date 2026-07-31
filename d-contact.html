@@ -67,7 +67,7 @@
         <div class="field-row">
           <div class="field">
             <label for="f-type">Modernization type</label>
-            <select id="f-type" name="modernization_type">
+            <select id="f-type" name="systemType">
               <option>On-Prem → Public Cloud</option>
               <option>Monolith → Microservices</option>
               <option>Java Android → Flutter</option>
@@ -95,7 +95,8 @@
           <button type="submit" class="btn btn-ochre">Submit request</button>
           <p class="form-note">Your request goes directly to the Gallop team. We use it only to prepare and schedule the consultation.</p>
         </div>
-        <p class="form-sent" id="formSent">✓ Request received — preview build; submissions aren’t wired to a backend yet.</p>
+        <p class="form-sent" id="formSent" role="status" aria-live="polite">✓ Request received — we’ll be in touch shortly to schedule your consultation.</p>
+        <p class="form-error" id="formError" role="alert"></p>
       </form>
     </div>
   </section>

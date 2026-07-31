@@ -130,13 +130,71 @@
     window.addEventListener('resize', evalMode, {passive:true});
   }
 
-  /* --- demo form (preview build — not wired to a backend yet) --- */
+  /* --- demo form → POST /api/contact (Next.js route handler, Resend-backed) ---
+     Payload contract is set by the client's handler and must match exactly:
+     { name, email, company, systemType, timeline, message }. The systemType and
+     timeline values must stay byte-identical to their server-side allowlists —
+     a mismatch there is silently coerced to "Other" / "" rather than rejected. */
   var form = document.getElementById('demoForm');
   if(form){
+    var ENDPOINT = form.getAttribute('data-endpoint') || '/api/contact';
+    var sent   = document.getElementById('formSent');
+    var errBox = document.getElementById('formError');
+    var btn    = form.querySelector('button[type="submit"]');
+    var btnLabel = btn ? btn.textContent : '';
+    var busy = false;
+
+    function showError(msg){
+      if(!errBox) return;
+      errBox.textContent = msg;
+      errBox.style.display = 'block';
+    }
+    function clearError(){
+      if(!errBox) return;
+      errBox.textContent = '';
+      errBox.style.display = 'none';
+    }
+
     form.addEventListener('submit', function(e){
       e.preventDefault();
-      var sent = document.getElementById('formSent');
-      if(sent){ sent.style.display = 'inline-block'; }
+      if(busy) return;                     /* guard against double-submit */
+      if(!form.reportValidity()) return;    /* let the browser flag required/email first */
+
+      busy = true;
+      clearError();
+      if(btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
+
+      var fd = new FormData(form);
+      var payload = {
+        name:       (fd.get('name')       || '').trim(),
+        email:      (fd.get('email')      || '').trim(),
+        company:    (fd.get('company')    || '').trim(),
+        systemType: fd.get('systemType')  || '',
+        timeline:   fd.get('timeline')    || '',
+        message:    (fd.get('message')    || '').trim()
+      };
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+      }).then(function(res){
+        /* the handler returns JSON on both success and error, but don't assume
+           it on a proxy/CDN failure that never reached the route */
+        return res.json().catch(function(){ return {}; }).then(function(data){
+          if(!res.ok) throw new Error(data.error || 'Something went wrong. Please try again.');
+          return data;
+        });
+      }).then(function(){
+        form.reset();
+        if(btn){ btn.textContent = btnLabel; }
+        if(sent){ sent.style.display = 'inline-block'; }
+        form.querySelectorAll('.field, .form-foot').forEach(function(el){ el.style.display = 'none'; });
+      }).catch(function(err){
+        showError(err && err.message ? err.message : 'Something went wrong. Please try again.');
+        if(btn){ btn.disabled = false; btn.textContent = btnLabel; }
+        busy = false;
+      });
     });
   }
 })();
