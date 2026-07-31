@@ -1,0 +1,99 @@
+/* =========================================================================
+   Gallop hero animation — client-created brand asset.
+   Extracted from hero-animation-share-w-babco.html into editable files so we
+   can make visual tweaks. Pairs with assets/hero-anim.js.
+
+   Story: the dark legacy monolith is scanned, peels into clean light tiers
+   (interface / services / schema), then agents dock onto the clean APIs.
+
+   TWEAKING COLOURS: the brand tokens live on `.gallop-hero` below. They are
+   ALSO mirrored as constants in hero-anim.js (the canvas maths needs raw hex),
+   so if you retune a colour, change it in BOTH places. Ask me and I can wire
+   the JS to read these automatically so there's a single source of truth.
+
+   Fonts (Funnel Sans / Geist Mono) are already loaded by the page.
+   ========================================================================= */
+
+.gallop-hero{
+  /* brand tokens (scoped to the component so they don't leak onto the page) */
+  /* July 2026 palette: Core lime + Secondary mint. The --ochre/--green
+     names are kept so the rules below are unchanged. */
+  --bg:#FAFAF8; --ink:#362F2C; --ink2:#7A7471; --surface:#FDFDFC; --cream:#F0F3E7;
+  --ochre:#D8F18F; --ochre-600:#9FCC1A; --green:#76DDAB;
+  /* deep mint for strokes/labels on the light canvas — Secondary/700 */
+  --green-deep:#298A5B;
+  --sans:'Funnel Sans',system-ui,sans-serif;
+  --mono:'Geist Mono',ui-monospace,monospace;
+
+  position:relative;
+  overflow:hidden;
+  background:transparent;           /* no canvas fill — animation sits on the page */
+  border-radius:0;                  /* brand: square corners */
+  font-family:var(--sans);
+  letter-spacing:-0.02em;           /* brand: −2% tracking */
+  /* NOTE: size + placement are set by d.css (.xhero-shot .gallop-hero) so the
+     animation fits the hero slot; it has no fixed dimensions of its own. */
+}
+
+/* fixed 1280×720 coordinate space, scaled to cover the responsive box (JS) */
+.gh-stage{position:absolute;top:0;left:0;width:1280px;height:720px;transform-origin:0 0;}
+.gh-world{position:absolute;top:0;left:0;width:1280px;height:720px;transform-origin:0 0;}
+
+/* faint warm dot texture */
+.gh-grid{
+  position:absolute;left:-700px;top:-500px;width:2700px;height:1800px;
+  background-image:radial-gradient(rgba(54,47,44,0.05) 1px,transparent 1px);
+  background-size:34px 34px;
+}
+/* SANCTIONED GLOSS: faint green analysis glow behind the modern stack */
+.gh-glow{
+  position:absolute;left:280px;top:70px;width:540px;height:580px;
+  background:radial-gradient(closest-side,color-mix(in srgb,var(--green) 12%,transparent),transparent);
+}
+.gh-band{position:absolute;overflow:hidden;}
+.gh-legacy,.gh-modern{position:absolute;inset:0;}
+.gh-labels{position:absolute;left:14px;top:14px;right:14px;height:16px;}  /* label inset matches the card padding */
+.gh-labels span{
+  position:absolute;left:0;top:0;white-space:nowrap;
+  font:500 13px var(--sans);letter-spacing:-0.02em;   /* main titles: Funnel, not mono */
+}
+.gh-code-row{position:absolute;left:0;right:0;}
+.gh-bar{position:absolute;height:4px;}
+
+/* modern card — flat surface block, square, no shadow */
+.gh-card{
+  flex:1;min-width:0;border-radius:6px;background:var(--surface);
+  padding:9px;position:relative;   /* nested card: lighter than the panel, no stroke */
+  display:flex;flex-direction:column;gap:7px;
+}
+.gh-head{display:flex;align-items:center;gap:6px;}
+.gh-head .dot{width:6px;height:6px;border-radius:50%;background:rgba(54,47,44,0.28);flex:0 0 auto;}
+.gh-head span{
+  font:500 11.5px var(--mono);color:rgba(54,47,44,0.86);letter-spacing:-0.02em;
+  white-space:nowrap;overflow:hidden;
+}
+.gh-ln{height:5px;border-radius:999px;}
+.gh-chip{
+  padding:2px 6px;border-radius:999px;border:none;
+  background:rgba(54,47,44,0.05);font:500 9px var(--mono);color:var(--ink2);
+  letter-spacing:-0.02em;text-transform:uppercase;
+}
+
+/* SANCTIONED GLOSS: scan beam keeps a soft green glow.
+   The tiers now run left-to-right, so the beam is a VERTICAL line that
+   sweeps across the row (was a horizontal bar travelling down the stack). */
+.gh-scan{
+  position:absolute;width:2px;
+  background:linear-gradient(180deg,transparent,var(--green-deep),transparent);
+  box-shadow:0 0 22px 6px color-mix(in srgb,var(--green) 45%,transparent);
+}
+/* agent — flat green block, square */
+.gh-agent{
+  position:absolute;width:78px;height:44px;border-radius:6px;
+  border:1px solid rgba(54,47,44,0.08);background:var(--surface);
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.gh-agent .diamond{width:13px;height:13px;background:var(--green-deep);transform:rotate(45deg);border-radius:0;}
+.gh-agent span{font:500 10px var(--mono);letter-spacing:-0.02em;color:var(--ink);text-transform:uppercase;}
+
+.gh-veil{position:absolute;inset:0;background:transparent;}  /* reset is handled by fading the world (hero-anim.js), not a white veil */

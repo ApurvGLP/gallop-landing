@@ -55,9 +55,8 @@ off-white, ensuring legibility and visual comfort across all surfaces."*
 | Text Secondary | `--brand-text-secondary` | `#7A7471` | Secondary / supporting text. |
 | Background | `--brand-background` | `#F9F9F2` | Page background. Warm off-white, never pure white. |
 | Surface | `--brand-surface` | `#F2F2EB` | Card headers, panels; text colour on dark buttons. |
-| Accent Ochre | `--brand-accent-ochre` | `#F4E27B` | The signature yellow. Hero bands, feature blocks, CTAs. |
-| Accent Blue | `--brand-accent-blue` | `#BCDEF7` | Secondary highlights, links, informational elements. |
-| Accent Green | `--brand-accent-green` | `#97DFA7` | Success states, positive indicators, tertiary accents. |
+| Core | `--brand-core` | `#D8F18F` | The signature lime. Hero bands, feature blocks, CTAs and key interactive elements. |
+| Secondary | `--brand-secondary` | `#76DDAB` | Mint. Supporting accents, success/positive indicators, informational elements. |
 | White / Black | `--brand-white` / `--brand-black` | `#FFFFFF` / `#000000` | Sparingly. |
 
 ### Ramps — for shades beyond the semantics
@@ -68,12 +67,20 @@ Each accent has a full 50→950 ramp in [tokens.css](tokens.css)
 - **Neutral** (`--neutral-*`) — warm brown-to-cream scale derived from Text
   Primary (500 = `#362F2C`, 50 = `#F9F9F2`). For text, borders, backgrounds,
   surfaces.
-- **Ochre** (`--ochre-*`) — signature brand yellow, deep amber to pale wheat.
-  Key steps: 500 `#F4E27B` (accent), 600 `#D2C164` (stripes on ochre),
-  50 `#FCFAEB` (cream text on dark).
-- **Blue** (`--blue-*`) — soft sky blue. Key steps: 600 `#98B9D8` (feature
-  blocks), 700 `#7494B9` (stripes on blue), 300 `#D5EAF9` (large soft panels).
-- **Green** (`--green-*`) — mint-sage, for success and positive states.
+- **Core** (`--core-*`) — signature brand lime, pale wheat to deep olive.
+  Light tints work for backgrounds and subtle highlights; darker shades
+  serve hover states and contrast pairings. Key steps: 300 `#D2E3A1`
+  (card tints), 600 `#9FCC1A` (stripes on core), 100 `#F0F3E7` (pale
+  text on dark).
+- **Secondary** (`--secondary-*`) — mint. Lighter tints for success /
+  positive backgrounds, darker shades for text on light surfaces. Key
+  steps: 300 `#A8DCC3` (soft panels), 700 `#298A5B` (strokes and labels
+  on a light canvas).
+
+> The earlier ochre / blue / green accents were retired in the July 2026
+> palette. `--ochre-*` maps onto Core and `--blue-*` / `--green-*` onto
+> Secondary in [tokens.css](tokens.css) so older markup keeps resolving,
+> but new work should use `--core-*` / `--secondary-*` directly.
 
 **Rules**
 

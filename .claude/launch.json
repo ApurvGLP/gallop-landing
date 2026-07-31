@@ -6,6 +6,12 @@
       "runtimeExecutable": "env",
       "runtimeArgs": ["PORT=4671", "node", "server.js"],
       "port": 4671
+    },
+    {
+      "name": "gallop-static",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4672"],
+      "port": 4672
     }
   ]
 }
