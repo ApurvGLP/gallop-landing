@@ -2,10 +2,26 @@
 (function(){
   /* --- ?noanim: render everything instantly (screenshot QA / reduced-motion testing) --- */
   if(/[?&]noanim/.test(location.search)){ document.documentElement.classList.add('noanim'); }
-  /* --- mobile nav (markup shared via partials/nav.html, stamped in by build.js) --- */
+  /* --- mobile nav (markup shared via partials/nav.html, stamped in by build.js) ---
+     Open/close state is the `hidden` attribute rather than a class: the panel
+     stays in the DOM so CSS can animate the close as well as the open (see
+     .nav-links in d.css). The panel is only ever hidden below the 760px
+     breakpoint — above it the links are always-visible desktop nav. */
   var t = document.getElementById('navToggle'), links = document.getElementById('navLinks');
-  if(t){ t.addEventListener('click', function(){ t.classList.toggle('open'); links.classList.toggle('open'); }); }
-  links && links.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ t.classList.remove('open'); links.classList.remove('open'); }); });
+  if(t && links){
+    /* CSS owns the closed-by-default state at mobile widths, so there is no
+       open-menu flash before this runs and the nav still renders with JS off. */
+    function set(open){
+      t.classList.toggle('open', open);
+      links.classList.toggle('open', open);
+      t.setAttribute('aria-expanded', open);
+    }
+    set(false);
+    t.setAttribute('aria-controls', 'navLinks');
+    t.addEventListener('click', function(){ set(!t.classList.contains('open')); });
+    links.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ set(false); }); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') set(false); });
+  }
 
   /* --- faint code-wall texture --- */
   var CODE = [
