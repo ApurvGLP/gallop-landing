@@ -805,7 +805,7 @@ img,svg,video{display:block;max-width:100%;}
 .mseq-rail{display:flex;flex-direction:column;gap:clamp(2.4rem,4.5vw,3.5rem);}
 .mseq-state{display:flex;flex-direction:column;}
 .mseq-name{font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.2;color:var(--gallop-text-secondary);}
-.mseq-name b{font-weight:500;color:var(--color-ink);}
+.mseq-name b{font-size:var(--type-h-xs);font-weight:500;color:var(--color-ink);}
 .mseq-headline{margin-top:.75rem;font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);line-height:1.28;color:var(--color-ink);max-width:32ch;}
 .mseq-points{margin:1.1rem 0 0;padding:0;list-style:none;max-width:38ch;}
 .mseq-points li{padding:clamp(.5rem,.9vw,.7rem) 0;border-top:1px solid var(--hairline);font-size:var(--type-body-md);letter-spacing:var(--gallop-tracking);line-height:1.28;color:var(--gallop-text-secondary);}
