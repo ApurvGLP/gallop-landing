@@ -1,0 +1,9 @@
+{
+  "name": "gallop-site",
+  "private": true,
+  "type": "module",
+  "description": "Static marketing site. The only server-side code is api/contact.js, the demo-request handler.",
+  "dependencies": {
+    "resend": "^6.0.0"
+  }
+}
