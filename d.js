@@ -23,6 +23,75 @@
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape') set(false); });
   }
 
+  /* --- FAQ open/close animation ------------------------------------------
+     <details> hides its content the moment `open` is removed, so the closing
+     direction can't animate on its own. We intercept the toggle click: opening
+     lets the browser set `open` and CSS animates max-height up; closing holds
+     `open` on until the collapse finishes, then drops it. Content is wrapped in
+     .a-inner so the answer's padding sits inside the clipped box. Height is
+     measured per item into --faq-h (max-height can't transition to auto), and
+     re-measured on open so reflowed text still collapses from the right height.
+     Without JS none of this applies and <details> keeps its native behavior. */
+  (function(){
+    var items = document.querySelectorAll('.faq-item');
+    if(!items.length) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion:reduce)');
+    var instant = function(){
+      return reduce.matches || document.documentElement.classList.contains('noanim');
+    };
+    document.documentElement.classList.add('faq-anim');
+    items.forEach(function(item){
+      var a = item.querySelector('.a');
+      var summary = item.querySelector('summary');
+      if(!a || !summary) return;
+      /* wrap the answer's children so the padding is inside the clipped box */
+      var inner = document.createElement('div');
+      inner.className = 'a-inner';
+      while(a.firstChild) inner.appendChild(a.firstChild);
+      a.appendChild(inner);
+
+      var measure = function(){ a.style.setProperty('--faq-h', inner.scrollHeight + 'px'); };
+      var closing = false;
+
+      /* Measure once the browser has revealed the content — on the opening click
+         the answer is still hidden, so scrollHeight reads 0. The custom property
+         is set on a fresh frame so max-height has a 0 start value to animate
+         from; setting it in the same frame as `open` would jump straight there. */
+      item.addEventListener('toggle', function(){
+        if(!item.open || instant()) return;
+        var h = inner.scrollHeight;
+        a.style.setProperty('--faq-h', '0px');
+        void a.offsetHeight;                        /* flush the 0 start state */
+        requestAnimationFrame(function(){ a.style.setProperty('--faq-h', h + 'px'); });
+      });
+
+      summary.addEventListener('click', function(e){
+        if(instant()) return;              /* let the browser handle it outright */
+        if(!item.open) return;             /* opening: the toggle handler sizes it */
+        e.preventDefault();                /* closing: animate before unsetting open */
+        if(closing) return;
+        closing = true;
+        measure();
+        void a.offsetHeight;               /* start the collapse from that height */
+        item.classList.add('is-closing');  /* drives max-height back to 0 */
+        var done = function(ev){
+          if(ev && ev.propertyName !== 'max-height') return;
+          a.removeEventListener('transitionend', done);
+          clearTimeout(fallback);
+          item.classList.remove('is-closing');
+          item.open = false;
+          closing = false;
+        };
+        a.addEventListener('transitionend', done);
+        /* transitionend can be skipped (tab hidden, already collapsed) */
+        var fallback = setTimeout(done, 600);
+      });
+
+      /* keep the open item's height correct when text reflows */
+      window.addEventListener('resize', function(){ if(item.open && !closing) measure(); });
+    });
+  })();
+
   /* --- faint code-wall texture --- */
   var CODE = [
     "const apiKey = process.env.API_KEY || 'default-key';",

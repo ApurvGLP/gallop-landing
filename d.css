@@ -60,8 +60,9 @@
   /* ---- Spacing (DESIGN-SYSTEM.md scale via gallop tokens) ---- */
   --space-page-x: clamp(1.15rem, 4.5vw, var(--gallop-space-40));
   --nav-pad: 1.1rem;  /* nav bar's inner padding; also how far the bar overhangs the content grid so the logo/CTA align with page content */
-  --space-section: clamp(5.5rem, 10vw, var(--gallop-space-section));
-  --space-section-sm: clamp(3.4rem, 6vw, 6.5rem);
+  /* tightened 20% from clamp(5.5rem,10vw,180px) / clamp(3.4rem,6vw,6.5rem) */
+  --space-section: clamp(4.4rem, 8vw, calc(var(--gallop-space-section) * .8));
+  --space-section-sm: clamp(2.72rem, 4.8vw, 5.2rem);
 
   /* ---- [EXT] film-grain texture (reused across gold/green blocks) ---- */
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
@@ -212,11 +213,11 @@ img,svg,video{display:block;max-width:100%;}
 
 /* open roles (Careers) */
 .role-list{margin-top:clamp(2.2rem,4vw,3.2rem);border-top:1px solid var(--hairline);}
-.role-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) 24px;gap:1.5rem;align-items:center;padding-block:1.6rem;border-bottom:1px solid var(--hairline);transition:background var(--dur-fast) var(--ease);}
+.role-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) 24px;gap:1.5rem;align-items:center;padding-block:1.6rem;padding-inline:1rem;margin-inline:-1rem;border-bottom:1px solid var(--hairline);transition:background var(--dur-fast) var(--ease);}
 .role-row:hover{background:var(--color-ochre-2);}
 .role-title{font-family:var(--font-body);font-weight:400;font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:var(--gallop-leading-body);}
 .role-meta{font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--ink-50);line-height:1.6;}
-.role-row .arw{font-family:var(--font-mono);color:var(--color-ink);justify-self:end;transition:transform var(--dur) var(--ease-emph);}
+.role-row .arw{font-family:var(--font-mono);color:var(--color-ink);justify-self:end;line-height:1;transition:transform var(--dur) var(--ease-emph);}
 .role-row:hover .arw{transform:translateX(3px);}
 .gates--3{grid-template-columns:repeat(3,1fr);}
 
@@ -276,7 +277,22 @@ img,svg,video{display:block;max-width:100%;}
 .faq-item .ind::before{left:2px;right:2px;top:11px;height:2px;}
 .faq-item .ind::after{top:2px;bottom:2px;left:11px;width:2px;}
 .faq-item[open] .ind{transform:rotate(45deg);}
+/* Answer collapse. Same technique as the mobile nav panel: grid-template-rows
+   0fr→1fr transitions where height:auto cannot. d.js holds the `open` attribute
+   on until the collapse finishes so closing animates too, and adds .faq-anim
+   only when JS is running — without it the rules below stay off and <details>
+   keeps its native instant toggle. */
 .faq-item .a{padding-bottom:2rem;max-width:56ch;}
+/* max-height rather than the nav's 0fr→1fr: an fr row needs a definite height to
+   resolve against, which a <details> child never gets, so it stays collapsed.
+   d.js sets --faq-h to the measured content height for each item. */
+.faq-anim .faq-item .a{overflow:hidden;max-height:0;padding-bottom:0;opacity:0;
+  transition:max-height var(--dur) var(--ease-emph),opacity var(--dur-fast) var(--ease);}
+.faq-anim .faq-item[open] .a{max-height:var(--faq-h,100vh);opacity:1;}
+/* d.js keeps `open` set through the closing transition, so this has to win */
+.faq-anim .faq-item[open].is-closing .a{max-height:0;opacity:0;}
+/* padding lives on the inner wrapper — on .a it would hold the closed state open */
+.faq-anim .faq-item .a-inner{padding-bottom:2rem;}
 .faq-item .a p{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.3;color:var(--ink-70);}
 .faq-item .a p+p{margin-top:.8rem;}
 .faq-item .a .note{margin-top:1rem;font-family:var(--font-mono);font-size:var(--type-label-sm);letter-spacing:var(--gallop-tracking);text-transform:uppercase;color:var(--ink-40);}
@@ -601,6 +617,8 @@ img,svg,video{display:block;max-width:100%;}
 .noanim{scroll-behavior:auto;}
 .noanim .reveal{opacity:1;transform:none;transition:none;}
 .noanim .nav-links{transition:none;}  /* menu opens/closes instantly, no deferred visibility */
+/* FAQ answers snap open/closed; d.js skips its close-deferral in this case too */
+.noanim .faq-item .a{transition:none;}
 
 /* =========================================================================
    METHODOLOGY — elevated brand-native visuals (recreated from
@@ -698,13 +716,17 @@ img,svg,video{display:block;max-width:100%;}
 .xhero-inner{position:relative;z-index:1;
   display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
   gap:clamp(2rem,4vw,4rem);align-items:start;
-  padding-top:clamp(3.4rem,7vw,6.5rem);padding-bottom:clamp(2.6rem,5vw,4.4rem);}
+  padding-top:clamp(6.8rem,14vw,13rem);padding-bottom:clamp(2.6rem,5vw,4.4rem);}
 .xhero-copy h1{font-family:var(--font-display);font-weight:400;font-size:clamp(calc(1.9rem * var(--lustria-scale)),calc(2.8vw * var(--lustria-scale)),calc(2.5rem * var(--lustria-scale)));line-height:1.08;letter-spacing:-.02em;max-width:36rem;}
 /* right column: sub-copy over the CTA (Figma stacks them with a 22px gap) */
 .xhero-aside{display:flex;flex-direction:column;align-items:flex-start;gap:22px;padding-top:7px;}
 .xhero-sub{font-family:var(--font-body);font-weight:400;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--color-ink);max-width:34rem;}
 .xhero-sub b{font-weight:500;}
-.xhero-cta{align-self:flex-start;}
+/* CTA — matches the nav-cta treatment (mono, uppercase, 2px radius) so the
+   two yellow buttons read as one component rather than two sizes. */
+.xhero-cta{align-self:flex-start;
+  font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;text-transform:uppercase;
+  padding:.55rem .95rem;border-radius:2px;}
 
 /* the texture band — full-bleed, breaks out of .wrap's centred column */
 .xhero-band{position:relative;
@@ -903,20 +925,33 @@ img,svg,video{display:block;max-width:100%;}
 }
 
 /* --- ENTERPRISE / TRUST ---------------------------------- */
-/* header split reuses .mb-head: .ent-lead (title + standfirst) sits left, the
-   team paragraph (.mb-body) sits right */
-.ent-lead{flex:none;max-width:40ch;}
+.ent-lead{max-width:40ch;}
 #enterprise .hx{max-width:none;}
 .ent-sub{margin-top:12px;font-family:var(--font-body);font-weight:300;font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--gallop-text-secondary);}
-.ent-grid{margin-top:clamp(3rem,5vw,4.5rem);display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gallop-space-card-gap);}
+/* the capability columns read as their own section below the trust row, so the
+   gap above them matches the section rhythm rather than an in-section step */
+.ent-grid{margin-top:var(--space-section);display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gallop-space-card-gap);}
 /* no surface panel behind each item — plain text columns on the page canvas */
 .ent-card{display:flex;flex-direction:column;gap:14px;}
 .ent-card-title{font-family:var(--font-body);font-weight:400;font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.2;color:var(--color-ink);}
 .ent-card-desc{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--gallop-text-secondary);}
-/* compliance marks only — SOC 2 + ISO badges, no written-out tags */
-.ent-badges{margin-top:clamp(3.4rem,6vw,5.5rem);display:flex;align-items:center;gap:28px;}
+/* trust row (Figma 4295:758): title + standfirst + compliance marks sit left
+   (326px of a 1359 frame); the paragraph column starts at 575px (~42.3%), so the
+   split is expressed as a fraction of the content width */
+.ent-trust{display:grid;grid-template-columns:minmax(326px,42.3%) minmax(0,1fr);gap:clamp(2rem,4vw,3rem);
+  align-items:start;}
+/* the paragraph (18px/1.24) runs smaller than the heading (.hx, 1.04 leading) and
+   the two faces have different ascents, so top-aligning the boxes alone leaves the
+   first lines off. This offset sits the paragraph's cap line on the heading's. */
+.ent-trust-body{margin-top:-0.17em;}
+/* compliance marks: badge beside its own mono caption, stacked below the standfirst */
+.ent-badges{margin:clamp(2.6rem,4.5vw,3.75rem) 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;}
+.ent-badges li{display:flex;align-items:center;gap:10px;}
 /* clip the square badge PNGs to a circle so the white corners disappear */
-.ent-badges img{width:56px;height:56px;object-fit:cover;border-radius:50%;}
+.ent-badges img{width:43.75px;height:43.75px;flex:none;object-fit:cover;border-radius:50%;}
+.ent-badges span{font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;
+  letter-spacing:var(--gallop-tracking);line-height:1.1;text-transform:uppercase;color:var(--color-ink);}
+.ent-trust-body{max-width:660px;}
 
 /* --- TRACK RECORD ----------------------------------------------------------- */
 /* head row: label + headline on the left, demo CTA pinned bottom-right so its
@@ -1034,13 +1069,14 @@ img,svg,video{display:block;max-width:100%;}
   .pb-inner .panel{flex:none;width:100%;max-width:560px;}
   .faq-grid{grid-template-columns:1fr;gap:2.2rem;}
   .ent-grid{grid-template-columns:repeat(2,1fr);}
+  .ent-trust{grid-template-columns:1fr;gap:2rem;}
 }
 @media (max-width:760px){
   /* HERO (mobile): the copy stacks on the paper and the texture band sits
      below it, same structure as desktop — only the columns collapse. The
      band keeps its own background (see .xhero-band), so .xhero itself stays
      plain paper here. */
-  .xhero-inner{display:block;padding-top:clamp(2rem,7vw,3rem);padding-bottom:clamp(1.8rem,6vw,2.6rem);}
+  .xhero-inner{display:block;padding-top:clamp(4rem,14vw,6rem);padding-bottom:clamp(1.8rem,6vw,2.6rem);}
   .xhero-aside{margin-top:1.5rem;}
   .logoband{padding-top:clamp(3rem,7vw,4.5rem);}
   .proto-card{flex-basis:86vw;}
