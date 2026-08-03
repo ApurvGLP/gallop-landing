@@ -878,9 +878,10 @@ img,svg,video{display:block;max-width:100%;}
   .mseq--live .mseq-stage{position:sticky;top:0;min-height:100vh;display:flex;flex-direction:column;
     justify-content:center;padding-top:clamp(5.5rem,8vh,7rem);padding-bottom:clamp(2rem,4vh,3.5rem);}
   /* row 1 = the full-width timeline (spans both columns); row 2 = box | window
-     with their tops aligned. */
+     with their tops aligned. row-gap 0 so the track sits flush on both and reads
+     as the header of the stage, not a bar floating over a gap. */
   .mseq--live .mseq-grid{display:grid;grid-template-columns:minmax(300px,0.86fr) minmax(0,2.1fr);
-    grid-template-rows:auto auto;column-gap:0;row-gap:clamp(1.4rem,2.4vw,2.2rem);align-items:stretch;}
+    grid-template-rows:auto auto;column-gap:0;row-gap:0;align-items:stretch;}
 
   /* LEFT: the copy sits in a warm Surface-colour box that bleeds to the left
      edge. Its inner left padding is a small margin from the VIEWPORT (not the
@@ -900,15 +901,20 @@ img,svg,video{display:block;max-width:100%;}
   .mseq--live .mseq-headline.lit,
   .mseq--live .mseq-points li.lit{opacity:1;color:var(--color-ink);}
 
-  /* timeline: row 1, spanning the full viewport width above the whole section.
-     Progress-only (scroll drives it) — not interactive, no marker. */
-  .mseq--live .mseq-track{display:block;grid-column:1 / -1;grid-row:1;align-self:start;
+  /* timeline: row 1, spanning the full viewport width directly above the box +
+     window. Progress-only (scroll drives it) — not interactive, no marker.
+     Sits flush on the row below (row-gap 0) so the two read as one unit. */
+  .mseq--live .mseq-track{display:block;grid-column:1 / -1;grid-row:1;align-self:end;
     position:relative;height:6px;background:var(--hairline);--p:0;}
   /* one smooth yellow→green gradient across the whole track (Discover→Modernize,
      per the key), revealed left-to-right as progress advances */
   .mseq--live .mseq-track-fill{position:absolute;inset:0;
     background:linear-gradient(90deg,var(--color-ochre) 0%,var(--gallop-secondary) 100%);
     clip-path:inset(0 calc((1 - var(--p)) * 100%) 0 0);}
+  /* midpoint tick: marks where the rail cross-fades Discover→Modernize, so the
+     track visibly corresponds to the two states below it */
+  .mseq--live .mseq-track::after{content:"";position:absolute;left:50%;top:0;bottom:0;
+    width:1px;background:var(--color-bg);}
 
   /* image window: row 2, right column; bleeds to the viewport's right edge,
      square corners (brand). Its height drives the row, so the box matches it. */
