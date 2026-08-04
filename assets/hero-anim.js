@@ -49,9 +49,10 @@
     x: TIERS[0].x, y: TIER_Y,
     w: (TIERS[2].x + TIER_W) - TIERS[0].x, h: TIER_H,
   };
-  // camera: centered on the row (cxCenter) until agents dock, then pans a
-  // little so the agents below-right stay in frame.
-  const CAM = { cxCenter: STACK.x + STACK.w/2, cxShift: STACK.x + STACK.w/2 + 34, cy: TIER_Y + TIER_H/2 + 46, z: 1.0 };
+  // camera: stays centered on the row horizontally the whole time (no pan —
+  // agents dock straight down under each tier, and the view only slides up via
+  // frameStage to make room for them).
+  const CAM = { cxCenter: STACK.x + STACK.w/2, cy: TIER_Y + TIER_H/2 + 46, z: 1.0 };
   const LAYERS = [
     { legacy: 'Presentation', modern: 'Interface' },
     { legacy: 'Business Logic', modern: 'Services · API' },
@@ -93,7 +94,7 @@
     const peel = [eseg(s, 2.06, 2.92), eseg(s, 3.06, 3.92), eseg(s, 4.06, 4.92)];
     const dock = eseg(s, 5.12, 5.84);
     return {
-      s, cx: lerp(CAM.cxCenter, CAM.cxShift, dock), cy: CAM.cy, z: CAM.z,
+      s, cx: CAM.cxCenter, cy: CAM.cy, z: CAM.z,   // no horizontal pan — agents dock straight down, so the view only slides up (see frameStage)
       chaos: 1 - 0.7 * analyzed, analyzed, scanPos, scanGlow, peel,
       wire01: seg(peel[1], 0.72, 1), wire12: seg(peel[2], 0.72, 1),
       dock,
