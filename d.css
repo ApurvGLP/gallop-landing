@@ -306,7 +306,7 @@ img,svg,video{display:block;max-width:100%;}
   background-image:image-set(url("assets/bg-cta-band.webp") type("image/webp"),
                              url("assets/bg-cta-band.jpg")  type("image/jpeg"));
   background-size:cover;background-repeat:no-repeat;background-position:center;
-  overflow:hidden;margin:50px clamp(1.15rem,4.5vw,50px);}
+  overflow:hidden;border-radius:8px;margin:50px clamp(1.15rem,4.5vw,50px);}
 .cta-band-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;
   gap:clamp(2rem,4.4vw,3.75rem);padding-block:clamp(5rem,11.3vw,9.7rem);text-align:center;}
 .cta-band-title{font-family:var(--font-body);font-weight:400;font-size:var(--type-h-xs);
@@ -740,7 +740,7 @@ img,svg,video{display:block;max-width:100%;}
 /* Figma 4295:260 is 1440x409; the cap is a touch above that so the scene
    (≈2.4:1 after the side-by-side relayout) fills more of the band width on
    wide screens instead of floating with texture margins. */
-.xhero-shot .gallop-hero{width:100%;height:clamp(280px,29vw,410px);}
+.xhero-shot .gallop-hero{width:100%;height:clamp(336px,34.8vw,492px);}
 
 @media (min-width:1101px){
   .logoband{padding-top:clamp(3rem,5vw,4.5rem);}
@@ -767,7 +767,7 @@ img,svg,video{display:block;max-width:100%;}
   padding-bottom:.5rem;}
 .proto-track::-webkit-scrollbar{display:none;}
 .proto-card{flex:0 0 min(563px,86vw);display:flex;flex-direction:column;gap:clamp(2.6rem,4.5vw,4rem);}
-.proto-media{height:clamp(330px,36vw,501px);}
+.proto-media{height:clamp(330px,36vw,501px);border-radius:8px;}
 /* each card holds the designer's updated screen mock, centred on the green
    texture with ~10% breathing room so the texture frames it. Uniform sizing —
    the mocks arrive as complete screens, no per-card cropping. */
@@ -973,9 +973,9 @@ img,svg,video{display:block;max-width:100%;}
 .track-label+.hx{margin-top:22px;max-width:34ch;}
 .track-cta{flex:none;
   font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;letter-spacing:var(--gallop-tracking);text-transform:uppercase;line-height:1.1;
-  color:var(--color-ink);background:var(--color-ochre);padding:14px 23px 12px 26px;border-radius:2px;white-space:nowrap;
+  color:var(--color-bg);background:var(--color-ink);padding:14px 23px 12px 26px;border-radius:2px;white-space:nowrap;
   transition:background var(--dur-fast) var(--ease);}
-.track-cta:hover{background:var(--color-ochre-2);}
+.track-cta:hover{background:var(--gallop-neutral-800);}
 .track{position:relative;margin-top:54px;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gallop-space-card-gap);}
 /* card size original; only the top stat line (.tc-meta) is enlarged — headline
    stats (Alice). Dialed back 20% from the earlier 1.5rem to 1.2rem. */
@@ -1055,7 +1055,7 @@ img,svg,video{display:block;max-width:100%;}
 .pb-copy{max-width:500px;display:flex;flex-direction:column;gap:32px;}
 .pb-copy .hx{max-width:26ch;}
 .pb-copy p{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;}
-.pb-inner .panel{flex:0 1 560px;border-radius:0;}
+.pb-inner .panel{flex:0 1 560px;border-radius:8px;}
 
 
 /* --- FAQ — surface band ------------------------------------------------------------ */

@@ -403,7 +403,10 @@
   const hero = document.getElementById('gallopHero');
   const stage = hero.querySelector('.gh-stage');
   const CV_BASE = { x: -6, w: 1258, h: 328 };   // constant scale + horizontal frame
-  const CV_Y_TIERS  = 102;   // tier row vertically centred (agents still hidden)
+  const CV_Y_TIERS  = 150;   // tier row vertically centred (agents still hidden)
+                             // 150, not 266/2: the world layer is offset by the
+                             // camera (CAM.cy=312 -> +48px), so the tier row sits
+                             // at stage-y 314; centre the 328-tall window on that.
   const CV_Y_AGENTS = 192;   // original framing, with room for the docked agents
   let heroW = 0, heroH = 0, cvY = CV_Y_TIERS;
   function frameStage(y){
