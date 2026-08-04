@@ -356,6 +356,12 @@
     // the loop restart doesn't flash white now that the background is removed
     world.style.opacity = 1 - P.veil;
     veil.style.opacity = 0;
+
+    // Dynamic framing: the tier row stays vertically centred through the whole
+    // transform; only as the agents dock (P.dock 0→1) does the viewport slide
+    // up to the agent-inclusive framing, so the tiers rise and the agent chips
+    // enter in the space that opens below.
+    frameStage(lerp(CV_Y_TIERS, CV_Y_AGENTS, P.dock));
   }
 
   // ── timeline driver ───────────────────────────────────────────────────
@@ -388,25 +394,27 @@
   requestAnimationFrame(frame);
 
   // ── fit the CONTENT (not the whole empty 1280×720 canvas) into the box ──
-  // The client's canvas has large empty margins around the scene; we crop to
-  // the content viewport CV (stage coords) so the artwork fills the frame with
-  // no dead space. Tune CV to reframe. Box aspect (d.css) should ~match CV.
+  // The client's canvas has large empty margins around the scene; we crop to a
+  // content viewport (stage coords) so the artwork fills the frame with no dead
+  // space. The viewport keeps a CONSTANT width/scale — only its vertical origin
+  // animates (see frameStage in apply): phase A centres the tier row, and as the
+  // agents dock the origin slides down to the agent-inclusive framing so the
+  // tiers rise and the chips enter below. Box aspect (d.css) should ~match CV_BASE.
   const hero = document.getElementById('gallopHero');
   const stage = hero.querySelector('.gh-stage');
-  // The hero sits in a wide, short band (Figma 4295:260, ≈1440x409) and the
-  // tiers now run side by side, so the scene is landscape (≈2.4:1). In stage
-  // coords it spans x 108-1138, y 150-562 across BOTH camera states (the pan
-  // between CAM.cxCenter and CAM.cxShift slides it 34px). The viewport is that
-  // union plus a small margin, so nothing clips at either end of the pan.
-  const CV = { x: -6, y: 192, w: 1258, h: 328 };
-  const fit = () => {
-    const bw = hero.clientWidth, bh = hero.clientHeight;
-    // CONTAIN (not cover): in a short band, `cover` would scale to the width
-    // and crop the top/bottom tiers off. `min` keeps the whole scene visible.
-    const s = Math.min(bw / CV.w, bh / CV.h);
-    const tx = bw / 2 - (CV.x + CV.w / 2) * s;
-    const ty = bh / 2 - (CV.y + CV.h / 2) * s;
+  const CV_BASE = { x: -6, w: 1258, h: 328 };   // constant scale + horizontal frame
+  const CV_Y_TIERS  = 102;   // tier row vertically centred (agents still hidden)
+  const CV_Y_AGENTS = 192;   // original framing, with room for the docked agents
+  let heroW = 0, heroH = 0, cvY = CV_Y_TIERS;
+  function frameStage(y){
+    cvY = y;
+    // CONTAIN (not cover): in a short band, `cover` would crop the tiers off.
+    const s = Math.min(heroW / CV_BASE.w, heroH / CV_BASE.h);
+    const tx = heroW / 2 - (CV_BASE.x + CV_BASE.w / 2) * s;
+    const ty = heroH / 2 - (y + CV_BASE.h / 2) * s;
     stage.style.transform = `translate(${tx}px, ${ty}px) scale(${s})`;
-  };
-  new ResizeObserver(fit).observe(hero); fit();
+  }
+  const measure = () => { heroW = hero.clientWidth; heroH = hero.clientHeight; };
+  new ResizeObserver(() => { measure(); frameStage(cvY); }).observe(hero);
+  measure(); frameStage(CV_Y_TIERS);
 })();
