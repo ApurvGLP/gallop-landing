@@ -1068,6 +1068,7 @@ img,svg,video{display:block;max-width:100%;}
 .pb-copy .hx{max-width:26ch;}
 .pb-copy p{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;}
 .pb-inner .panel{flex:0 1 560px;border-radius:8px;}
+.pb-shot{flex:0 1 560px;min-width:0;width:100%;height:auto;border-radius:8px;display:block;}
 
 
 /* --- FAQ — surface band ------------------------------------------------------------ */
@@ -1091,6 +1092,7 @@ img,svg,video{display:block;max-width:100%;}
   .track-card::after{display:none;}
   .pb-inner{flex-direction:column;align-items:flex-start;}
   .pb-inner .panel{flex:none;width:100%;max-width:560px;}
+  .pb-shot{flex:none;max-width:560px;}
   .faq-grid{grid-template-columns:1fr;gap:2.2rem;}
   .ent-grid{grid-template-columns:repeat(2,1fr);}
   .ent-trust{grid-template-columns:1fr;gap:2rem;}
