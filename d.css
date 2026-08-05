@@ -955,13 +955,14 @@ img,svg,video{display:block;max-width:100%;}
    the two faces have different ascents, so top-aligning the boxes alone leaves the
    first lines off. This offset sits the paragraph's cap line on the heading's. */
 .ent-trust-body{margin-top:-0.17em;}
-/* compliance marks: badge beside its own mono caption, stacked below the standfirst */
-.ent-badges{margin:clamp(2.6rem,4.5vw,3.75rem) 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;}
-.ent-badges li{display:flex;align-items:center;gap:10px;}
+/* compliance marks: badges sit side by side, each caption centred beneath its mark */
+.ent-badges{margin:clamp(2.6rem,4.5vw,3.75rem) 0 0;padding:0;list-style:none;
+  display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.25rem clamp(2rem,3.5vw,3rem);}
+.ent-badges li{display:flex;flex-direction:column;align-items:center;gap:10px;}
 /* clip the square badge PNGs to a circle so the white corners disappear */
-.ent-badges img{width:43.75px;height:43.75px;flex:none;object-fit:cover;border-radius:50%;}
+.ent-badges img{width:clamp(60px,5.5vw,72px);height:clamp(60px,5.5vw,72px);flex:none;object-fit:cover;border-radius:50%;}
 .ent-badges span{font-family:var(--font-mono);font-size:var(--type-label-sm);font-weight:500;
-  letter-spacing:var(--gallop-tracking);line-height:1.1;text-transform:uppercase;color:var(--color-ink);}
+  letter-spacing:var(--gallop-tracking);line-height:1.1;text-transform:uppercase;text-align:center;color:var(--color-ink);}
 .ent-trust-body{max-width:660px;}
 
 /* --- TRACK RECORD ----------------------------------------------------------- */
@@ -1022,6 +1023,17 @@ img,svg,video{display:block;max-width:100%;}
 .tc-main{display:flex;flex-direction:column;gap:2px;}
 .tc-title{font-size:var(--type-body-xl);letter-spacing:var(--gallop-tracking);line-height:1.24;}
 .tc-desc{font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;opacity:.5;}
+/* each card is a link to its case study. The hover affordance is paint-only on
+   purpose: a transform would lift one card out of the row and visibly break the
+   horse's continuity at the seams it shares with its neighbours. Inset rings
+   rather than outline — the card sets overflow:hidden. A .post-card-style
+   background swap is no good either: it would flatten the three lemon/sage/mint
+   tints the soft-light composite needs underneath it. */
+.track-card{transition:box-shadow var(--dur-fast) var(--ease);}
+.track-card:hover{box-shadow:inset 0 0 0 1px var(--ink-70);}
+.track-card:hover .tc-desc{opacity:.7;}
+.track-card:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--color-ink);}
+.tc-desc{transition:opacity var(--dur-fast) var(--ease);}
 
 /* --- CORE FEATURES ----------------------------------------------------------- */
 /* Heading on the left, a 2×2 grid of icon + title + description on the right.
@@ -1038,7 +1050,7 @@ img,svg,video{display:block;max-width:100%;}
 .stats{margin-top:clamp(3.5rem,9vw,8rem);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(2rem,5vw,5.6rem);}
 .stat{display:flex;flex-direction:column;}
 .stat-num{font-family:var(--font-body);font-size:clamp(1.7rem,2.4vw,2.125rem);letter-spacing:var(--gallop-tracking);line-height:1.04;}
-.stat-label{margin-top:clamp(1.4rem,2vw,1.85rem);font-family:var(--font-mono);font-weight:500;font-size:var(--type-label-md);letter-spacing:var(--gallop-tracking);text-transform:uppercase;line-height:1.2;color:var(--color-ink);max-width:18rem;}
+.stat-label{margin-top:clamp(1.4rem,2vw,1.85rem);font-family:var(--font-mono);font-weight:500;font-size:var(--type-label-md);letter-spacing:var(--gallop-tracking);text-transform:uppercase;line-height:1.2;color:var(--color-ink);max-width:22rem;}
 .stat-body{margin-top:clamp(1.4rem,2.4vw,2rem);font-weight:300;font-size:var(--type-body-lg);letter-spacing:var(--gallop-tracking);line-height:1.24;color:var(--ink-50);max-width:34ch;}
 
 /* --- PARITY — texture band ------------------------------------------------------ */
@@ -1143,10 +1155,8 @@ img,svg,video{display:block;max-width:100%;}
   font-size:clamp(1.4rem,2vw,var(--gallop-text-heading-xs));line-height:var(--gallop-leading-heading-xs);
   letter-spacing:var(--gallop-tracking);max-width:633px;}
 .prin-grid{margin-top:clamp(3rem,5.5vw,5rem);display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
-.prin-card{padding-block:32px;display:flex;flex-direction:column;gap:32px;}
-.prin-icon{width:48px;height:48px;flex:none;background:var(--color-surface);border-radius:8px;
-  display:flex;align-items:center;justify-content:center;}
-.prin-icon img{width:20px;height:20px;}
+.prin-card{padding:32px;display:flex;flex-direction:column;gap:32px;
+  background:#D2E3A1;border-radius:16px;}
 .prin-card h3{font-family:var(--font-body);font-weight:400;
   font-size:clamp(1.3rem,1.95vw,var(--gallop-text-heading-xs));line-height:var(--gallop-leading-heading-xs);
   letter-spacing:var(--gallop-tracking);}
