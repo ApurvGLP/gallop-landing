@@ -111,7 +111,7 @@ export async function POST(request) {
         const safeMessage = truncate(message || '', MAX_MESSAGE);
 
         const { error } = await getResend().emails.send({
-            from: 'Gallop Leads <abhijeet@gallopintelligence.ai>',
+            from: 'Gallop Leads <support@gallopintelligence.ai>',
             to: 'support@gallopintelligence.ai',
             replyTo: email,
             subject: `New Lead: ${truncate(name, MAX_NAME)} (${truncate(company, MAX_FIELD)})`,
