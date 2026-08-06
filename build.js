@@ -2,9 +2,10 @@
    into d.html and every d-*.html page, between generated-block markers.
    The markup ships inside each page — no JavaScript needed to render it.
    After editing a partial, run:  node build.js  (then redeploy). */
-const fs = require('fs');
-const path = require('path');
-const ROOT = __dirname;
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+const ROOT = path.dirname(fileURLToPath(import.meta.url));
 
 const PARTIALS = {
   'site-nav': fs.readFileSync(path.join(ROOT, 'partials', 'nav.html'), 'utf8').trim(),
